@@ -6,7 +6,7 @@ module Aeolus
       end
 
       def images
-        images = [["UUID", "NAME", "TARGET", "OS", "OS VERSION", "ARCH", "DESCRIPTION"]]
+        images = [["IMAGE ID", "LASTEST PUSHED BUILD", "NAME", "TARGET", "OS", "OS VERSION", "ARCH", "DESCRIPTION"]]
         doc = Nokogiri::XML iwhd['/target_images'].get
         # Check for any invalid data in iwhd
         invalid_images = []
@@ -14,11 +14,11 @@ module Aeolus
           begin
             build = iwhd["/target_images/" + targetimage.text + "/build"].get
             image = iwhd["/builds/" + build + "/image"].get
-            template_info = get_template_info(image, targetimage.text)
-            if template_info
-              images << template_info
+
+            if template_info = get_template_info(image, targetimage.text)
+              images << [image] + [lastest_pushed(image)] + template_info
             else
-              images << [image, get_image_name(image), iwhd["/target_images/" + targetimage + "/target"].get, "", "", "", ""]
+              images << [image] + [lastest_pushed(image)] +[get_image_name(image), iwhd["/target_images/" + targetimage + "/target"].get, "", "", "", ""]
             end
           rescue
             invalid_images << targetimage.text
@@ -109,12 +109,12 @@ module Aeolus
       def get_template_info(image, targetimage)
         begin
           template = Nokogiri::XML iwhd["/templates/" + iwhd["/target_images/" + targetimage + "/template"].get].get
-          [image, template.xpath("/template/name").text,
-                  iwhd["/target_images/" + targetimage + "/target"].get,
-                  template.xpath("/template/os/name").text,
-                  template.xpath("/template/os/version").text,
-                  template.xpath("/template/os/arch").text,
-                  template.xpath("/template/description").text]
+          [template.xpath("/template/name").text,
+            iwhd["/target_images/" + targetimage + "/target"].get,
+            template.xpath("/template/os/name").text,
+            template.xpath("/template/os/version").text,
+            template.xpath("/template/os/arch").text,
+            template.xpath("/template/description").text]
         rescue
         end
       end
@@ -123,6 +123,15 @@ module Aeolus
         begin
           template_xml = Nokogiri::XML iwhd["images/" + image].get
           template_xml.xpath("/image/name").text
+        rescue
+          ""
+        end
+      end
+
+      def lastest_pushed(image)
+        begin
+          build = iwhd["/images/" + image + "/latest_build"].get
+          build.nil? ? "" : build
         rescue
           ""
         end
