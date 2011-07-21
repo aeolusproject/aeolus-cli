@@ -12,7 +12,7 @@ RPM_SPEC = "rubygem-aeolus-image.spec"
 
 spec = Gem::Specification.new do |s|
   s.name = 'aeolus-image'
-  s.version = '0.0.1'
+  s.version = '0.1.0'
   s.has_rdoc = true
   s.summary= 'cli for aeolus cloud suite'
   s.description = 'Commandline interface for working with the aeolus cloud management suite'

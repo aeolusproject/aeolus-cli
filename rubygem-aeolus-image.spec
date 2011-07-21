@@ -6,7 +6,7 @@
 
 Summary: Commandline interface for working with the Aeolus cloud suite
 Name: rubygem-%{gemname}
-Version: 0.0.1
+Version: 0.1.0
 Release: 1%{?dist}%{?extra_release}
 Group: Development/Languages
 License: GPLv2+ or Ruby
