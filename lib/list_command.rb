@@ -6,6 +6,7 @@ module Aeolus
       end
 
       def images
+        check_bucket_exists("images")
         images = [["IMAGE ID", "LASTEST PUSHED BUILD", "NAME", "TARGET", "OS", "OS VERSION", "ARCH", "DESCRIPTION"]]
         doc = Nokogiri::XML iwhd['/target_images'].get
         # Check for any invalid data in iwhd
@@ -34,6 +35,7 @@ module Aeolus
       end
 
       def builds
+        check_bucket_exists("builds")
         doc = Nokogiri::XML iwhd['/builds'].get
         doc.xpath("/objects/object/key").each do |build|
           if iwhd['/builds/' + build.text + "/image"].get == @options[:id]
@@ -44,6 +46,7 @@ module Aeolus
       end
 
       def targetimages
+        check_bucket_exists("target-images")
         doc = Nokogiri::XML iwhd['/target_images'].get
         doc.xpath("/objects/object/key").each do |target_image|
           begin
@@ -134,6 +137,14 @@ module Aeolus
           build.nil? ? "" : build
         rescue
           ""
+        end
+      end
+
+      def check_bucket_exists(bucket)
+        begin
+          iwhd["/" + bucket].get
+        rescue
+          quit(0)
         end
       end
     end
