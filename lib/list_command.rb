@@ -46,7 +46,7 @@ module Aeolus
       end
 
       def targetimages
-        check_bucket_exists("target-images")
+        check_bucket_exists("target_images")
         doc = Nokogiri::XML iwhd['/target_images'].get
         doc.xpath("/objects/object/key").each do |target_image|
           begin
