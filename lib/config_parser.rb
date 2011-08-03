@@ -85,7 +85,7 @@ module Aeolus
             @options[:id] = id
           end
           opts.on('-P', '--providerimages ID', 'Retrieve the provider images from a target image') do |id|
-            @options[:subcommand] = :targetimages
+            @options[:subcommand] = :providerimages
             @options[:id] = id
           end
           opts.on('-g', '--targets', 'Retrieve the values available for the --target parameter') do
