@@ -35,14 +35,27 @@ module Aeolus
       end
 
       def builds
-        check_bucket_exists("builds")
+        builds = [["Build ID"]]
+        list_builds(@options[:id]).each do |b|
+          builds << [b]
+        end
+        format_print(builds)
+        quit(0)
+      end
+
+      def list_builds(image)
+        builds = []
+        if check_bucket_exists("builds").nil?
+          return builds
+        end
+
         doc = Nokogiri::XML iwhd['/builds'].get
         doc.xpath("/objects/object/key").each do |build|
-          if iwhd['/builds/' + build.text + "/image"].get == @options[:id]
-            puts build.text
+          if iwhd['/builds/' + build.text + "/image"].get == image
+            builds << build.text
           end
         end
-        quit(0)
+        builds
       end
 
       def targetimages
