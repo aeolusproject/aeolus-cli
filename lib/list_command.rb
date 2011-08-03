@@ -46,17 +46,30 @@ module Aeolus
       end
 
       def targetimages
-        check_bucket_exists("target-images")
+        targetimages = [["Target Image Id"]]
+        list_targetimages(@options[:id]).each do |ti|
+          targetimages << [ti]
+        end
+        format_print(targetimages)
+        quit(0)
+      end
+
+      def list_targetimages(build)
+        targetimages = []
+        if check_bucket_exists("target_images").nil?
+          return targetimages
+        end
+
         doc = Nokogiri::XML iwhd['/target_images'].get
         doc.xpath("/objects/object/key").each do |target_image|
           begin
-            if iwhd['/target_images/' + target_image.text + "/build"].get == @options[:id]
-              puts target_image.text
+            if iwhd['/target_images/' + target_image.text + "/build"].get == build
+              targetimages << target_image.text
             end
           rescue RestClient::ResourceNotFound
           end
         end
-        quit(0)
+        targetimages
       end
 
       def providerimages
