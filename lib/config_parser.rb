@@ -119,6 +119,7 @@ module Aeolus
             @options[:targetimage] = id
           end
           opts.on('-D', '--providerimage ID', 'delete provider image') do |id|
+            @options[:subcommand] = :provider_image
             @options[:providerimage] = id
           end
 
@@ -205,7 +206,14 @@ module Aeolus
       end
 
       def delete
-        "Not implemented"
+        if @options[:subcommand].nil?
+          # TODO: Pull out Print Usage into seporate method, and print
+          puts "Could not find subcommand for delete, run `./aeolus-image --help` for usage instructions"
+          exit(1)
+        else
+          delete_command = DeleteCommand.new(@options)
+          delete_command.send(@options[:subcommand])
+        end
       end
     end
   end

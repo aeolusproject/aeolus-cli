@@ -71,6 +71,11 @@ module Aeolus
         schema.validate(doc)
       end
 
+      def is_uuid?(id)
+        uuid = Regexp.new('[\w]{8}[-][\w]{4}[-][\w]{4}[-][\w]{4}[-][\w]{12}')
+        uuid.match(id).nil? ? false : true
+      end
+
       private
       def load_config
         begin
