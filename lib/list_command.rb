@@ -99,9 +99,9 @@ module Aeolus
       end
 
       def providerimages
-        providerimages = [["Provider Image ID"]]
-        list_providerimages(@options[:id]).each do |pi|
-          providerimages << [pi]
+        providerimages = [["PROVIDER IMAGE", "PROVIDER", "TARGET IMAGE", "TARGET IDENTIFIER", "IMAGE"]]
+        list_providerimages(@options[:id], (@options[:id] == "all")).each do |pi|
+          providerimages << pi
         end
         format_print(providerimages)
         quit(0)
@@ -116,8 +116,11 @@ module Aeolus
         doc = Nokogiri::XML iwhd['/provider_images'].get
         doc.xpath("/objects/object/key").each do |provider_image|
           begin
-            if all || (iwhd['/provider_images/' + provider_image.text + "/target_image"].get == targetimage)
-              providerimages << provider_image.text
+            thistargetimage = iwhd["/provider_images/" + provider_image.text + "/target_image"].get
+            if all || (thistargetimage == targetimage)
+              build = iwhd["/target_images/" + thistargetimage + "/build"].get
+              image = iwhd["/builds/" + build + "/image"].get
+              providerimages << [provider_image.text] + [iwhd["/provider_images/" + provider_image.text + "/provider"].get] + [thistargetimage] + [iwhd["/provider_images/" + provider_image.text + "/target_identifier"].get] + [image]
             end
           rescue RestClient::ResourceNotFound
           end
