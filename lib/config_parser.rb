@@ -116,6 +116,7 @@ module Aeolus
           opts.separator ""
           opts.separator "Delete options:"
           opts.on('-m', '--targetimage ID', 'delete target image and its provider images') do |id|
+            @options[:subcommand] = :target_image
             @options[:targetimage] = id
           end
           opts.on('-D', '--providerimage ID', 'delete provider image') do |id|
