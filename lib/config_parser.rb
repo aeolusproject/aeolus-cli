@@ -115,6 +115,10 @@ module Aeolus
 
           opts.separator ""
           opts.separator "Delete options:"
+          opts.on('-I', '--image ID', 'delete build image and associated objects') do |id|
+            @options[:subcommand] = :image
+            @options[:image] = id
+          end
           opts.on('-B', '--build ID', 'delete build and associated objects') do |id|
             @options[:subcommand] = :build
             @options[:build] = id

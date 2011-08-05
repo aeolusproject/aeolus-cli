@@ -53,6 +53,22 @@ module Aeolus
         end
       end
 
+      def image
+        check_id(@options[:image], "Image")
+        begin
+          delete_image(@options[:image])
+          puts "Image: '" + @options[:image] + "' was succesfully deleted"
+          exit(0)
+        rescue RestClient::ResourceNotFound
+          puts "Error: Could not find Image with ID: '" + @options[:image]  + "'"
+          exit(1)
+        rescue => e
+          puts "Error: Could not delete Image with ID: '" + @options[:image]  + "'"
+          puts e.inspect
+          exit(1)
+        end
+      end
+
       private
       def delete_provider_image(provider_image)
         iwhd['/provider_images/' + provider_image].delete
@@ -82,6 +98,19 @@ module Aeolus
         end
         # Delete Build
         iwhd['/builds/' + build].delete
+      end
+
+      def delete_image(image)
+        # Delete Builds
+        list_command = ListCommand.new
+        list_command.list_builds(image).each do |build|
+          begin
+            delete_build(build)
+          rescue
+          end
+        end
+        # Delete Image
+        iwhd['/images/' + image].delete
       end
 
       def check_id(uuid, type)
