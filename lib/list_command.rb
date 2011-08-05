@@ -56,7 +56,7 @@ module Aeolus
         quit(0)
       end
 
-      def list_builds(image)
+      def list_builds(image, all=false)
         builds = []
         if check_bucket_exists("builds").nil?
           return builds
@@ -64,7 +64,7 @@ module Aeolus
 
         doc = Nokogiri::XML iwhd['/builds'].get
         doc.xpath("/objects/object/key").each do |build|
-          if iwhd['/builds/' + build.text + "/image"].get == image
+          if all || (iwhd['/builds/' + build.text + "/image"].get == image)
             builds << build.text
           end
         end
@@ -80,7 +80,7 @@ module Aeolus
         quit(0)
       end
 
-      def list_targetimages(build)
+      def list_targetimages(build, all=false)
         targetimages = []
         if check_bucket_exists("target_images").nil?
           return targetimages
@@ -89,7 +89,7 @@ module Aeolus
         doc = Nokogiri::XML iwhd['/target_images'].get
         doc.xpath("/objects/object/key").each do |target_image|
           begin
-            if iwhd['/target_images/' + target_image.text + "/build"].get == build
+            if all || (iwhd['/target_images/' + target_image.text + "/build"].get == build)
               targetimages << target_image.text
             end
           rescue RestClient::ResourceNotFound
@@ -107,7 +107,7 @@ module Aeolus
         quit(0)
       end
 
-      def list_providerimages(targetimage)
+      def list_providerimages(targetimage, all=false)
         providerimages = []
         if check_bucket_exists("provider_images").nil?
           return providerimages
@@ -116,7 +116,7 @@ module Aeolus
         doc = Nokogiri::XML iwhd['/provider_images'].get
         doc.xpath("/objects/object/key").each do |provider_image|
           begin
-            if iwhd['/provider_images/' + provider_image.text + "/target_image"].get == targetimage
+            if all || (iwhd['/provider_images/' + provider_image.text + "/target_image"].get == targetimage)
               providerimages << provider_image.text
             end
           rescue RestClient::ResourceNotFound

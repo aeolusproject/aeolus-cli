@@ -131,6 +131,9 @@ module Aeolus
             @options[:subcommand] = :provider_image
             @options[:providerimage] = id
           end
+          opts.on('-W', '--iwhd', 'Delete everything stored in IWHD') do
+            @options[:subcommand] = :iwhd
+          end
 
           opts.separator ""
           opts.separator "List Examples:"

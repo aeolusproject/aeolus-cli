@@ -69,6 +69,28 @@ module Aeolus
         end
       end
 
+      # Deletes all objects.  Iterates through each object to make sure any stray objects are deleted.
+      def iwhd
+        list_command = ListCommand.new
+        list_command.list_providerimages(nil, true).each do |provider_image|
+          iwhd['/provider_images/' + provider_image].delete
+        end
+
+#        list_command.list_targetimages(nil, true).each do |target_image|
+#          iwhd['/target_images/' + target_image].delete
+#        end
+#        
+#        list_command.list_builds(nil, true).each do |build|
+#          iwhd['/builds/' + build].delete
+#        end
+#        
+#        list_command.list_images.each do |image|
+#          iwhd['/images/' + image].delete
+#        end
+#        puts "IWHD was successfully cleared"
+        exit(0)
+      end
+
       private
       def delete_provider_image(provider_image)
         iwhd['/provider_images/' + provider_image].delete
