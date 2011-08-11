@@ -2,7 +2,7 @@
 .SH NAME
 aeolus-image \- command for listing aeolus image associated objects.
 .SH SYNOPSIS
-.B aeolus-image list [\-h|--help] [\-u|--username] [\-w|--password] [\-i|--images] [\-b|--builds [image id]] [\-t|--targetimages [build id]] [\-g|--targets] [\-a|--accounts] [\-p|--providers]
+.B aeolus-image list [\-h|--help] [\-u|--username] [\-w|--password] [\-i|--images] [\-b|--builds [image id]] [\-t|--targetimages [build id]] [\-P|--providerimages [target image id]] [\-g|--targets] [\-a|--accounts] [\-p|--providers]
 .SH DESCRIPTION
 aeolus-image list commands allows users to list information on the contents of particular objects in image warehouse including:
 .P
@@ -33,6 +33,9 @@ Retrieve a list of builds of for a particular image
 \-t, --targetimages <build id>
 Retrieve a list of completed target-images builds for a particular build id
 .TP
+\-P, --providerimages <target image id>
+Retrieve a list of completed provider-images builds for a particular target image id. Use "all" to list all provider images.
+.TP
 \-g, --targets
 Retrieve a list of available targets
 .TP
@@ -58,7 +61,15 @@ List all builds for an image with id: 12345678-aaaa-1234--1234567890ab
 .TP
 List all target images for a given build with id: 12345678-bbbb-1234--1234567890ab
 .B aeolus-image list
-\--builds 12345678-bbbb-1234--1234567890ab
+\--targetimages 12345678-bbbb-1234--1234567890ab
+.TP
+List all provider images for a given target image with id: 12345678-tttt-1234--1234567890ab
+.B aeolus-image list
+\--providerimages 12345678-tttt-1234--1234567890ab
+.TP
+List all provider images
+.B aeolus-image list
+\--providerimages all
 .TP
 List all available targets
 .B aeolus-image list
