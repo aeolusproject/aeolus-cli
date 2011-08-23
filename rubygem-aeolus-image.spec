@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-image
 Version: 0.1.0
-Release: 3%{?dist}%{?extra_release}
+Release: 3%{?extra_release}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://aeolusproject.org
