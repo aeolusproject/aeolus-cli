@@ -1,4 +1,4 @@
-$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib"))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image"))
 $: << File.expand_path(File.join(File.dirname(__FILE__), "."))
 require 'rubygems'
 require 'config_parser'
@@ -31,7 +31,7 @@ module Helpers
   end
 end
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.include Helpers
   config.before(:all) do
     Aeolus::Image::BaseCommand.class_eval do

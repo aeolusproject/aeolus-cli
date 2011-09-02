@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'rake'
 require 'rake/clean'
-require 'rake/gempackagetask'
-require 'rake/rdoctask'
+require 'rubygems/package_task'
+require 'rdoc/task'
 require 'rake/testtask'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 require 'rake/rpmtask'
 
 RPMBUILD_DIR = "#{File.expand_path('~')}/rpmbuild"
@@ -13,7 +13,6 @@ RPM_SPEC = "rubygem-aeolus-image.spec"
 spec = Gem::Specification.new do |s|
   s.name = 'aeolus-image'
   s.version = '0.1.0'
-  s.has_rdoc = true
   s.summary= 'cli for aeolus cloud suite'
   s.description = 'Commandline interface for working with the aeolus cloud management suite'
   s.author = 'Jason Guiditta, Martyn Taylor'
@@ -31,7 +30,7 @@ spec = Gem::Specification.new do |s|
   s.add_development_dependency('rspec', '~>1.3.0')
 end
 
-Rake::GemPackageTask.new(spec) do |p|
+Gem::PackageTask.new(spec) do |p|
   p.gem_spec = spec
   p.need_tar = true
   p.need_zip = true
@@ -50,9 +49,8 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/*.rb']
 end
 
-Spec::Rake::SpecTask.new do |t|
-  t.spec_files = FileList['spec/**/*.rb']
-  t.libs << Dir["lib"]
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = FileList['spec/**/*.rb']
 end
 
 Rake::RpmTask.new(RPM_SPEC) do |rpm|
