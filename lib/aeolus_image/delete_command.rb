@@ -79,11 +79,11 @@ module Aeolus
 #        list_command.list_targetimages(nil, true).each do |target_image|
 #          iwhd['/target_images/' + target_image].delete
 #        end
-#        
+#
 #        list_command.list_builds(nil, true).each do |build|
 #          iwhd['/builds/' + build].delete
 #        end
-#        
+#
 #        list_command.list_images.each do |image|
 #          iwhd['/images/' + image].delete
 #        end

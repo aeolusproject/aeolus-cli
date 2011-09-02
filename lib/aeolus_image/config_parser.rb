@@ -1,11 +1,5 @@
 require 'optparse'
 require 'logger'
-require 'base_command'
-require 'list_command'
-require 'build_command'
-require 'push_command'
-require 'import_command'
-require 'delete_command'
 
 module Aeolus
   module Image
