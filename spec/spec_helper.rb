@@ -1,5 +1,6 @@
-$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image"))
-$: << File.expand_path(File.join(File.dirname(__FILE__), "."))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image/command/"))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image/model/"))
+
 require 'rubygems'
 require 'config_parser'
 require 'stringio'

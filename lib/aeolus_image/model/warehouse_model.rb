@@ -42,7 +42,7 @@ module Aeolus
         end
 
         def first
-        obj = bucket_objects.first
+          obj = bucket_objects.first
           obj ? self.new(obj.attrs(obj.attr_list)) : nil
         end
 

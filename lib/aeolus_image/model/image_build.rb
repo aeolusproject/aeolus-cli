@@ -18,7 +18,7 @@ module Aeolus
       def self.find_all_by_image_uuid(uuid)
         self.set_warehouse_and_bucket if self.bucket.nil?
         self.bucket.objects.map do |wh_object|
-          if wh_object.attr('image')[1] == uuid
+          if wh_object.attr('image') == uuid
             ImageBuild.new(wh_object.attrs(wh_object.attr_list))
           end
         end.compact
