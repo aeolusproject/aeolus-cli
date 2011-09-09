@@ -7,125 +7,54 @@ module Aeolus
 
       def images
         check_bucket_exists("images")
-        images = [["IMAGE ID", "LASTEST PUSHED BUILD", "NAME", "TARGET", "OS", "OS VERSION", "ARCH", "DESCRIPTION"]]
-        doc = Nokogiri::XML iwhd['/target_images'].get
-        # Check for any invalid data in iwhd
-        invalid_images = []
-        doc.xpath("/objects/object/key").each do |targetimage|
-          begin
-            build = iwhd["/target_images/" + targetimage.text + "/build"].get
-            image = iwhd["/builds/" + build + "/image"].get
-
-            if template_info = get_template_info(image, targetimage.text)
-              images << [image] + [lastest_pushed(image)] + template_info
-            else
-              images << [image] + [lastest_pushed(image)] +[get_image_name(image), iwhd["/target_images/" + targetimage + "/target"].get, "", "", "", ""]
-            end
-          rescue
-            invalid_images << targetimage.text
-          end
+        images = [["IMAGE ID", "LASTEST PUSHED BUILD", "NAME", "OS", "OS VERSION", "ARCH", "DESCRIPTION"]]
+        Image.all.each do |i|
+          images << [i.uuid, (i.latest_pushed_build.nil? ? "" : i.latest_pushed_build.uuid), i.name, i.os.name, i.os.version, i.os.arch, i.description]
         end
         format_print(images)
-
-        unless invalid_images.empty?
-          puts "\nN.B. following images were not listed, aeolus-image encountered some invalid data in iwhd:"
-          puts invalid_images.join "\n"
-        end
         quit(0)
-      end
-
-      def list_images
-        images = []
-        if check_bucket_exists("images").nil?
-          return images
-        end
-
-        doc = Nokogiri::XML iwhd['/images'].get
-        doc.xpath("/objects/object/key").each do |image|
-          images << image.text
-        end
-        images
       end
 
       def builds
         builds = [["Build ID"]]
-        list_builds(@options[:id]).each do |b|
-          builds << [b]
-        end
-        format_print(builds)
-        quit(0)
-      end
-
-      def list_builds(image, all=false)
-        builds = []
-        if check_bucket_exists("builds").nil?
-          return builds
-        end
-
-        doc = Nokogiri::XML iwhd['/builds'].get
-        doc.xpath("/objects/object/key").each do |build|
-          if all || (iwhd['/builds/' + build.text + "/image"].get == image)
-            builds << build.text
+        image = Image.find(@options[:id])
+        if image
+          image.image_builds.each do |b|
+            builds << [b.uuid]
           end
+          format_print(builds)
+        else
+          puts "ERROR: could not find Image with ID: " + options[:id]
         end
-        builds
+        quit(0)
       end
 
       def targetimages
         targetimages = [["Target Image Id"]]
-        list_targetimages(@options[:id]).each do |ti|
-          targetimages << [ti]
-        end
-        format_print(targetimages)
-        quit(0)
-      end
-
-      def list_targetimages(build, all=false)
-        targetimages = []
-        if check_bucket_exists("target_images").nil?
-          return targetimages
-        end
-
-        doc = Nokogiri::XML iwhd['/target_images'].get
-        doc.xpath("/objects/object/key").each do |target_image|
-          begin
-            if all || (iwhd['/target_images/' + target_image.text + "/build"].get == build)
-              targetimages << target_image.text
-            end
-          rescue RestClient::ResourceNotFound
+        build = ImageBuild.find(@options[:id])
+        if build
+          build.target_images.each do |ti|
+            targetimages << [ti.uuid]
           end
+          format_print(targetimages)
+        else
+          puts "ERROR: could not find Build with ID: " + options[:id]
         end
-        targetimages
+        quit(0)
       end
 
       def providerimages
-        providerimages = [["PROVIDER IMAGE", "PROVIDER", "TARGET IMAGE", "TARGET IDENTIFIER", "IMAGE"]]
-        list_providerimages(@options[:id], (@options[:id] == "all")).each do |pi|
-          providerimages << pi
-        end
-        format_print(providerimages)
-        quit(0)
-      end
-
-      def list_providerimages(targetimage, all=false)
-        providerimages = []
-        if check_bucket_exists("provider_images").nil?
-          return providerimages
-        end
-
-        doc = Nokogiri::XML iwhd['/provider_images'].get
-        doc.xpath("/objects/object/key").each do |provider_image|
-          begin
-            thistargetimage = iwhd["/provider_images/" + provider_image.text + "/target_image"].get
-            if all || (thistargetimage == targetimage)
-              build = iwhd["/target_images/" + thistargetimage + "/build"].get
-              image = iwhd["/builds/" + build + "/image"].get
-              providerimages << [provider_image.text] + [iwhd["/provider_images/" + provider_image.text + "/provider"].get] + [thistargetimage] + [iwhd["/provider_images/" + provider_image.text + "/target_identifier"].get] + [image]
-            end
-          rescue RestClient::ResourceNotFound
+        providerimages = [["PROVIDER IMAGE", "PROVIDER", "TARGET IMAGE", "TARGET IDENTIFIER"]]
+        target_image = TargetImage.find(@options[:id])
+        if target_image
+          target_image.provider_images.each do |pi|
+            providerimages << [pi.uuid, pi.provider_name, target_image.uuid, target_image.target]
           end
+          format_print(providerimages)
+        else
+          puts "ERROR: could not find Target Image with ID: " + options[:id]
         end
-        providerimages
+        quit(0)
       end
 
       def targets

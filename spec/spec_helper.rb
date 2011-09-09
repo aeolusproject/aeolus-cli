@@ -2,6 +2,12 @@ $: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image/co
 $: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image/model/"))
 
 require 'rubygems'
+require 'warehouse_client'
+require 'warehouse_model'
+require 'image'
+require 'image_build'
+require 'target_image'
+require 'provider_image'
 require 'config_parser'
 require 'stringio'
 require 'base_command'
@@ -10,6 +16,7 @@ require 'build_command'
 require 'push_command'
 require 'import_command'
 require 'delete_command'
+
 
 
 module Helpers
