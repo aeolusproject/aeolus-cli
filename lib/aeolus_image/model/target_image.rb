@@ -23,8 +23,8 @@ module Aeolus
         ProviderImage.all.select{|pi| pi.target_image and (pi.target_image.uuid == self.uuid)}
       end
 
-      def template
-        Template.new(@template)
+      def target_template
+        Template.find(@template) if @template
       end
     end
   end

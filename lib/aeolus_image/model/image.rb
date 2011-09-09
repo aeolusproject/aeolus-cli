@@ -21,7 +21,7 @@ module Aeolus
       def template_xml
         unless @template_xml
           begin
-            @template_xml = Nokogiri::XML image_builds.first.target_images.first.template.body
+            @template_xml = Nokogiri::XML image_builds.first.target_images.first.target_template.body
           rescue
             @template_xml = Nokogiri::XML "<template></template>"
           end
@@ -29,7 +29,7 @@ module Aeolus
         @template_xml
       end
 
-      def latest_build
+      def latest_pushed_build
         ImageBuild.find(@latest_build) if @latest_build
       end
 
@@ -50,14 +50,14 @@ module Aeolus
 
       def os
         unless @os
-          OS.new(template_xml.xpath("/template/name").text, template_xml.xpath("/template/os/version"), template_xml.xpath("/template/os/arch"))
+          @os = OS.new(template_xml.xpath("/template/os/name").text, template_xml.xpath("/template/os/version").text, template_xml.xpath("/template/os/arch").text)
         end
         @os
       end
 
       def description
         unless @description
-          template_xml.xpath("/template/description").text
+          @description = template_xml.xpath("/template/description").text
         end
         @description
       end
