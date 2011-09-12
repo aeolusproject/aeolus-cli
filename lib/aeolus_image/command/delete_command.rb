@@ -56,6 +56,27 @@ module Aeolus
         end
         exit(1)
       end
+
+      # Deletes all Images,Builds,TargetImages,ProviderImages
+      def iwhd
+        Image.all.each do |image|
+          Image.delete(image.uuid)
+        end
+
+        ImageBuild.all.each do |build|
+          ImageBuild.delete(build.uuid)
+        end
+
+        TargetImage.all.each do |target_image|
+          TargetImage.delete(target_image.uuid)
+        end
+
+        ProviderImage.all.each do |provider_image|
+          ProviderImage.delete(provider_image.uuid)
+        end
+        puts "Deleted all objects in IWHD"
+        exit(0)
+      end
     end
   end
 end
