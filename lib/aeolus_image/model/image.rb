@@ -61,6 +61,17 @@ module Aeolus
         end
         @description
       end
+
+      # Delete this image and all child objects
+      def delete!
+        begin
+          image_builds.each do |build|
+            build.delete!
+          end
+        rescue NoMethodError
+        end
+        Image.delete(@uuid)
+      end
     end
   end
 end

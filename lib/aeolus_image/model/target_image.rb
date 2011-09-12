@@ -26,6 +26,17 @@ module Aeolus
       def target_template
         Template.find(@template) if @template
       end
+
+      # Deletes this targetimage and all child objects
+      def delete!
+        begin
+          provider_images.each do |pi|
+            pi.delete!
+          end
+        rescue NoMethodError
+        end
+        TargetImage.delete(@uuid)
+      end
     end
   end
 end

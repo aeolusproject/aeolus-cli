@@ -38,6 +38,17 @@ module Aeolus
           targets.include?(pi.target_image)
         end
       end
+
+      # Deletes this image and all child objects
+      def delete!
+        begin
+          target_images.each do |ti|
+            ti.delete!
+          end
+        rescue NoMethodError
+        end
+        ImageBuild.delete(@uuid)
+      end
     end
   end
 end

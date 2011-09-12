@@ -75,6 +75,19 @@ module Aeolus
           self.warehouse.query(@bucket_name, query_string)
         end
 
+        def delete(uuid)
+          self.set_warehouse_and_bucket if self.bucket.nil?
+          begin
+            if self.bucket.include?(uuid)
+              self.bucket.object(uuid).delete!
+            else
+              false
+            end
+          rescue RestClient::ResourceNotFound
+            false
+          end
+        end
+
         protected
         # Copy over entirely too much code to load the config file
         def load_config

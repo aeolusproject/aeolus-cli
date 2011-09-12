@@ -22,6 +22,11 @@ module Aeolus
       def provider_name
         @provider
       end
+
+      # Deletes this provider image
+      def delete!
+        ProviderImage.delete(@uuid)
+      end
     end
   end
 end
