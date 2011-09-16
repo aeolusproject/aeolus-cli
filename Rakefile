@@ -34,7 +34,7 @@ spec = Gem::Specification.new do |s|
   s.license = 'ASL 2.0'
   s.homepage = 'http://aeolusproject.org'
   s.executables << 'aeolus-image'
-  s.files = %w(Rakefile) + Dir.glob("{bin,lib,spec,examples,man}/**/*")
+  s.files = %w(Rakefile) + Dir.glob("{bin,lib,spec,examples,man}/**/*") + %w(COPYING)
   s.require_path = "lib"
   s.bindir = "bin"
   s.add_dependency('nokogiri', '>=0.4.0')
@@ -51,7 +51,7 @@ Gem::PackageTask.new(spec) do |p|
 end
 
 Rake::RDocTask.new do |rdoc|
-  files =['README', 'LICENSE', 'lib/**/*.rb']
+  files =['README', 'COPYING', 'lib/**/*.rb']
   rdoc.rdoc_files.add(files)
   rdoc.main = "README" # page to start on
   rdoc.title = "aeolus-image Docs"

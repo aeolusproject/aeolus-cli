@@ -37,13 +37,16 @@ Provides: rubygem(%{gemname}) = %{version}
 QMF Console for Aeolus Image Factory
 
 %prep
+%setup -q -c -T
+mkdir -p ./%{gemdir}
+gem install --local --install-dir ./%{gemdir} --force --rdoc %{SOURCE0}
 
 %build
 
 %install
+rm -rf %{buildroot}
 mkdir -p %{buildroot}%{gemdir}
-gem install --local --install-dir %{buildroot}%{gemdir} \
-            --force --rdoc %{SOURCE0}
+cp -a .%{gemdir}/* %{buildroot}%{gemdir}/
 
 mkdir -p %{buildroot}/%{_bindir}
 mv %{buildroot}%{gemdir}/bin/* %{buildroot}/%{_bindir}
@@ -54,9 +57,16 @@ mkdir -p %{buildroot}%{mandir}
 mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 
 %files
-%doc COPYING
+%doc %{geminstdir}/COPYING
 %{_bindir}/aeolus-image
-%{gemdir}/gems/%{gemname}-%{version}/
+%dir %{geminstdir}
+%{geminstdir}/.yardoc
+%{geminstdir}/Rakefile
+%{geminstdir}/bin
+%{geminstdir}/examples
+%{geminstdir}/lib
+%{geminstdir}/man
+%{geminstdir}/spec
 %doc %{gemdir}/doc/%{gemname}-%{version}
 %{gemdir}/cache/%{gemname}-%{version}.gem
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
