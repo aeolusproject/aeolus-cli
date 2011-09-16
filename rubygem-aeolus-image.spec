@@ -9,7 +9,7 @@ Name: rubygem-aeolus-image
 Version: 0.1.0
 Release: 3%{?extra_release}%{?dist}
 Group: Development/Languages
-License: GPLv2+ or Ruby
+License: ASL 2.0
 URL: http://aeolusproject.org
 
 # The source for this packages was pulled from the upstream's git repo.
@@ -29,6 +29,7 @@ Requires: rubygem(imagefactory-console) >= 0.4.0
 
 BuildRequires: ruby
 BuildRequires: rubygems
+
 BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
 
@@ -53,7 +54,7 @@ mkdir -p %{buildroot}%{mandir}
 mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 
 %files
-%defattr(-, root, root, -)
+%doc COPYING
 %{_bindir}/aeolus-image
 %{gemdir}/gems/%{gemname}-%{version}/
 %doc %{gemdir}/doc/%{gemname}-%{version}

@@ -1,3 +1,17 @@
+#   Copyright 2011 Red Hat, Inc.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
 require 'rubygems'
 require 'rake'
 require 'rake/clean'
@@ -17,7 +31,7 @@ spec = Gem::Specification.new do |s|
   s.description = 'Commandline interface for working with the aeolus cloud management suite'
   s.author = 'Jason Guiditta, Martyn Taylor'
   s.email = 'jguiditt@redhat.com, mtaylor@redhat.com'
-  s.license = 'GPL-2'
+  s.license = 'ASL 2.0'
   s.homepage = 'http://aeolusproject.org'
   s.executables << 'aeolus-image'
   s.files = %w(Rakefile) + Dir.glob("{bin,lib,spec,examples,man}/**/*")
