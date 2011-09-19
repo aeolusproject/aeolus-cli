@@ -52,6 +52,7 @@ mkdir -p %{buildroot}/%{_bindir}
 mv %{buildroot}%{gemdir}/bin/* %{buildroot}/%{_bindir}
 find %{buildroot}%{geminstdir}/bin -type f | xargs chmod 755
 rmdir %{buildroot}%{gemdir}/bin
+rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 
 mkdir -p %{buildroot}%{mandir}
 mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
@@ -60,7 +61,6 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %doc %{geminstdir}/COPYING
 %{_bindir}/aeolus-image
 %dir %{geminstdir}
-%{geminstdir}/.yardoc
 %{geminstdir}/Rakefile
 %{geminstdir}/bin
 %{geminstdir}/examples
