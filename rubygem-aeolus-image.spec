@@ -29,6 +29,7 @@ Requires: rubygem(imagefactory-console) >= 0.4.0
 
 BuildRequires: ruby
 BuildRequires: rubygems
+BuildRequires: rubygem(rspec-core)
 
 BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
