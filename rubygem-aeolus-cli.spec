@@ -1,11 +1,11 @@
 %global gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
-%global gemname aeolus-image
+%global gemname aeolus-cli
 %global geminstdir %{gemdir}/gems/%{gemname}-%{version}
 %global mandir %{_mandir}/man1
 %global rubyabi 1.8
 
 Summary: Command-line interface for working with the Aeolus cloud suite
-Name: rubygem-aeolus-image
+Name: rubygem-aeolus-cli
 Version: 0.1.0
 Release: 3%{?extra_release}%{?dist}
 Group: Development/Languages
@@ -35,7 +35,7 @@ BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
 
 %description
-QMF Console for Aeolus Image Factory
+CLI for Aeolus Image Factory
 
 %prep
 %setup -q -c -T
