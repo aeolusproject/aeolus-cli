@@ -27,6 +27,7 @@ module Aeolus
         @options = opts
         @config_location = "~/.aeolus-cli"
         @config = load_config
+        configure_active_resource
       end
 
       protected
@@ -42,14 +43,6 @@ module Aeolus
           @logger.datetime_format = "%Y-%m-%d %H:%M:%S"
         end
         return @logger
-      end
-
-      def iwhd
-        create_resource(:iwhd)
-      end
-
-      def conductor
-        create_resource(:conductor)
       end
 
       def read_file(path)
@@ -91,6 +84,12 @@ module Aeolus
       end
 
       private
+      def configure_active_resource
+        Aeolus::CLI::Base.site = @config[:conductor][:url]
+        Aeolus::CLI::Base.user = @config[:conductor][:username]
+        Aeolus::CLI::Base.password = @config[:conductor][:password]
+      end
+
       def load_config
         begin
           file_str = read_file(@config_location)
@@ -115,37 +114,6 @@ module Aeolus
         example = File.read(File.expand_path(File.dirname(__FILE__) + "/../../../examples/aeolus-cli"))
         File.open(File.expand_path(@config_location), 'a+') do |f|
           f.write(example)
-        end
-      end
-
-      def create_resource(resource_name)
-        # Check to see if config has a resource with this name
-        if !@config.has_key?(resource_name)
-          raise "Unable to determine resource: " + resource_name.to_s + " from configuration file.  Please check: " + @config_location
-          return
-        end
-
-        #Use command line arguments for username/password
-        if @options.has_key?(:username)
-          if @options.has_key?(:password)
-            RestClient::Resource.new(@config[resource_name][:url], :user => @options[:username], :password => @options[:password])
-          else
-            #TODO: Create a custom exception to wrap CLI Exceptions
-            raise "Password not found for user: " + @options[:username]
-          end
-
-        #Use config for username/password
-        elsif @config[resource_name].has_key?(:username)
-          if @config[resource_name].has_key?(:password)
-            RestClient::Resource.new(@config[resource_name][:url], :user => @config[resource_name][:username], :password => @config[resource_name][:password])
-          else
-            #TODO: Create a custom exception to wrap CLI Exceptions
-            raise "Password not found for user: " + @config[resource_name][:username]
-          end
-
-        # Do not use authentication
-        else
-          RestClient::Resource.new(@config[resource_name][:url])
         end
       end
     end

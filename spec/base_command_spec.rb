@@ -17,20 +17,13 @@ require 'spec_helper'
 module Aeolus
   module Image
     describe BaseCommand do
-
-      it "should determine the correct credentials for HTTP Authentication" do
-        basec = BaseCommand.new
-        iwhd = basec.send :iwhd
-        iwhd.user.should == nil
-
-        conductor = basec.send :conductor
-        conductor.user.should == "admin"
-        conductor.password.should == "password"
-
-        basec = BaseCommand.new({:username => "testusername", :password=> "testpassword"})
-        conductor = basec.send :conductor
-        conductor.user.should == "testusername"
-        conductor.password.should == "testpassword"
+      describe "configure_active_resource" do
+        it "should setup ActiveResource with endpoint and authentication" do
+          basec = BaseCommand.new
+          Aeolus::CLI::Base.site.to_s.should == "http://localhost/conductor/api"
+          Aeolus::CLI::Base.user.to_s.should == "admin"
+          Aeolus::CLI::Base.password.to_s.should == "password"
+        end
       end
 
       describe "#read_file" do
@@ -67,7 +60,7 @@ module Aeolus
           b.instance_eval {@config_location = new_file}
           b.send(:write_file)
           conf = YAML::load(File.open(File.expand_path(new_file)))
-          conf.has_key?(:iwhd).should be_true
+          conf.has_key?(:conductor).should be_true
           File.delete(new_file)
         end
       end
