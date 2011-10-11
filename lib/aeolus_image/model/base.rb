@@ -12,9 +12,20 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+require 'active_resource'
 module Aeolus
   module CLI
-    class Image < Base
+    class Base < ActiveResource::Base
+      self.timeout = 600
+      class << self
+        def instantiate_collection(collection, prefix_options = {})
+          unless collection.kind_of? Array
+            [instantiate_record(collection, prefix_options)]
+          else
+            collection.collect! { |record| instantiate_record(record, prefix_options) }
+          end
+        end
+      end
     end
   end
 end
