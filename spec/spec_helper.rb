@@ -12,8 +12,8 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image/command/"))
-$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image/model/"))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_cli/command/"))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_cli/model/"))
 
 require 'rubygems'
 require 'base'
