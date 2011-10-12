@@ -15,7 +15,7 @@
 require 'spec_helper'
 
 module Aeolus
-  module Image
+  module CLI
     describe PushCommand do
 
       before(:each) do

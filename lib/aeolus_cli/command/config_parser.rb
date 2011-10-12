@@ -16,7 +16,7 @@ require 'optparse'
 require 'logger'
 
 module Aeolus
-  module Image
+  module CLI
     class ConfigParser
       COMMANDS = %w(list build push import delete)
       attr_accessor :options, :command, :args

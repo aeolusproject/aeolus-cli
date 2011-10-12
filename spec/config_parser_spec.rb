@@ -15,7 +15,7 @@
 require 'spec_helper'
 
 module Aeolus
-  module Image
+  module CLI
     describe ConfigParser do
       it "should parse the specified command" do
         config_parser = ConfigParser.new(%w(list  --images))

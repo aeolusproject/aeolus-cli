@@ -15,7 +15,7 @@
 require 'spec_helper'
 
 module Aeolus
-  module Image
+  module CLI
     describe ImportCommand do
       before(:each) do
         @options[:id] = "ami-test"

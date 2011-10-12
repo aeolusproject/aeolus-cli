@@ -17,7 +17,7 @@ require 'rest_client'
 require 'nokogiri'
 
 module Aeolus
-  module Image
+  module CLI
     #This will house some methods that multiple Command classes need to use.
     class BaseCommand
       attr_accessor :options

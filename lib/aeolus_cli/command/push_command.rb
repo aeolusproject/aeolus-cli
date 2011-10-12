@@ -15,7 +15,7 @@
 require 'rest_client'
 
 module Aeolus
-  module Image
+  module CLI
     class PushCommand < BaseCommand
       attr_accessor :console
       def initialize(opts={}, logger=nil)

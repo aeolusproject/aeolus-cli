@@ -15,7 +15,7 @@
 require 'imagefactory'
 
 module Aeolus
-  module Image
+  module CLI
     class BuildCommand < BaseCommand
       attr_accessor :console
       def initialize(opts={}, logger=nil)

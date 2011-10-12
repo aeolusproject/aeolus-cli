@@ -15,7 +15,7 @@
 require 'spec_helper'
 
 module Aeolus
-  module Image
+  module CLI
     describe BaseCommand do
       describe "configure_active_resource" do
         it "should setup ActiveResource with endpoint and authentication" do

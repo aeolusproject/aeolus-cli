@@ -13,7 +13,7 @@
 #   limitations under the License.
 
 module Aeolus
-  module Image
+  module CLI
     class ListCommand < BaseCommand
       def initialize(opts={}, logger=nil)
         super(opts, logger)

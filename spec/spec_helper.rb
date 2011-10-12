@@ -30,8 +30,6 @@ require 'push_command'
 require 'import_command'
 require 'delete_command'
 
-
-
 module Helpers
   # Silences any stream for the duration of the block.
   #
@@ -55,7 +53,7 @@ end
 RSpec.configure do |config|
   config.include Helpers
   config.before(:all) do
-    Aeolus::Image::BaseCommand.class_eval do
+    Aeolus::CLI::BaseCommand.class_eval do
       def load_config
         YAML::load(File.open(File.join(File.dirname(__FILE__), "/../examples/aeolus-cli")))
       end

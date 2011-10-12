@@ -15,7 +15,7 @@
 require 'spec_helper'
 
 module Aeolus
-  module Image
+  module CLI
     describe BuildCommand do
       before(:each) do
         @options[:target] = ['mock','ec2']
