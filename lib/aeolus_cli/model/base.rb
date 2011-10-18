@@ -19,12 +19,28 @@ module Aeolus
       self.timeout = 600
       class << self
         def instantiate_collection(collection, prefix_options = {})
-          unless collection.kind_of? Array
-            [instantiate_record(collection, prefix_options)]
+          if collection.is_a?(Hash) && collection.size == 1
+            value = collection.values.first
+            if value.is_a?(Array)
+              value.collect! { |record| instantiate_record(record,prefix_options) }
+            else
+              [ instantiate_record(value, prefix_options) ]
+            end
+          elsif collection.is_a?(Hash)
+            instantiate_record(collection, prefix_options)
           else
-            collection.collect! { |record| instantiate_record(record, prefix_options) }
+            begin
+              collection.collect! { |record| instantiate_record(record, prefix_options) }
+            rescue
+              []
+            end
           end
         end
+      end
+
+      # Instance Methods
+      def to_s
+        id
       end
     end
   end
