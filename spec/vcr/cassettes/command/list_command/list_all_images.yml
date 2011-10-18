@@ -1,0 +1,227 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://admin:password@localhost/conductor/api/images.xml
+    body:
+    headers:
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - "\"72facb643bc9af0ba0bc08772d40b761\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
+      date:
+      - Tue, 18 Oct 2011 10:51:12 GMT
+      x-runtime:
+      - "55.063563"
+      content-length:
+      - "8443"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlMmY1ODVkNTk3MmY3MTdiOWE3NmUyMjdlMDNiMDdlN2IiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--ed789d17e117d57cd4c4a6ccf452edc9c79572dd; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+    body: |
+      <images>
+        <image href='http://localhost:3000/api/images/7e6d409b-11d5-446d-99e8-656deb4f28ca' id='7e6d409b-11d5-446d-99e8-656deb4f28ca'>
+          <name>tmpl1</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/98632297-1d3b-4493-8643-e37beb29204c' id='98632297-1d3b-4493-8643-e37beb29204c'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/a2da41eb-4bec-410c-b59d-afca5ea94c21' id='a2da41eb-4bec-410c-b59d-afca5ea94c21'>
+          <name>tmpl1</name>
+          <description>foo</description>
+          <os>Fedora</os>
+          <os_version>14</os_version>
+          <arch>x86_64</arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/3eeb6c8f-9dd0-4a5b-bd13-e96daef435f9' id='3eeb6c8f-9dd0-4a5b-bd13-e96daef435f9'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/11ffb46d-61c1-418e-b080-9f9f56cfb32e' id='11ffb46d-61c1-418e-b080-9f9f56cfb32e'>
+          <name>tmpl1</name>
+          <description>foo</description>
+          <os>Fedora</os>
+          <os_version>14</os_version>
+          <arch>x86_64</arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/6942a36c-ffaa-488c-9f87-908a4516f71b' id='6942a36c-ffaa-488c-9f87-908a4516f71b'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/d257caa1-6ac0-40b0-9621-d9ea0703f85d' id='d257caa1-6ac0-40b0-9621-d9ea0703f85d'>
+          <name>tmpl1</name>
+          <description>foo</description>
+          <os>Fedora</os>
+          <os_version>14</os_version>
+          <arch>x86_64</arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/2cf2acbc-6a45-4027-b695-093356e56f4d' id='2cf2acbc-6a45-4027-b695-093356e56f4d'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/a0f44026-6d7e-49ee-80f8-c7e48e3b9eb9' id='a0f44026-6d7e-49ee-80f8-c7e48e3b9eb9'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/3268f30a-9a39-4dc6-9cd9-7891cb7f9d53' id='3268f30a-9a39-4dc6-9cd9-7891cb7f9d53'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/7b21febc-12d7-40b5-9b35-5b2731bfd914' id='7b21febc-12d7-40b5-9b35-5b2731bfd914'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/6f274fa6-dc93-487c-8f0c-0a57b56f7dd5' id='6f274fa6-dc93-487c-8f0c-0a57b56f7dd5'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/4c83ad1c-af84-49d3-9011-2379295c09f7' id='4c83ad1c-af84-49d3-9011-2379295c09f7'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/bdc69bdc-96d2-41c1-9748-9bd9ebbcee13' id='bdc69bdc-96d2-41c1-9748-9bd9ebbcee13'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/0cf58ea2-ec1e-43c9-88cf-18be84c6d21c' id='0cf58ea2-ec1e-43c9-88cf-18be84c6d21c'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/c4d71108-de11-4cb0-a920-3bff25c55497' id='c4d71108-de11-4cb0-a920-3bff25c55497'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/648ae2c2-f42c-4f7b-8fcf-22aaeb359c67' id='648ae2c2-f42c-4f7b-8fcf-22aaeb359c67'>
+          <name></name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/29f88b96-1394-4da6-a639-c56fbe02f08b' id='29f88b96-1394-4da6-a639-c56fbe02f08b'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/f22d96a7-5d73-4a58-86bf-180fdc620306' id='f22d96a7-5d73-4a58-86bf-180fdc620306'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/0092660e-f4d3-4c8e-a86b-3a0c438d28e2' id='0092660e-f4d3-4c8e-a86b-3a0c438d28e2'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/65554d9a-af72-4c88-a7d9-15b5a76da99e' id='65554d9a-af72-4c88-a7d9-15b5a76da99e'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/0d8190d8-7a47-4d79-82ae-ff1a847dbd9a' id='0d8190d8-7a47-4d79-82ae-ff1a847dbd9a'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/977e5a5e-e2b2-45a5-8a4b-52d4bcc9a343' id='977e5a5e-e2b2-45a5-8a4b-52d4bcc9a343'>
+          <name></name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/2bbba518-bfc1-4e32-b2a4-d4c1d2c4979d' id='2bbba518-bfc1-4e32-b2a4-d4c1d2c4979d'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/6b6f7970-b0b6-4fc5-95e1-1d35f99a026e' id='6b6f7970-b0b6-4fc5-95e1-1d35f99a026e'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/bd91c2ba-0a81-4b6c-b1e1-69d441d14a82' id='bd91c2ba-0a81-4b6c-b1e1-69d441d14a82'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/4368776e-6dc6-4356-840e-c89ef98451b3' id='4368776e-6dc6-4356-840e-c89ef98451b3'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/279ed048-a538-4f0b-8d8f-900c2004ac90' id='279ed048-a538-4f0b-8d8f-900c2004ac90'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/ef629b3f-0391-412f-840c-3243e2615f37' id='ef629b3f-0391-412f-840c-3243e2615f37'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/5ea2f3aa-71de-48ce-b4fe-b218da4620a7' id='5ea2f3aa-71de-48ce-b4fe-b218da4620a7'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/feb79997-82a2-4782-aa6d-cc20f27d0a6c' id='feb79997-82a2-4782-aa6d-cc20f27d0a6c'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/4da378c7-c551-41bc-b0fd-275ecb93ed8e' id='4da378c7-c551-41bc-b0fd-275ecb93ed8e'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/f823fc3f-7cb1-47cd-90da-8bdc83319ed4' id='f823fc3f-7cb1-47cd-90da-8bdc83319ed4'>
+          <name></name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/09c64c44-ba14-45eb-b3bd-2a21b3adab05' id='09c64c44-ba14-45eb-b3bd-2a21b3adab05'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/6611686e-36a5-4ce9-b5a5-f9e6154d6ec4' id='6611686e-36a5-4ce9-b5a5-f9e6154d6ec4'>
+          <name>ami-test</name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/b1a43374-6549-46c3-9295-a26c38891c85' id='b1a43374-6549-46c3-9295-a26c38891c85'></build>
+          </builds>
+        </image>
+        <image href='http://localhost:3000/api/images/10bf9309-1521-4f48-8ed5-a637a449da02' id='10bf9309-1521-4f48-8ed5-a637a449da02'>
+          <name></name>
+          <description></description>
+          <os></os>
+          <os_version></os_version>
+          <arch></arch>
+          <builds type='xs:list'>
+            <build href='http://localhost:3000/api/builds/4273e39c-4cd5-4d17-9628-84be69ef0355' id='4273e39c-4cd5-4d17-9628-84be69ef0355'></build>
+          </builds>
+        </image>
+      </images>
+
+    http_version: "1.1"

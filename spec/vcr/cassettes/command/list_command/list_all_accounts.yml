@@ -1,0 +1,81 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://admin:password@localhost/conductor/api/provider_accounts.xml
+    body:
+    headers:
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - "\"cc06d592201615534db0988bbe9d9032\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
+      date:
+      - Tue, 18 Oct 2011 11:58:20 GMT
+      x-runtime:
+      - "1.437227"
+      content-length:
+      - "2435"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlZmQyODRiMDEwOWYwZGY2YmM4NWQ2NTJiYWZiYjFmNmQiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwZ7CToKY2xhc3MiFnByb3ZpZGVyX2FjY291bnRzOg52aWV3c3RhdGUwOgluYW1lQAw6CXBhdGgiFy9wcm92aWRlcl9hY2NvdW50cw%3D%3D--89f7b144b8e02f5792f60dd2165b0f0fcd5f3b14; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+    body: |
+      <?xml version="1.0"?>
+      <provider_accounts>
+        <provider_account>
+        <name>ec2-acc</name>
+        <provider>ec2-us-east-1</provider>
+        <provider_type>ec2</provider_type>
+        <provider_credentials>
+          <ec2_credentials>
+            <access_key>AKIAI5HJ6ZDO6KLRG7YA</access_key>
+            <account_number>8637-5181-7422</account_number>
+            <certificate>-----BEGIN CERTIFICATE-----
+      MIICdzCCAeCgAwIBAgIGANSQ1b/JMA0GCSqGSIb3DQEBBQUAMFMxCzAJBgNVBAYT
+      AlVTMRMwEQYDVQQKEwpBbWF6b24uY29tMQwwCgYDVQQLEwNBV1MxITAfBgNVBAMT
+      GEFXUyBMaW1pdGVkLUFzc3VyYW5jZSBDQTAeFw0xMDEwMTMxNDU4MzVaFw0xMTEw
+      MTMxNDU4MzVaMFIxCzAJBgNVBAYTAlVTMRMwEQYDVQQKEwpBbWF6b24uY29tMRcw
+      FQYDVQQLEw5BV1MtRGV2ZWxvcGVyczEVMBMGA1UEAxMMbjM5OHhyb2tkbWR1MIGf
+      MA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCCnLDO5ePhJCvHEJ15VUszxBm+T1LN
+      dE+NOtQ4m1/4Fswz28T+ErUxpOtvureF3REBQp8f3Fvp9BAsxRXT/mCFT0Gv5bta
+      6hpRjv3wZrK3llDZrKrzXZCvgu5TREQOT2bwdzepoe3QupgSgdT3ZZpxf8kqiPav
+      jXKyaEKlpCgdKwIDAQABo1cwVTAOBgNVHQ8BAf8EBAMCBaAwFgYDVR0lAQH/BAww
+      CgYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUAg2H+zIo4W8GQL+K
+      aGAA1moHQ/owDQYJKoZIhvcNAQEFBQADgYEAX984N/YrujDpwhRczBiFYEwqWT0r
+      gNEw1urbUUsHy6t2+t0tjJJsKjvkdgM6Syc1VsgI2EnRaGfbOrzuoRC0Zrb+TSrB
+      JLE/dz3KCvHoq1kHeQF42HKuJJc0nTc+b1BQEefZxEpeFQrI01/Ghln5EFF7Cwje
+      laRVOzOtE+1n9nw=
+      -----END CERTIFICATE-----
+      </certificate>
+            <key>-----BEGIN PRIVATE KEY-----&#xD;
+      MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIKcsM7l4+EkK8cQnXlVSzPEGb5P&#xD;
+      Us10T4061DibX/gWzDPbxP4StTGk62+6t4XdEQFCnx/cW+n0ECzFFdP+YIVPQa/lu1rqGlGO/fBm&#xD;
+      sreWUNmsqvNdkK+C7lNERA5PZvB3N6mh7dC6mBKB1PdlmnF/ySqI9q+NcrJoQqWkKB0rAgMBAAEC&#xD;
+      gYB19XVpJg4sYzJ2UfcmgXWthsmJKrKpgwXlkt/fT9PYhx5dJ3o9zD+AWmWXPpZIe2LENJrpd2Y7&#xD;
+      YITLKiOQlggskdIXQgBYACZauRhlMS8iRNWS1QgEA7EoLqg90l7NJt+MWhu9rfwgCWWYuk1awKDq&#xD;
+      W9Nn6/5gx1eYo/3pn+oF4QJBAMfjO0MkUmXO47ORSan5h6Vo0PP5f0Ihacb8ucgurOPa2R/BeQoO&#xD;
+      VZc36B3P0rjI7ag0WAEXmY1VspUDF4DTfVUCQQCnRwaRJwlYVyWKygf6aqlJ/SjoMFm1GGfVuFlf&#xD;
+      uYzJNfQt4y+QppZUFnALT1MVpTq1Wkt7t2CTpyV0ysj8yTB/AkEAvXjNcgV5/XsxJ8NuWipnxAkp&#xD;
+      GDrFwD+/7pkc2X407/9AlPNl8nxH8YFTCv82NWZwsGJ9kPt32BsFnm5B1yGhyQJAU9q6AwezmpJN&#xD;
+      Io72guT3Kjz7RbH/NlYerzdzrhXg6njeiCZMENJBp7N7xV+lgcNLc9/o2QLrKflvQGXrbTUZ1wJA&#xD;
+      NgArAS+yKRjxIt7orNPR/JHpghhS7xQ1KIg/v1j9HHz0Pmwg3+ZN7ejrI2miERv5CcwYYx2ZGkMs&#xD;
+      Dc1go5/qpA==&#xD;
+      -----END PRIVATE KEY-----</key>
+            <secret_access_key>Hz3uYk+xf9z2KGX7iOufi5XAZ9OU7CvQZEc4bm0K</secret_access_key>
+          </ec2_credentials>
+        </provider_credentials>
+      </provider_account>
+      </provider_accounts>
+
+    http_version: "1.1"
