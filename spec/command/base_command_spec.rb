@@ -20,7 +20,7 @@ module Aeolus
       describe "configure_active_resource" do
         it "should setup ActiveResource with endpoint and authentication" do
           basec = BaseCommand.new
-          Aeolus::CLI::Base.site.to_s.should == "http://localhost/conductor/api"
+          Aeolus::CLI::Base.site.to_s.should == "https://localhost/conductor/api"
           Aeolus::CLI::Base.user.to_s.should == "admin"
           Aeolus::CLI::Base.password.to_s.should == "password"
         end
@@ -35,7 +35,7 @@ module Aeolus
 
         it "should read file content into string variable" do
           b = BaseCommand.new
-          template_str = b.send(:read_file, "#{File.dirname(__FILE__)}" + "/../examples/custom_repo.tdl")
+          template_str = b.send(:read_file, "#{File.dirname(__FILE__)}" + "/../../examples/custom_repo.tdl")
           template_str.should include("<template>")
         end
       end
@@ -47,7 +47,7 @@ module Aeolus
         end
         it "should return true if file found" do
           b = BaseCommand.new
-          valid_file = "#{File.dirname(__FILE__)}" + "/../examples/aeolus-cli"
+          valid_file = "#{File.dirname(__FILE__)}" + "/../../examples/aeolus-cli"
           b.instance_eval {@config_location = valid_file}
           b.send(:is_file?, valid_file).should be_true
         end

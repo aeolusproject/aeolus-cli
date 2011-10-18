@@ -21,6 +21,9 @@ require 'image'
 require 'build'
 require 'target_image'
 require 'provider_image'
+require 'provider'
+require 'provider_type'
+require 'provider_account'
 require 'config_parser'
 require 'stringio'
 require 'base_command'
@@ -29,6 +32,8 @@ require 'build_command'
 require 'push_command'
 require 'import_command'
 require 'delete_command'
+
+require 'vcr_setup'
 
 module Helpers
   # Silences any stream for the duration of the block.
@@ -56,6 +61,11 @@ RSpec.configure do |config|
     Aeolus::CLI::BaseCommand.class_eval do
       def load_config
         YAML::load(File.open(File.join(File.dirname(__FILE__), "/../examples/aeolus-cli")))
+      end
+    end
+    Aeolus::CLI::BaseCommand.class_eval do
+      def handle_exception(e)
+        raise e
       end
     end
   end
