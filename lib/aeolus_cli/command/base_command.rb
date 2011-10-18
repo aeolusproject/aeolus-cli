@@ -15,6 +15,7 @@
 require 'yaml'
 require 'rest_client'
 require 'nokogiri'
+require 'active_support'
 
 module Aeolus
   module CLI
@@ -84,6 +85,26 @@ module Aeolus
       end
 
       private
+      def handle_exception(e)
+        message = "Unable to perform task: \n"
+        case e.class
+          when ActiveResource::BadRequest : message += "- Bad Request Sent to Server"
+          when ActiveResource::UnauthorizedAccess : message += "- You are unauthorized to view/edit this resource/collection"
+          when ActiveResource::ForbiddenAccess : message += "- Access is forbidden to this resource/collection"
+          when ActiveResource::ResourceNotFound : message += "- Unable to find resource"
+          when ActiveResource::MethodNotAllowed : message += "- Method not allowed"
+          when ActiveResource::ResourceConflict : message += "- This resource conflicts with another on the server"
+          when ActiveResource::ResourceGone : message += "- This resource no londer exists"
+          when ActiveResource::ResourceInvalid : message += "- This resource is invalid"
+          when ActiveResource::ClientError : message += "- An error was thrown by the client"
+          when ActiveResource::ServerError : message += "- An unexplained error was returned by the server"
+          when ActiveResource::ConnectionError : message += "- Unable to connect to the server"
+          else message += "- Internal Error: " + e.message
+        end
+        puts message
+        quit(1)
+      end
+
       def configure_active_resource
         Aeolus::CLI::Base.site = @config[:conductor][:url]
         Aeolus::CLI::Base.user = @config[:conductor][:username]
