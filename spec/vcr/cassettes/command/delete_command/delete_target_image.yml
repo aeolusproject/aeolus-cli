@@ -1,0 +1,77 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://admin:password@localhost:3000/api/target_images/e626cadf-5901-4db4-95c5-d53a696e00dd.xml
+    body:
+    headers:
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - "\"750a6fd6f256f02577362005d205b9a0\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
+      date:
+      - Wed, 19 Oct 2011 19:52:41 GMT
+      x-runtime:
+      - "1.064720"
+      content-length:
+      - "629"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlNGYxYWEwNTc4ZDEzZjhmMzA5OTczNDE1MWRjYTE5ZTMiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--6bd775a222316d51f8fbca9c9f64a960b3cfd7d0; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+    body: |
+      <target_image href='http://localhost:3000/api/target_images/e626cadf-5901-4db4-95c5-d53a696e00dd' id='e626cadf-5901-4db4-95c5-d53a696e00dd'>
+        <object_type>target_image</object_type>
+        <template>b97b62c8-a55b-4fb6-8ca9-f67e4e869f0b</template>
+        <build href='http://localhost:3000/api/builds/a5b23c06-8d63-4173-be49-fb15975065da' id='a5b23c06-8d63-4173-be49-fb15975065da'></build>
+        <status>COMPLETE</status>
+        <provider_image>
+          <provider_image href='http://localhost:3000/api/provider_images/c36c478c-58af-446b-80bf-1720724a68bd' id='c36c478c-58af-446b-80bf-1720724a68bd'></provider_image>
+        </provider_image>
+      </target_image>
+
+    http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :delete
+    uri: http://admin:password@localhost:3000/api/target_images/e626cadf-5901-4db4-95c5-d53a696e00dd.xml
+    body:
+    headers:
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - "\"c2f80b58455fb6d578895fc59bf244e2\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
+      date:
+      - Wed, 19 Oct 2011 19:52:42 GMT
+      x-runtime:
+      - "0.616347"
+      content-length:
+      - "20"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlYTc5NGUyMzY0NTk1MzNmNWMyNjA3OGJmYmJlYTE4YjQiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--2530799f06e70fa34ea5562eb195c1304c530774; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+    body: Target Image Deleted
+    http_version: "1.1"
