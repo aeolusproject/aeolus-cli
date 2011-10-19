@@ -2,6 +2,7 @@
   <name>tmpl1</name>
   <description>foo</description>
   <os>
+    <rootpw>password</rootpw>
     <name>Fedora</name>
     <arch>x86_64</arch>
     <version>14</version>

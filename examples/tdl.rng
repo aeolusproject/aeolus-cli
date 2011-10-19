@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- This Schema is lifted from the OZ project: http://www.aeolusproject.org/oz.html any changes to this schema should be done in the upstream project, then added here-->
 <!-- A Relax NG schema for the TDL (template description language) format -->
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
