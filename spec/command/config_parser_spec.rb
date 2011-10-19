@@ -18,9 +18,15 @@ module Aeolus
   module CLI
     describe ConfigParser do
       it "should parse the specified command" do
-        config_parser = ConfigParser.new(%w(list  --images))
-        config_parser.process
-        config_parser.command.should == 'list'
+        VCR.use_cassette('command/list_command/list_all_images') do
+          begin
+            config_parser = ConfigParser.new(%w(list  --images))
+            config_parser.process
+          rescue SystemExit => e
+            e.status.should == 0
+          end
+          config_parser.command.should == 'list'
+        end
       end
 
       it "should exit gracefully when a required subcommand is not provided" do
