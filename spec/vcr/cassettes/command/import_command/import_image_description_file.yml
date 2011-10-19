@@ -1,0 +1,56 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: https://admin:password@localhost/conductor/api/images.xml
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <image>
+        <target_name>ec2</target_name>
+        <target_identifier>ami-5592553c</target_identifier>
+        <provider_name>ec2-us-east-1</provider_name>
+        <image_descriptor>spec/sample_data/image_description.xml</image_descriptor>
+      </image>
+
+    headers:
+      content-type:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - "\"9bffa6c31d892ed5173064f19d76ab9e\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
+      date:
+      - Wed, 19 Oct 2011 22:24:38 GMT
+      x-runtime:
+      - "0.545222"
+      content-length:
+      - "760"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlNmMwM2Q3YWYyMmQwN2VmNDg2MTU4YzNhZGI1NzU4ODMiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--99d5431c9025c37b729f5f254b52104fad89cc1e; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+    body: |
+      <image href='http://localhost:3000/api/images/510bec08-e6fa-4004-aa21-c726b420d97e' id='510bec08-e6fa-4004-aa21-c726b420d97e'>
+        <build href='http://localhost:3000/api/builds/24c0f87e-86f6-4bd3-a3a6-a61d89b348f6' id='24c0f87e-86f6-4bd3-a3a6-a61d89b348f6'>
+          <target_images>
+            <target_image href='http://localhost:3000/api/target_images/e6841cdc-c632-4dc8-be5e-8da8476b02cc' id='e6841cdc-c632-4dc8-be5e-8da8476b02cc'>
+              <provider_images>
+                <provider_image href='http://localhost:3000/api/provider_images/e21fe1a3-4c14-473a-8818-9aeeac09c8ad' id='e21fe1a3-4c14-473a-8818-9aeeac09c8ad'>
+                  <status>COMPLETE</status>
+                </provider_image>
+              </provider_images>
+            </target_image>
+          </target_images>
+        </build>
+      </image>
+
+    http_version: "1.1"

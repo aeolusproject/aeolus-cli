@@ -26,8 +26,6 @@ module Aeolus
           :provider => ''
         }
         @options = default.merge(@options)
-        @console = ImageFactoryConsole.new()
-        @console.start
       end
 
       def import_image
@@ -36,22 +34,18 @@ module Aeolus
           @options[:description] = description
         end
         # TODO: Validate Description XML
-
-        #This is a temporary hack in case the agent doesn't show up on bus
-        #immediately
-        sleep(5)
-        import_map = @console.import_image(@options[:image], @options[:build], @options[:id], @options[:description], @options[:target].first, @options[:provider].first)
+        image = Aeolus::CLI::Image.new({:target_identifier => @options[:id],
+                                        :target_name => @options[:target].first,
+                                        :image_descriptor => @options[:description],
+                                        :provider_name => @options[:provider].first})
+        image.save!
         puts ""
-        puts "Target Image: " + import_map['target_image']
-        puts "Image: " + import_map['image']
-        puts "Build: " + import_map['build']
-        puts "Provider Image: " + import_map['provider_image']
+        puts "Image: " + image.id
+        puts "Build: " + image.build.id
+        puts "Target Image: " + image.build.target_images.target_image.id
+        puts "Provider Image: " + image.build.target_images.target_image.provider_images.provider_image.id
+        puts "Status: " + image.build.target_images.target_image.provider_images.provider_image.status
         quit(0)
-      end
-
-      def quit(code)
-        @console.shutdown
-        super
       end
     end
   end
