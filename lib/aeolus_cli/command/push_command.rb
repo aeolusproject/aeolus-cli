@@ -26,9 +26,8 @@ module Aeolus
           :build => ''
         }
         @options = default.merge(@options)
-        @console = ImageFactoryConsole.new()
-        @console.start
       end
+
       def run
         begin
           if combo_implemented?
@@ -38,20 +37,22 @@ module Aeolus
               quit(1)
             end
 
-            sleep(5)
-            @console.push(@options[:provider], get_creds, @options[:id], @options[:build]).each do |adaptor|
-              puts ""
-              puts "Provider Image: #{adaptor.image_id}"
-              puts "Image: #{adaptor.image}"
-              puts "Build: #{adaptor.build}"
-              puts "Status: #{adaptor.status}"
-              puts "Percent Complete: #{adaptor.percent_complete}"
-            end
+            pi = Aeolus::CLI::ProviderImage.new({:provider_name => @options[:provider].to_s,
+                                                 :provider_account => @options[:account],
+                                                 :image_id => @options[:image],
+                                                 :build_id => @options[:build],
+                                                 :target_image_id => @options[:targetimage]})
+            pi.save!
+            puts ""
+            puts "Image: " + pi.image_id
+            puts "Build: " + pi.build_id
+            puts "Target Image: " + pi.target_image_id
+            puts "Provider Image: " + pi.id
+            puts "Status: " + pi.status
             quit(0)
           end
-        rescue
-          puts "An Error occured whilst trying to push this build, please check aeolus-image --help for details on how to use this command"
-          quit(1)
+        rescue => e
+          handle_exception(e)
         end
       end
 
@@ -60,7 +61,7 @@ module Aeolus
       end
 
       def combo_implemented?
-        if @options[:provider].empty? || (@options[:build].empty? && @options[:id].empty?)
+        if (@options[:provider].empty? || @options[:build].empty? || @options[:image].empty? || @options[:account].empty? || @options[:targetimage].empty?)
           puts "This combination of parameters is not currently supported"
           quit(1)
         end
@@ -68,11 +69,6 @@ module Aeolus
       end
 
       private
-      def quit(code)
-        @console.shutdown
-        exit(code)
-      end
-
       def pushed?(image)
         begin
           uuid = Regexp.new('[\w]{8}[-][\w]{4}[-][\w]{4}[-][\w]{4}[-][\w]{12}')

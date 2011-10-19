@@ -25,30 +25,25 @@ module Aeolus
       end
 
       describe "#run" do
-        before(:each) do
-          options = {}
-          options[:target] = ['mock','ec2']
-          options[:template] = "#{File.dirname(__FILE__)}" + "/../examples/custom_repo.tdl"
-          b = BuildCommand.new(options)
-          sleep(5)
-          tmpl_str = b.send(:read_file, options[:template])
-          b.console.build(tmpl_str, ['mock','ec2']).each do |adaptor|
-            @build_id = adaptor.image
-          end
-          b.console.shutdown
-          @options[:id] = @build_id
-        end
-
         it "should push an image with valid options" do
-          p = PushCommand.new(@options, @output)
-          begin
-            p.run
-          rescue SystemExit => e
-            e.status.should == 0
+          VCR.use_cassette('command/push_command/push_image') do
+            @options = ({ :image => "ae24eed8-6190-4725-877a-24bb1517fb54",
+                          :build => "accaad33-6bc7-4cd0-9260-3fd5c1b73ff9",
+                          :targetimage => "817ab83c-beda-4b84-bad1-38d90ebfe5ea",
+                          :account => "ec2-acc",
+                          :provider => "ec2-us-east-1" })
+            p = PushCommand.new(@options, @output)
+            begin
+              p.run
+            rescue SystemExit => e
+              e.status.should == 0
+            end
+            $stdout.string.should include("Image: ae24eed8-6190-4725-877a-24bb1517fb54")
+            $stdout.string.should include("Build: accaad33-6bc7-4cd0-9260-3fd5c1b73ff9")
+            $stdout.string.should include("Target Image: 817ab83c-beda-4b84-bad1-38d90ebfe5ea")
+            $stdout.string.should include("Provider Image: 92f03089-99a6-473d-afef-0a91b67b481a")
+            $stdout.string.should include("Status:")
           end
-          $stdout.string.should include("Image:")
-          $stdout.string.should include("Provider Image:")
-          $stdout.string.should include("Build:")
         end
       end
 

@@ -117,6 +117,9 @@ module Aeolus
           opts.on('-B', '--build ID', 'push all target images for a build, to same providers as previously') do |id|
             @options[:build] = id
           end
+          opts.on('-t', '--targetimages ID', 'Retrieve the target images from a build') do |id|
+            @options[:targetimage] = id
+          end
           opts.on('-A', '--account NAME', 'name of specific provider account to use for push') do |name|
             @options[:account] = name
           end

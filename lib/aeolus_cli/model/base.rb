@@ -38,6 +38,12 @@ module Aeolus
         end
       end
 
+      # Active Resrouce Uses dashes instead of underscores, this method overrides to use underscore
+      def to_xml(options={})
+        options[:dasherize] ||= false
+        super({ :root => self.class.element_name }.merge(options))
+      end
+
       # Instance Methods
       def to_s
         id
