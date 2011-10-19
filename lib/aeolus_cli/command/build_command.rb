@@ -12,8 +12,6 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-require 'imagefactory'
-
 module Aeolus
   module CLI
     class BuildCommand < BaseCommand
@@ -28,40 +26,40 @@ module Aeolus
           :build => ''
         }
         @options = default.merge(@options)
-        @console = ImageFactoryConsole.new()
-        @console.start
       end
 
       def run
         if combo_implemented?
-          @options[:template_str] = read_file(@options[:template])
-          if @options[:template_str].nil?
-            puts "Cannot find specified file"
-            quit(1)
-          end
+          template = read_template
+          validate_xml_schema(template)
 
-          # Validate XML against TDL Schema
-          errors = validate_xml_document(File.dirname(__FILE__) + "/../../../examples/tdl.rng", @options[:template_str])
-          if errors.length > 0
-            puts "ERROR: The given Template does not conform to the TDL Schema, see below for specific details:"
-            errors.each do |error|
-              puts "- " + error.message
-            end
-            quit(1)
-          end
-
-          #This is a temporary hack in case the agent doesn't show up on bus immediately
-          sleep(5)
-          @console.build(@options[:template_str], @options[:target], @options[:image], @options[:build]).each do |adaptor|
-            puts ""
-            puts "Target Image: #{adaptor.image_id}"
-            puts "Image: #{adaptor.image}"
-            puts "Build: #{adaptor.build}"
-            puts "Status: #{adaptor.status}"
-            puts "Percent Complete: #{adaptor.percent_complete}"
-          end
+          image = Aeolus::CLI::Image.new({:targets => @options[:target].to_s, :tdl => template})
+          image.save!
+          puts "Image: " + image.id
+          puts "Build: " + image.build.id
+          puts "Target Image: " + image.build.target_images.target_image.id
           quit(0)
         end
+      end
+
+      def validate_xml_schema(xml)
+        errors = validate_xml_document(File.dirname(__FILE__) + "/../../../examples/tdl.rng", xml)
+        if errors.length > 0
+          puts "ERROR: The given Template does not conform to the TDL Schema, see below for specific details:"
+          errors.each do |error|
+            puts "- " + error.message
+          end
+          quit(1)
+        end
+      end
+
+      def read_template
+        template = read_file(@options[:template])
+        if template.nil?
+          puts "Cannot find specified file"
+          quit(1)
+        end
+        template
       end
 
       def combo_implemented?
@@ -71,12 +69,6 @@ module Aeolus
         end
         true
       end
-
-      def quit(code)
-        @console.shutdown
-        super
-      end
-
     end
   end
 end
