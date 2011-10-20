@@ -1,5 +1,5 @@
 # Below is the correct format for this file, please update any older version you may have
 :conductor:
-  :url: http://localhost:3000/api
+  :url: https://localhost/conductor/api
   :username: admin
   :password: password
