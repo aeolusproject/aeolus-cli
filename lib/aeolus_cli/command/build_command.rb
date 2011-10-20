@@ -33,11 +33,13 @@ module Aeolus
           template = read_template
           validate_xml_schema(template)
 
-          image = Aeolus::CLI::Image.new({:targets => @options[:target].to_s, :tdl => template})
+          image = Aeolus::CLI::Image.new({:targets => @options[:target] * ",", :tdl => template})
           image.save!
           puts "Image: " + image.id
           puts "Build: " + image.build.id
-          puts "Target Image: " + image.build.target_images.target_image.id
+          image.build.target_images.target_image.to_a.each do |target_image|
+            puts "Target Image: " + target_image.id.to_s + "\t :Status " + target_image.status
+          end
           quit(0)
         end
       end
