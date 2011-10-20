@@ -21,8 +21,8 @@ module Aeolus
 
       def provider_image
         if pi = ProviderImage.find(@options[:providerimage])
-          if pi.destroy
-            puts "Provider Image: " + @options[:providerimage] + " Deleted Successfully"
+          if pi.delete!
+            puts "b: " + @options[:providerimage] + " Deleted Successfully"
             exit(0)
           end
           puts "ERROR: Unable to Delete Provider Image: " + @options[:providerimage]
@@ -34,7 +34,7 @@ module Aeolus
 
       def target_image
         if ti = TargetImage.find(@options[:targetimage])
-          if ti.destroy
+          if ti.delete!
             puts "Target Image: " + @options[:targetimage] + " Deleted Successfully"
             exit(0)
           end
@@ -46,8 +46,8 @@ module Aeolus
       end
 
       def build
-        if b = Build.find(@options[:build])
-          if b.destroy
+        if b = ImageBuild.find(@options[:build])
+          if b.delete!
             puts "Build: " + @options[:build] + " Deleted Successfully"
             exit(0)
           end
@@ -60,7 +60,7 @@ module Aeolus
 
       def image
         if i = Image.find(@options[:image])
-          if i.destroy
+          if i.delete!
             puts "Image: " + @options[:image] + " Deleted Successfully"
             exit(0)
           end
@@ -69,6 +69,27 @@ module Aeolus
           puts "Image: " + @options[:image] + " does not exist"
         end
         exit(1)
+      end
+
+      # Deletes all Images,Builds,TargetImages,ProviderImages
+      def iwhd
+        Image.all.each do |image|
+          Image.delete(image.uuid)
+        end
+
+        ImageBuild.all.each do |build|
+          ImageBuild.delete(build.uuid)
+        end
+
+        TargetImage.all.each do |target_image|
+          TargetImage.delete(target_image.uuid)
+        end
+
+        ProviderImage.all.each do |provider_image|
+          ProviderImage.delete(provider_image.uuid)
+        end
+        puts "Deleted all objects in IWHD"
+        exit(0)
       end
     end
   end
