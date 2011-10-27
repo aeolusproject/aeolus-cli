@@ -37,7 +37,7 @@ module Aeolus
           image.save!
           puts "Image: " + image.id
           puts "Build: " + image.build.id
-          image.build.target_images.target_image.to_a.each do |target_image|
+          Array(image.build.target_images.target_image).each do |target_image|
             puts "Target Image: " + target_image.id.to_s + "\t :Status " + target_image.status
           end
           quit(0)
