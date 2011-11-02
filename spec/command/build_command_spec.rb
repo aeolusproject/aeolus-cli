@@ -37,6 +37,22 @@ module Aeolus
           end
         end
 
+        it "should build for multiple targets" do
+          VCR.use_cassette('command/build_command/multiple_build') do
+            @options[:target] = ['ec2,mock']
+            b = BuildCommand.new(@options, @output)
+            begin
+              b.run
+            rescue SystemExit => e
+              e.status.should == 0
+            end
+            $stdout.string.should include("Image: 38d8b8e4-21f8-439b-9fc8-e6f8816682cb")
+            $stdout.string.should include("Build: af8016a8-2ee6-409c-8752-7c74c60a174e")
+            $stdout.string.should include("Target Image: 30a11f4a-e568-4c2d-a9b6-7c2c80a7ed3f")
+            $stdout.string.should include("Target Image: c27db6d9-6f7c-413e-9103-70e8af0daf32")
+          end
+        end
+
         it "should exit with a message if only image id is provided" do
           @options.delete(:template)
           @options.delete(:target)

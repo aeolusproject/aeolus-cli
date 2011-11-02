@@ -1,0 +1,74 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: https://admin:password@localhost:443/conductor/api/images.xml
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <image>
+        <targets>ec2,mock</targets>
+        <tdl>&lt;template&gt;
+        &lt;name&gt;tmpl1&lt;/name&gt;
+        &lt;description&gt;foo&lt;/description&gt;
+        &lt;os&gt;
+          &lt;rootpw&gt;password&lt;/rootpw&gt;
+          &lt;name&gt;Fedora&lt;/name&gt;
+          &lt;arch&gt;x86_64&lt;/arch&gt;
+          &lt;version&gt;14&lt;/version&gt;
+          &lt;install type="url"&gt;
+            &lt;url&gt;http://download.fedoraproject.org/pub/fedora/linux/releases/14/Fedora/x86_64/os/&lt;/url&gt;
+          &lt;/install&gt;
+        &lt;/os&gt;
+        &lt;repositories&gt;
+          &lt;repository name="custom"&gt;
+            &lt;url&gt;http://repos.fedorapeople.org/repos/aeolus/demo/webapp/&lt;/url&gt;
+            &lt;signed&gt;false&lt;/signed&gt;
+          &lt;/repository&gt;
+        &lt;/repositories&gt;
+      &lt;/template&gt;</tdl>
+      </image>
+
+    headers:
+      content-type:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge,chrome=1
+      etag:
+      - "\"7c99627727857e6618d365853351a8d5\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - thin 1.2.11 codename Bat-Shit Crazy
+      date:
+      - Wed, 02 Nov 2011 14:56:05 GMT
+      x-runtime:
+      - "0.335635"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlZDljNTgyMzFkNzIwMDVmMTA3MmM0ZDYwZDBjYTg0ZTAiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--01b1228fe550752e0c9ec1a3ec0534083af93561; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+      transfer-encoding:
+      - chunked
+    body: |+
+      <image href='https://localhost/conductor/api/images/38d8b8e4-21f8-439b-9fc8-e6f8816682cb' id='38d8b8e4-21f8-439b-9fc8-e6f8816682cb'>
+      <build href='https://localhost/conductor/api/builds/af8016a8-2ee6-409c-8752-7c74c60a174e' id='af8016a8-2ee6-409c-8752-7c74c60a174e'>
+      <target_images>
+      <target_image href='https://localhost/conductor/api/target_images/c27db6d9-6f7c-413e-9103-70e8af0daf32' id='c27db6d9-6f7c-413e-9103-70e8af0daf32'>
+      <status>New</status>
+      <provider_images>
+      </provider_images>
+      </target_image>
+      <target_image href='https://localhost/conductor/api/target_images/30a11f4a-e568-4c2d-a9b6-7c2c80a7ed3f' id='30a11f4a-e568-4c2d-a9b6-7c2c80a7ed3f'>
+      <status>COMPLETED</status>
+      <provider_images>
+      </provider_images>
+      </target_image>
+      </target_images>
+      </build>
+      </image>
+    http_version: "1.1"
