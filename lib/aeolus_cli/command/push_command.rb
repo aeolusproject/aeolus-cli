@@ -20,63 +20,54 @@ module Aeolus
       attr_accessor :console
       def initialize(opts={}, logger=nil)
         super(opts, logger)
-        default = {
-          :provider => [],
-          :id => '',
-          :build => ''
-        }
-        @options = default.merge(@options)
       end
 
       def run
         begin
-          if combo_implemented?
-            if !@options[:id].empty? && pushed?(@options[:id])
-              puts "ERROR: This image has already been pushed, to push to another provider please push via build-id rather than image-id"
-              puts "e.g. aeolus-image push --provider <provider> --build <build-id>"
-              quit(1)
-            end
+          pi = Aeolus::CLI::ProviderImage.new(request_parameters)
+          pi.save!
 
-            pi = Aeolus::CLI::ProviderImage.new({:provider_name => @options[:provider].to_s,
-                                                 :provider_account => @options[:account],
-                                                 :image_id => @options[:image],
-                                                 :build_id => @options[:build],
-                                                 :target_image_id => @options[:targetimage]})
-            pi.save!
-            puts ""
-            puts "Image: " + pi.image_id
-            puts "Build: " + pi.build_id
-            puts "Target Image: " + pi.target_image_id
-            puts "Provider Image: " + pi.id
-            puts "Status: " + pi.status
-            quit(0)
+          {:image_id => "Image", :build_id => "Build", :target_image_id => "Target Image"}.each_pair do |method, label|
+            if pi.respond_to?(method)
+              puts label + ": " + pi.send(method)
+            end
           end
+
+          if pi.respond_to?(:provider_image)
+            Array(pi.provider_image).each do |p|
+              puts "Provider Image: " + p.id + "\t Status: " + p.status
+            end
+          else
+            puts "Provider Image: " + pi.id
+          end
+
+          quit(0)
         rescue => e
           handle_exception(e)
         end
       end
 
-      def get_creds
-        conductor['provider_accounts'].get
-      end
-
-      def combo_implemented?
-        if (@options[:provider].empty? || @options[:build].empty? || @options[:image].empty? || @options[:account].empty? || @options[:targetimage].empty?)
-          puts "This combination of parameters is not currently supported"
+      def request_parameters
+        if @options[:account]
+          request_map = {:provider_account => @options[:account]}
+        else
+          puts "Error: You must specifcy an account to push to"
           quit(1)
         end
-        true
+
+        if @options[:image]
+          request_map[:image_id] = @options[:image]
+        elsif @options[:build]
+          request_map[:build_id] = @options[:build]
+        elsif @options[:targetimage]
+          request_map[:target_image_id] = @options[:targetimage]
+        else
+          puts "Error: You must specify either an image, build or target image to push"
+          quit(1)
+        end
+        request_map
       end
 
-      private
-      def pushed?(image)
-        begin
-          uuid = Regexp.new('[\w]{8}[-][\w]{4}[-][\w]{4}[-][\w]{4}[-][\w]{12}')
-          uuid.match(iwhd["/images/" + image + "/latest_unpushed"].get).nil? ? true : false
-        rescue
-          true
-        end
-      end
     end
   end
 end

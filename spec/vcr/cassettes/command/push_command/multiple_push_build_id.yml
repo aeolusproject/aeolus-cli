@@ -1,0 +1,49 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: https://admin:password@localhost/conductor/api/provider_images.xml
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <provider_image>
+        <build_id>5d81e1a4-911a-4934-bb50-b46881343f6d</build_id>
+        <provider_account>ec2-acc,mock-acc</provider_account>
+      </provider_image>
+
+    headers:
+      content-type:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - "\"12874d57a167cb0633095f4cf8468004\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
+      date:
+      - Tue, 08 Nov 2011 19:57:44 GMT
+      x-runtime:
+      - "2.909574"
+      content-length:
+      - "427"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlOWFhOTkwZWJhMGE0MWVhYmZmNDEyYzQ1ZjQ0OTI1ZWIiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--3086dfe54356c688ed742cbe97ad71028ea0d5e6; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+    body: |
+      <provider_images>
+        <provider_image href='http://localhost:3000/api/provider_images/3597b77b-0a0e-4d0c-8916-a071a6e8ec30' id='3597b77b-0a0e-4d0c-8916-a071a6e8ec30'>
+          <status>New</status>
+        </provider_image>
+        <provider_image href='http://localhost:3000/api/provider_images/bd04dc3d-0e88-4175-987f-f448c009ea90' id='bd04dc3d-0e88-4175-987f-f448c009ea90'>
+          <status>COMPLETED</status>
+        </provider_image>
+      </provider_images>
+
+    http_version: "1.1"
