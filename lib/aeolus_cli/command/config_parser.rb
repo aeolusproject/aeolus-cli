@@ -50,12 +50,6 @@ module Aeolus
 
           opts.separator ""
           opts.separator "General options:"
-          opts.on('-u', '--user USERNAME', 'Conductor username') do |user|
-            @options[:user] = user
-          end
-          opts.on('-w', '--password PASSWORD', 'Conductor password') do |pw|
-            @options[:password] = pw
-          end
           opts.on('-d', '--id ID', 'id for a given object') do |id|
             @options[:id] = id
           end
@@ -70,9 +64,6 @@ module Aeolus
           end
           opts.on('-T', '--target TARGET1,TARGET2', Array, 'provider type (ec2, rackspace, rhevm, etc)') do |name|
             @options[:target] = name
-          end
-          opts.on('-d', '--daemon', 'run as a background process') do
-            @options[:subcommand] = :images
           end
           opts.on( '-h', '--help', 'Get usage information for this tool') do
             puts opts
@@ -142,9 +133,6 @@ module Aeolus
             @options[:subcommand] = :provider_image
             @options[:providerimage] = id
           end
-          opts.on('-W', '--iwhd', 'Delete everything stored in IWHD') do
-            @options[:subcommand] = :iwhd
-          end
 
           opts.separator ""
           opts.separator "List Examples:"
@@ -152,25 +140,24 @@ module Aeolus
           opts.separator "aeolus-image list --builds $image_id          # list the builds of an image"
           opts.separator "aeolus-image list --targetimages $build_id    # list the target images from a build"
           opts.separator "aeolus-image list --providerimages $target_id # list the provider images from a target image"
-          opts.separator "aeolus-image list --providerimages all        # list all provider images"
           opts.separator "aeolus-image list --targets                   # list the values available for the --target parameter"
           opts.separator "aeolus-image list --providers                 # list the values available for the --provider parameter"
           opts.separator "aeolus-image list --accounts                  # list the values available for the --account parameter"
 
           opts.separator ""
           opts.separator "Build examples:"
-          opts.separator "aeolus-image build --target ec2 --template my.tmpl  # build a new image for ec2 from the template"
-          opts.separator "aeolus-image build --image $image_id                # (NOT IMPLEMENTED) rebuild the image template and targets from latest build"
-          opts.separator %q{aeolus-image build --target ec2,rackspace \         # rebuild the image with a new template and set of targets
-                   --image $image_i \
-                   --template my.tmpl}
+          opts.separator "aeolus-image build --target ec2 --template my.tmpl        # build a new image for ec2 from based on the given template"
+          opts.separator "aeolus-image build --target ec2,rhevm --template my.tmpl  # build a new image for ec2 and for rhevm based on the given template"
+          #opts.separator "aeolus-image build --image $image_id                # (NOT IMPLEMENTED) rebuild the image template and targets from latest build"
+          #opts.separator %q{aeolus-image build --target ec2,rackspace \         # rebuild the image with a new template and set of targets
+          #         --image $image_i \
+          #         --template my.tmpl}
 
           opts.separator ""
           opts.separator "Push examples:"
-          opts.separator "aeolus-image push --provider ec2-us-east-1 --id $image_id         # initial push of an image build via image id to the specified provider"
-          opts.separator "aeolus-image push --build $build_id                               # push an image build via build id to the specified provider"
-          opts.separator "aeolus-image push --account $provider_account --build $build_id   # (NOT IMPLEMENTED) ditto, using a specific provider account"
-          opts.separator "aeolus-image push --image $image_id                               # (NOT IMPLEMENTED) push all the target images for the latest build"
+          opts.separator "aeolus-image push --account ec2-account,ec2-account2 --targetimage $target_image_id   # Push target images to each of the specified account"
+          opts.separator "aeolus-image push --account ec2-account,rhevm-account --build $build_id               # Push target images attached to a particular build to each of the specified accounts"
+          opts.separator "aeolus-image push --account ec2-account,rhevm-account --image $image_id               # Push target images attached to a particular image to each of the specified accounts"
 
           opts.separator ""
           opts.separator "Import examples:"
@@ -180,8 +167,9 @@ module Aeolus
 
           opts.separator ""
           opts.separator "Delete examples: (DELETE CURRENTLY NOT IMPLEMENTED) "
-          opts.separator "aeolus-image delete --build $build_id               # deletes a build, updating latest/parent references as appropriate"
-          opts.separator "aeolus-image delete --targetimage $target_image     # deletes a target image and its provider images"
+          opts.separator "aeolus-image delete --image $image_id               # deletes a image and all associated builds"
+          opts.separator "aeolus-image delete --build $build_id               # deletes a build and all associated targetimages"
+          opts.separator "aeolus-image delete --targetimage $target_image     # deletes a target image and all associated provider images"
           opts.separator "aeolus-image delete --providerimage $provider_image # deletes a provider image"
         end
 

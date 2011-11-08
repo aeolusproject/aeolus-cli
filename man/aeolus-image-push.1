@@ -2,38 +2,41 @@
 .SH NAME
 aeolus-image push \- command for pushing aeolus images to back end providers
 .SH SYNOPSIS
-.B aeolus-image push [\-h|--help] [\-u|--username] [\-w|--password] [\-id [image-id]] [-r|--provider [provider-name]]
+.B aeolus-image push [\-h|--help] [\-I|--image [image-id]] [\-B|--build [build-id]] [-m|--targetimage]] [-A|--account[account-name]]
 .SH DESCRIPTION
-aeolus-image push allows users to push built images to a particular backend provider
+aeolus-image push allows users to push target images to particular backend providers.
 .SH OPTIONS
 .TP
-\-u, --user <username>
-Conductor username
+\-I|--image <id>
+The image id for pushing all target images associated with this image
 .TP
-\-w, --password <password>
-Conductor password
+\-B|--build <id>
+The build id for pushing all target images associated with this build
 .TP
-\-r|--provider
-The provider name this image should be pushed to
+\-m|--targetimage <id>
+The id of the target image to push
 .TP
-\--id <id>
-The id of the image for pushing
-.TP
-\-d, --daemon
-Run as a background process
+\-A|--account <id>
+A comma separated list of account that the target images should be pushed to
 .TP
 Get usage information for this command and associated commmands
 \-h, --help
 .SH EXAMPLES
 .TP
-Initial push of an image with id 12345678-bbbb-1234--1234567890ab to provider ec2-us-east-1
+Push target images associated with an image to each of specified accounts
 .B aeolus-image push
-\--id 12345678-bbbb-1234--1234567890ab
-\--provider ec2-us-east-1
-Push a build with id 12345678-bbbb-1234--1234567890ab to provider ec2-us-east-1
+\--image 12345678-bbbb-1234--1234567890ab
+\--account ec2-account,rhevm-account
+.TP
+Push target images associated with a build to each of the specified accounts
 .B aeolus-image push
 \--build 12345678-bbbb-1234--1234567890ab
-\--provider ec2-us-east-1
+\--account ec2-account,rhevm-account
+.TP
+Push a target image to each of the specified accounts
+.B aeolus-image push
+\--targetimage 12345678-bbbb-1234--1234567890ab
+\--account ec2-account,ec2-account2
 .SH AUTHOR
 Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
 .SH SEE ALSO
