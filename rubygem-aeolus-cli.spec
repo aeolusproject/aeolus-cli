@@ -60,7 +60,7 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 
 %files
 %doc %{geminstdir}/COPYING
-%{_bindir}/aeolus-image
+%{_bindir}/aeolus-cli
 %dir %{geminstdir}
 %{geminstdir}/Rakefile
 %{geminstdir}/bin
@@ -74,6 +74,9 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Wed Nov 9 2011 Martyn Taylor <mmorsi@redhat.com>  - 0.0.1-4
+- Renamed Bin file to aeolus-cli
+
 * Wed Jul 20 2011 Mo Morsi <mmorsi@redhat.com>  - 0.0.1-3
 - more updates to conform to fedora guidelines
 

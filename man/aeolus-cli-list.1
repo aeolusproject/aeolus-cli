@@ -1,10 +1,10 @@
-.TH aeolus-image 1  "July 07, 2011" "version 0.4" "USER COMMANDS"
+.TH aeolus-cli 1  "July 07, 2011" "version 0.4" "USER COMMANDS"
 .SH NAME
-aeolus-image \- command for listing aeolus image associated objects.
+aeolus-cli \- command for listing aeolus image associated objects.
 .SH SYNOPSIS
-.B aeolus-image list [\-h|--help] [\-u|--username] [\-w|--password] [\-i|--images] [\-b|--builds [image id]] [\-t|--targetimages [build id]] [\-P|--providerimages [target image id]] [\-g|--targets] [\-a|--accounts] [\-p|--providers]
+.B aeolus-cli list [\-h|--help] [\-u|--username] [\-w|--password] [\-i|--images] [\-b|--builds [image id]] [\-t|--targetimages [build id]] [\-P|--providerimages [target image id]] [\-g|--targets] [\-a|--accounts] [\-p|--providers]
 .SH DESCRIPTION
-aeolus-image list commands allows users to list information on the contents of particular objects in image warehouse including:
+aeolus-cli list commands allows users to list information on the contents of particular objects in image warehouse including:
 .P
 images: high level image representation associated with underlying provider and target images
 .br
@@ -52,37 +52,37 @@ Run as a background process
 .SH EXAMPLES
 .TP
 List all images
-.B aeolus-image list
+.B aeolus-cli list
 \--images
 .TP
 List all builds for an image with id: 12345678-aaaa-1234--1234567890ab
-.B aeolus-image list
+.B aeolus-cli list
 \--builds 12345678-aaaa-1234--1234567890ab
 .TP
 List all target images for a given build with id: 12345678-bbbb-1234--1234567890ab
-.B aeolus-image list
+.B aeolus-cli list
 \--targetimages 12345678-bbbb-1234--1234567890ab
 .TP
 List all provider images for a given target image with id: 12345678-tttt-1234--1234567890ab
-.B aeolus-image list
+.B aeolus-cli list
 \--providerimages 12345678-tttt-1234--1234567890ab
 .TP
 List all provider images
-.B aeolus-image list
+.B aeolus-cli list
 \--providerimages all
 .TP
 List all available targets
-.B aeolus-image list
+.B aeolus-cli list
 \--targets
 .TP
 List all available providers
-.B aeolus-image list
+.B aeolus-cli list
 \--providers
 .TP
 List all available accounts
-.B aeolus-image list
+.B aeolus-cli list
 \--account
 .SH AUTHOR
 Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
 .SH SEE ALSO
-aeolus-image-build(1), aeolus-image-push(1), aeolus-image-import(1), aeolus-image-delete(1)
+aeolus-cli-build(1), aeolus-cli-push(1), aeolus-cli-import(1), aeolus-cli-delete(1)

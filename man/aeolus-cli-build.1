@@ -1,10 +1,10 @@
-.TH aeolus-image 1  "July 07, 2011" "version 0.4" "USER COMMANDS"
+.TH aeolus-cli 1  "July 07, 2011" "version 0.4" "USER COMMANDS"
 .SH NAME
-aeolus-image build \- command for building aeolus images
+aeolus-cli build \- command for building aeolus images
 .SH SYNOPSIS
-.B aeolus-image build [\-h|--help] [\-u|--username] [\-w|--password] [\-I|--image [image-id]] [\-e|--template [path-to-template]] [\-t|--targets [targets]] [\-d|--daemon]
+.B aeolus-cli build [\-h|--help] [\-u|--username] [\-w|--password] [\-I|--image [image-id]] [\-e|--template [path-to-template]] [\-t|--targets [targets]] [\-d|--daemon]
 .SH DESCRIPTION
-aeolus-image build command allows users to build new images based on a given TDL template file for a set of specified targets such e.g. EC2, RHEVM etc...  See list man list target-images for information on how to list the completed builds.
+aeolus-cli build command allows users to build new images based on a given TDL template file for a set of specified targets such e.g. EC2, RHEVM etc...  See list man list target-images for information on how to list the completed builds.
 .SH OPTIONS
 .TP
 \-u, --user <username>
@@ -27,10 +27,10 @@ Get usage information for this command and associated commmands
 .SH EXAMPLES
 .TP
 Build a new image for ec2 based on the specified template TDL file template.tdl
-.B aeolus-image build
+.B aeolus-cli build
 \--targets ec2
 \--template ./template.tdl
 .TP
 Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
 .SH SEE ALSO
-aeolus-image-list(1), aeolus-image-push(1), aeolus-image-import(1)
+aeolus-cli-list(1), aeolus-cli-push(1), aeolus-cli-import(1)

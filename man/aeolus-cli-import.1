@@ -1,10 +1,10 @@
-.TH aeolus-image 1  "July 07, 2011" "version 0.4" "USER COMMANDS"
+.TH aeolus-cli 1  "July 07, 2011" "version 0.4" "USER COMMANDS"
 .SH NAME
-aeolus-image import \- command for importing existing provider images into aeolus
+aeolus-cli import \- command for importing existing provider images into aeolus
 .SH SYNOPSIS
-.B aeolus-image import [\-h|--help] [\-u|--username] [\-w|--password] [\-r|--provider [provider-name]] [\--id [provider-image-id]] [--description [path-to-file|xml string]] [\T|--target [target]] [\-d|--daemon]
+.B aeolus-cli import [\-h|--help] [\-u|--username] [\-w|--password] [\-r|--provider [provider-name]] [\--id [provider-image-id]] [--description [path-to-file|xml string]] [\T|--target [target]] [\-d|--daemon]
 .SH DESCRIPTION
-aeolus-image import allows users to import pre-existing images that exist in cloud provders for example AMI from EC2, into aeolus.
+aeolus-cli import allows users to import pre-existing images that exist in cloud provders for example AMI from EC2, into aeolus.
 .SH OPTIONS
 .TP
 \-u, --user <username>
@@ -33,20 +33,20 @@ Get usage information for this command and associated commmands
 .SH EXAMPLES
 .TP
 Import the AMI ami-1234567 from the provider ec2-us-east-1 into aeolus
-.B aeolus-image import
+.B aeolus-cli import
 \--provider ec2-us-east-1
 \--target ec2
 \--id ami-1234567
 .TP
 Import the AMI ami-1234567 from the provider ec2-us-west-1 into aeolus with a given xml description
-.B aeolus-image import
+.B aeolus-cli import
 \--provider ec2-us-west-1
 \--target ec2
 \--id ami-1234567
 \--description '<image><name>myAMI</name></image>'
 .TP
 Import the AMI ami-1234567 from the provider ec2-us-west-1 into aeolus providing a path to the description XML file
-.B aeolus-image import
+.B aeolus-cli import
 \--provider ec2-us-west-1
 \--target ec23
 \--id ami-1234567
@@ -54,4 +54,4 @@ Import the AMI ami-1234567 from the provider ec2-us-west-1 into aeolus providing
 .SH AUTHOR
 Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
 .SH SEE ALSO
-aeolus-image-list(1), aeolus-image-push(1), aeolus-image-build(1)
+aeolus-cli-list(1), aeolus-cli-push(1), aeolus-cli-build(1)
