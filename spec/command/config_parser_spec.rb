@@ -59,13 +59,6 @@ module Aeolus
         end
       end
 
-      it "should set options hash for valid general options" do
-        config_parser = ConfigParser.new(%w(list --user joe --password cloud --images))
-        config_parser.options[:user].should == 'joe'
-        config_parser.options[:password].should == 'cloud'
-        config_parser.options[:subcommand].should == :images
-      end
-
       it "should set options hash for valid list options" do
         config_parser = ConfigParser.new(%w(list --builds 12345))
         config_parser.options[:subcommand].should == :builds
