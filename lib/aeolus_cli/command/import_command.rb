@@ -29,23 +29,27 @@ module Aeolus
       end
 
       def import_image
-        description = read_file(@options[:description])
-        if !description.nil?
-          @options[:description] = description
+        begin
+          description = read_file(@options[:description])
+          if !description.nil?
+            @options[:description] = description
+          end
+          # TODO: Validate Description XML
+          image = Aeolus::CLI::Image.new({:target_identifier => @options[:id],
+                                          :target_name => @options[:target].first,
+                                          :image_descriptor => @options[:description],
+                                          :provider_name => @options[:provider].first})
+          image.save!
+          puts ""
+          puts "Image: " + image.id
+          puts "Build: " + image.build.id
+          puts "Target Image: " + image.build.target_images.target_image.id
+          puts "Provider Image: " + image.build.target_images.target_image.provider_images.provider_image.id
+          puts "Status: " + image.build.target_images.target_image.provider_images.provider_image.status
+          quit(0)
+        rescue => e
+          handle_exception(e)
         end
-        # TODO: Validate Description XML
-        image = Aeolus::CLI::Image.new({:target_identifier => @options[:id],
-                                        :target_name => @options[:target].first,
-                                        :image_descriptor => @options[:description],
-                                        :provider_name => @options[:provider].first})
-        image.save!
-        puts ""
-        puts "Image: " + image.id
-        puts "Build: " + image.build.id
-        puts "Target Image: " + image.build.target_images.target_image.id
-        puts "Provider Image: " + image.build.target_images.target_image.provider_images.provider_image.id
-        puts "Status: " + image.build.target_images.target_image.provider_images.provider_image.status
-        quit(0)
       end
     end
   end

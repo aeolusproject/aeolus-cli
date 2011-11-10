@@ -30,17 +30,21 @@ module Aeolus
 
       def run
         if combo_implemented?
-          template = read_template
-          validate_xml_schema(template)
+          begin
+            template = read_template
+            validate_xml_schema(template)
 
-          image = Aeolus::CLI::Image.new({:targets => @options[:target] * ",", :tdl => template})
-          image.save!
-          puts "Image: " + image.id
-          puts "Build: " + image.build.id
-          Array(image.build.target_images.target_image).each do |target_image|
-            puts "Target Image: " + target_image.id.to_s + "\t :Status " + target_image.status
+            image = Aeolus::CLI::Image.new({:targets => @options[:target] * ",", :tdl => template})
+            image.save!
+            puts "Image: " + image.id
+            puts "Build: " + image.build.id
+            Array(image.build.target_images.target_image).each do |target_image|
+              puts "Target Image: " + target_image.id.to_s + "\t :Status " + target_image.status
+            end
+            quit(0)
+          rescue => e
+            handle_exception(e)
           end
-          quit(0)
         end
       end
 
@@ -58,7 +62,7 @@ module Aeolus
       def read_template
         template = read_file(@options[:template])
         if template.nil?
-          puts "Cannot find specified file"
+          puts "Error: Cannot find specified file"
           quit(1)
         end
         template
@@ -66,7 +70,7 @@ module Aeolus
 
       def combo_implemented?
         if @options[:template].empty? || @options[:target].empty?
-          puts "This combination of parameters is not currently supported"
+          puts "Error: This combination of parameters is not currently supported"
           quit(1)
         end
         true

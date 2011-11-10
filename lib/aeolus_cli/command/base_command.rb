@@ -86,22 +86,32 @@ module Aeolus
 
       private
       def handle_exception(e)
-        message = "Unable to perform task: \n"
-        case e.class
-          when ActiveResource::BadRequest : message += "- Bad Request Sent to Server"
-          when ActiveResource::UnauthorizedAccess : message += "- You are unauthorized to view/edit this resource/collection"
-          when ActiveResource::ForbiddenAccess : message += "- Access is forbidden to this resource/collection"
-          when ActiveResource::ResourceNotFound : message += "- Unable to find resource"
-          when ActiveResource::MethodNotAllowed : message += "- Method not allowed"
-          when ActiveResource::ResourceConflict : message += "- This resource conflicts with another on the server"
-          when ActiveResource::ResourceGone : message += "- This resource no londer exists"
-          when ActiveResource::ResourceInvalid : message += "- This resource is invalid"
-          when ActiveResource::ClientError : message += "- An error was thrown by the client"
-          when ActiveResource::ServerError : message += "- An unexplained error was returned by the server"
-          when ActiveResource::ConnectionError : message += "- Unable to connect to the server"
-          else message += "- Internal Error: " + e.message
+        doc = Nokogiri::XML e.response.body
+        code = doc.xpath("/error/code").text
+        message = doc.xpath("/error/message").text
+
+        if message.to_s.empty?
+          case code
+            when "BuildDeleteFailure" : message = "An error occured when deleting the Build from the Image Warehouse"
+            when "BuildNotFound" : message = "Could not find the specified Build"
+            when "ImageDeleteFailure" : message = "An error occured when deleting the Image from the Image Warehouse"
+            when "ImageNotFound" : message = "Could not find the specified Image"
+            when "InsufficientParametersSupplied" : message = "There were insufficient parameters provided in the request"
+            when "ParameterDataIncorrect" : message = "The given parameters are incorrect"
+            when "PushError" : message = "An error occured the Image Factory when trying to push"
+            when "ProviderAccountNotFound" : message = "Could not find the specified account"
+            when "ProviderImageDeleteFailure" : message = "An error occurd when deleting the Provider Image from Image Warehouse"
+            when "ProviderImageNotFound" : message = "Could not find the specified Provider Image"
+            when "ProviderImageStatusNotFound" : message = "There was no status supplied in the Provider Image"
+            when "TargetImageDeleteFailure" : message = "An error occured when deleting the Target Image from the Image Warehouse"
+            when "TargetImageNotFound" : message = "Could not locate the specified Target Image"
+            when "TargetImageStatusNotFound" : message = "There was no status supplied in the Target Image"
+            when "TargetNotFound" : message = "Could not locate the specified Target"
+            else message = "Unknown Error"
+          end
         end
-        puts message
+        puts ""
+        puts "ERROR:  " + code + " => " + message
         quit(1)
       end
 
