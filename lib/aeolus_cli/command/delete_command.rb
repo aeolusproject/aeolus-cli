@@ -20,55 +20,73 @@ module Aeolus
       end
 
       def provider_image
-        if pi = ProviderImage.find(@options[:providerimage])
-          if pi.destroy
-            puts "Provider Image: " + @options[:providerimage] + " Deleted Successfully"
-            exit(0)
+        begin
+          if pi = ProviderImage.find(@options[:providerimage])
+            if pi.destroy
+              puts "Provider Image: " + @options[:providerimage] + " Deleted Successfully"
+              exit(0)
+            end
+            puts "ERROR: Unable to Delete Provider Image: " + @options[:providerimage]
+            exit(1)
+          else
+            puts "ERROR: Provider Image: " + @options[:providerimage] + " does not exist"
+            exit(1)
           end
-          puts "ERROR: Unable to Delete Provider Image: " + @options[:providerimage]
-        else
-          puts "Provider Image: " + @options[:providerimage] + " does not exist"
+        rescue => e
+          handle_exception(e)
         end
-        exit(1)
       end
 
       def target_image
-        if ti = TargetImage.find(@options[:targetimage])
-          if ti.destroy
-            puts "Target Image: " + @options[:targetimage] + " Deleted Successfully"
-            exit(0)
+        begin
+          if ti = TargetImage.find(@options[:targetimage])
+            if ti.destroy
+              puts "Target Image: " + @options[:targetimage] + " Deleted Successfully"
+              exit(0)
+            end
+            puts "ERROR: Unable to Delete Target Image: " + @options[:targetimage]
+            exit(1)
+          else
+            puts "ERROR: Target Image: " + @options[:targetimage] + " does not exist"
+            exit(1)
           end
-          puts "ERROR: Unable to Delete Target Image: " + @options[:targetimage]
-        else
-          puts "Target Image: " + @options[:targetimage] + " does not exist"
+        rescue => e
+          handle_exception(e)
         end
-        exit(1)
       end
 
       def build
-        if b = Build.find(@options[:build])
-          if b.destroy
-            puts "Build: " + @options[:build] + " Deleted Successfully"
-            exit(0)
+        begin
+          if b = Build.find(@options[:build])
+            if b.destroy
+              puts "Build: " + @options[:build] + " Deleted Successfully"
+              exit(0)
+            end
+            puts "ERROR: Unable to Delete Build: " + @options[:build]
+            exit(1)
+          else
+            puts "ERROR: Build: " + @options[:build] + " does not exist"
+            exit(1)
           end
-          puts "ERROR: Unable to Delete Build: " + @options[:build]
-        else
-          puts "Build: " + @options[:build] + " does not exist"
+        rescue => e
+          handle_exception(e)
         end
-        exit(1)
       end
 
       def image
-        if i = Image.find(@options[:image])
-          if i.destroy
-            puts "Image: " + @options[:image] + " Deleted Successfully"
-            exit(0)
+        begin
+          if i = Image.find(@options[:image])
+            if i.destroy
+              puts "Image: " + @options[:image] + " Deleted Successfully"
+              exit(0)
+            end
+            puts "ERROR: Unable to Delete Image: " + @options[:image]
+          else
+            puts "ERROR: Image: " + @options[:image] + " does not exist"
           end
-          puts "ERROR: Unable to Delete Image: " + @options[:image]
-        else
-          puts "Image: " + @options[:image] + " does not exist"
+        rescue => e
+          exit(1)
         end
-        exit(1)
       end
     end
   end
