@@ -7,6 +7,11 @@
 
   <define name='template'>
     <element name='template'>
+      <optional>
+        <attribute name='version'>
+          <text/>
+        </attribute>
+      </optional>
       <interleave>
         <element name='name'>
           <text/>
@@ -121,6 +126,33 @@
                     <element name='signed'>
                       <ref name='bool'/>
                     </element>
+                  </optional>
+                  <optional>
+                    <element name='persisted'>
+                      <ref name='bool'/>
+                    </element>
+                  </optional>
+                  <optional>
+                    <interleave>
+                      <element name='clientcert'>
+                        <text/>
+                      </element>
+                      <optional>
+                        <element name='clientkey'>
+                          <text/>
+                        </element>
+                      </optional>
+                    </interleave>
+                  </optional>
+                  <optional>
+                    <interleave>
+                      <element name='sslverify'>
+                        <ref name='bool'/>
+                      </element>
+                      <element name='cacert'>
+                        <text/>
+                      </element>
+                    </interleave>
                   </optional>
                 </interleave>
               </element>
