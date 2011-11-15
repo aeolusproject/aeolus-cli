@@ -102,6 +102,9 @@ module Aeolus
           opts.on('-e', '--template FILE', 'path to file that contains template xml') do |file|
             @options[:template] = file
           end
+          opts.on('-z', '--no-validation', 'Do not validation the template against the TDL XML Schema') do |description|
+            @options[:validation] = false
+          end
 
           opts.separator ""
           opts.separator "Push options:"
