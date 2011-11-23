@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: 0.2.0
-Release: 0%{?extra_release}%{?dist}
+Release: 1%{?extra_release}%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -26,6 +26,8 @@ Requires: rubygems
 Requires: rubygem(nokogiri) >= 1.4.0
 Requires: rubygem(rest-client)
 Requires: rubygem(imagefactory-console) >= 0.4.0
+Requires: rubygem(activesupport)
+Requires: rubygem(activeresource)
 
 BuildRequires: ruby
 BuildRequires: rubygems
@@ -74,6 +76,9 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Mon Nov 21 2011 Maros Zatko <mzatko@redhat.com> 0.2.0-1
+- added dependency on ActiveSupport and ActiveResource
+
 * Wed Nov 16 2011 Steve Linabery <slinaber@redhat.com> 0.2.0-0
 - bump version and release for ongoing development
 
