@@ -138,6 +138,10 @@ module Aeolus
           end
 
           opts.separator ""
+          opts.separator "URL with credentials to Conductor are set in ~/.aeolus-cli"
+          opts.separator "Conductor URL should point to https://<host_where_conductor_runs>/conductor/api"
+
+          opts.separator ""
           opts.separator "List Examples:"
           opts.separator "aeolus-cli list --images                    # list available images"
           opts.separator "aeolus-cli list --builds $image_id          # list the builds of an image"
