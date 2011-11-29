@@ -52,51 +52,165 @@ module Aeolus
       it "should exit gracefully with bad params" do
         begin
           silence_stream(STDOUT) do
-            ConfigParser.new(%w(delete --fred)).should_receive(:exit).with(1)
+            config_parser = ConfigParser.new(%w(delete --fred))
+            config_parser.process
+            config_parser.should_receive(:exit).with(1)
           end
         rescue SystemExit => e
           e.status.should == 1
         end
       end
 
-      it "should set options hash for valid list options" do
-        config_parser = ConfigParser.new(%w(list --builds 12345))
-        config_parser.options[:subcommand].should == :builds
-        config_parser.options[:id].should == '12345'
+      context "setting options hash" do
+        subject { config_parser }
+        let ( :parameters ) { %w{} }
+        let ( :config_parser ) { ConfigParser.new( parameters ) }
+
+        before(:each) do
+          Aeolus::CLI::ConfigParser::COMMANDS.each do |command|
+            subject.stub!( command.to_sym )
+          end
+          subject.process
+        end
+
+        context "for list command" do
+          context "with --images" do
+            let ( :parameters ) { %w(list --images) }
+            let ( :options_hash ) { { :subcommand => :images } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --builds ID" do
+            let ( :parameters ) { %w(list --builds 12345) }
+            let ( :options_hash ) { { :subcommand => :builds, :id => '12345' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --targetimages ID" do
+            let ( :parameters ) { %w(list --targetimages 12345) }
+            let ( :options_hash ) { { :subcommand => :targetimages, :id => '12345' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --providerimages ID" do
+            let ( :parameters ) { %w(list --providerimages 12345) }
+            let ( :options_hash ) { { :subcommand => :providerimages, :id => '12345' } }
+          its ( :options ) { should include( options_hash ) }
+          end
+          context "with --targets" do
+            let ( :parameters ) { %w(list --targets) }
+            let ( :options_hash ) { { :subcommand => :targets } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --providers" do
+            let ( :parameters ) { %w(list --providers) }
+            let ( :options_hash ) { { :subcommand => :providers } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --accounts" do
+            let ( :parameters ) { %w(list --accounts) }
+            let ( :options_hash ) { { :subcommand => :accounts } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+        end
+
+        context "for delete command" do
+          context "with --image ID" do
+            let ( :parameters ) { %w(delete --image 12345) }
+            let ( :options_hash ) { { :image => '12345', :subcommand => :image } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --build ID" do
+            let ( :parameters ) { %w(delete --build 12345) }
+            let ( :options_hash ) { { :build => '12345', :subcommand => :build } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --targetimage ID" do
+            let ( :parameters ) { %w(delete --targetimage 12345) }
+            let ( :options_hash ) { { :targetimage => '12345', :subcommand => :target_image } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --providerimage ID" do
+            let ( :parameters ) { %w(delete --providerimage 12345) }
+            let ( :options_hash ) { { :providerimage => '12345', :subcommand => :provider_image } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+        end
+
+        context "for import command" do
+          context "without other options" do
+            let ( :parameters ) { %w(import --provider ec2-us-east-1a --description /path/to/file --id ami-123456 --target ec2) }
+            let ( :options_hash ) { { :provider => ['ec2-us-east-1a'], :target => ['ec2'], :description => '/path/to/file', :id =>  'ami-123456' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+        end
+
+        context "for build command" do
+          context "with --template FILE" do
+            let ( :parameters ) { %w(build --target ec2,rackspace --image 12345 --template my.tmpl) }
+            let ( :options_hash ) { { :target => ['ec2','rackspace'], :image => '12345', :template => 'my.tmpl' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --no-validation" do
+            let ( :parameters ) { %w(build --target ec2,rackspace --image 12345 --no-validation) }
+            let ( :options_hash ) { { :target => ['ec2','rackspace'], :image => '12345', :validation => false } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+        end
+
+        context "for push command" do
+          context "without other options" do
+            let ( :parameters ) { %w(push --provider ec2-us-east1 --id 12345) }
+            let ( :options_hash ) { { :provider => ['ec2-us-east1'], :id => '12345' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --build ID" do
+            let ( :parameters ) { %w(push --provider ec2-us-east1 --build 12345) }
+            let ( :options_hash ) { { :provider => ['ec2-us-east1'], :build => '12345' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --targetimage ID" do
+            let ( :parameters ) { %w(push --provider ec2-us-east1 --targetimage 12345) }
+            let ( :options_hash ) { { :provider => ['ec2-us-east1'], :targetimage => '12345' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --account NAME" do
+            let ( :parameters ) { %w(push --provider ec2-us-east1 --account 12345) }
+            let ( :options_hash ) { { :provider => ['ec2-us-east1'], :account => '12345' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+        end
+
+        context "for status command" do
+          context "with --targetimage" do
+            let ( :parameters ) { %w(status --targetimage 789) }
+            let ( :options_hash ) { { :targetimage => '789' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+          context "with --providerimage" do
+            let ( :parameters ) { %w(status --providerimage 789) }
+            let ( :options_hash ) { { :providerimage => '789' } }
+
+            its ( :options ) { should include( options_hash ) }
+          end
+        end
       end
 
-      it "should set options hash for valid build options" do
-        config_parser = ConfigParser.new(%w(build --target ec2,rackspace --image 12345 --template my.tmpl))
-        config_parser.options[:target].should == ['ec2','rackspace']
-        config_parser.options[:image].should == '12345'
-        config_parser.options[:template].should == 'my.tmpl'
-      end
-
-      it "should set options hash for valid push options" do
-        config_parser = ConfigParser.new(%w(push --provider ec2-us-east1 --id 12345))
-        config_parser.options[:provider].should == ['ec2-us-east1']
-        config_parser.options[:id].should == '12345'
-      end
-
-      it "should set options hash for valid delete options" do
-        config_parser = ConfigParser.new(%w(delete --build 12345))
-        config_parser.options[:build].should == '12345'
-      end
-
-      it "should set options hash for valid status options" do
-        config_parser = ConfigParser.new(%w(status --targetimage 789))
-        config_parser.options[:targetimage].should == '789'
-        config_parser = ConfigParser.new(%w(status --providerimage 123))
-        config_parser.options[:providerimage].should == '123'
-      end
-
-      it "should set options hash for valid import options" do
-        config_parser = ConfigParser.new(%w(import --provider ec2-us-east-1a --description /path/to/file --id ami-123456 --target ec2))
-        config_parser.options[:provider].should == ['ec2-us-east-1a']
-        config_parser.options[:target].should == ['ec2']
-        config_parser.options[:description].should == '/path/to/file'
-        config_parser.options[:id].should == 'ami-123456'
-      end
     end
   end
 end
