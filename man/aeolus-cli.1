@@ -5,11 +5,22 @@ aeolus-cli \- command line tool for managing aeolus images
 .B aeolus-cli
 [\-h]
 .SH DESCRIPTION
-aeolus-cli is a tool that allows users to control their aeolus images through image builder and aeolus conductor.  aeolus-cli offers four commands options; list, build, push, import.  For more information on each command please run man aeolus-cli <command> or aeolus-cli --help
+aeolus-cli is a tool that allows users to control their aeolus images through image builder and aeolus conductor. aeolus-cli offers four commands options; list, build, push, import. For more information on each command please run man aeolus-cli <command> or aeolus-cli --help
 .SH OPTIONS
 .TP
 \-h, --help
 Get usage information for this tool and subcommands
+.SH FILES
+.P
+aeolus-cli reads it's configuration from ~/.aeolus-cli
+.P
+.I ~/.aeolus-cli
+.RS
+There is URL with credentials to
+.B aeolus-conductor.
+If setup differs from default one, those should be changed accordingly. Conductor URL should be as follows
+.I https://<host_where_conductor_runs>/conductor/api
+.RE
 .SH AUTHOR
 Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
 .SH SEE ALSO

@@ -17,6 +17,7 @@ module Aeolus
   module CLI
     class Base < ActiveResource::Base
       self.timeout = 600
+      self.format = :xml
       class << self
         def instantiate_collection(collection, prefix_options = {})
           if collection.is_a?(Hash) && collection.size == 1
