@@ -18,7 +18,7 @@ module Aeolus
   module CLI
     describe DeleteCommand do
       it "should delete a provider image of a given id" do
-        @options = {:providerimage => "8f8bc89c-f86b-4366-8b28-f632ad7ce711"}
+        @options = {:providerimage => "20bb51cb-a289-4331-9e56-26196df62ca8"}
         VCR.use_cassette('command/delete_command/delete_provider_image') do
           dc = DeleteCommand.new(@options)
           begin
@@ -26,25 +26,25 @@ module Aeolus
           rescue SystemExit => e
             e.status.should == 0
           end
-          $stdout.string.should include("Provider Image: 8f8bc89c-f86b-4366-8b28-f632ad7ce711 Deleted Successfully")
+          $stdout.string.should include("Provider Image: 20bb51cb-a289-4331-9e56-26196df62ca8 Deleted Successfully")
         end
       end
 
       it "should delete an target image of a given id" do
         VCR.use_cassette('command/delete_command/delete_target_image') do
-          @options = {:targetimage => "e626cadf-5901-4db4-95c5-d53a696e00dd"}
+          @options = {:targetimage => "ef7ee9be-5f3c-4695-969a-7c3fa996c048"}
           dc = DeleteCommand.new(@options)
           begin
             dc.target_image
           rescue SystemExit => e
             e.status.should == 0
           end
-          $stdout.string.should include("Target Image: e626cadf-5901-4db4-95c5-d53a696e00dd Deleted Successfully")
+          $stdout.string.should include("Target Image: ef7ee9be-5f3c-4695-969a-7c3fa996c048 Deleted Successfully")
         end
       end
 
       it "should delete a build of a given id" do
-        @options = {:build => "a5b23c06-8d63-4173-be49-fb15975065da"}
+        @options = {:build => "becc269c-8a02-4f6a-9132-2af3cb580b2b"}
         VCR.use_cassette('command/delete_command/delete_build') do
           dc = DeleteCommand.new(@options)
           begin
@@ -52,20 +52,22 @@ module Aeolus
           rescue SystemExit => e
             e.status.should == 0
           end
-          $stdout.string.should include("Build: a5b23c06-8d63-4173-be49-fb15975065da Deleted Successfully")
+          $stdout.string.should include("Build: becc269c-8a02-4f6a-9132-2af3cb580b2b Deleted Successfully")
         end
       end
 
       it "should delete an image of a given id" do
         VCR.use_cassette('command/delete_command/delete_image') do
-          @options = {:image => "3d0ee4e4-901f-415d-be3a-f8da80e74d03"}
+          @options = {:image => "55bc53d9-7310-4cff-8c26-99823d79dfa6"}
           dc = DeleteCommand.new(@options)
           begin
             dc.image
           rescue SystemExit => e
             e.status.should == 0
           end
-          $stdout.string.should include("Image: 3d0ee4e4-901f-415d-be3a-f8da80e74d03 Deleted Successfully")
+          $stdout.string.should include("Image: 55bc53d9-7310-4cff-8c26-99823d79dfa6 Deleted Successfully")
+          $stdout.string.should include("N.B. The following provider content must be manually removed")
+          $stdout.string.should include("mock")
         end
       end
     end
