@@ -22,8 +22,10 @@ module Aeolus
       def provider_image
         begin
           if pi = ProviderImage.find(@options[:providerimage])
-            if pi.destroy
+            if response = pi.destroy
               puts "Provider Image: " + @options[:providerimage] + " Deleted Successfully"
+              puts ""
+              print_provider_content(response.body)
               exit(0)
             end
             puts "ERROR: Unable to Delete Provider Image: " + @options[:providerimage]
@@ -40,8 +42,10 @@ module Aeolus
       def target_image
         begin
           if ti = TargetImage.find(@options[:targetimage])
-            if ti.destroy
+            if response = ti.destroy
               puts "Target Image: " + @options[:targetimage] + " Deleted Successfully"
+              puts ""
+              print_provider_content(response.body)
               exit(0)
             end
             puts "ERROR: Unable to Delete Target Image: " + @options[:targetimage]
@@ -58,8 +62,10 @@ module Aeolus
       def build
         begin
           if b = Build.find(@options[:build])
-            if b.destroy
+            if response = b.destroy
               puts "Build: " + @options[:build] + " Deleted Successfully"
+              puts ""
+              print_provider_content(response.body)
               exit(0)
             end
             puts "ERROR: Unable to Delete Build: " + @options[:build]
@@ -76,8 +82,10 @@ module Aeolus
       def image
         begin
           if i = Image.find(@options[:image])
-            if i.destroy
+            if response = i.destroy
               puts "Image: " + @options[:image] + " Deleted Successfully"
+              puts ""
+              print_provider_content(response.body)
               exit(0)
             end
             puts "ERROR: Unable to Delete Image: " + @options[:image]
@@ -88,6 +96,50 @@ module Aeolus
           exit(1)
         end
       end
+
+      private
+      def print_provider_content(content_xml)
+        h = Hash.from_xml(content_xml)
+        provider_content = h[h.keys.first]["content"]["provider_content"]
+        content = provider_content.instance_of?(Array) ? provider_content : [provider_content]
+        if content.size > 0
+          widths = calculate_widths(content)
+          puts "N.B. The following provider content must be manually removed"
+          puts ""
+
+          # Print Headers
+          printf("%-#{widths[:provider] + 5}s", "Provider")
+          printf("%-#{widths[:id] + 5}s", "ID")
+          puts ""
+
+          # Print Column Lines
+          printf("%-#{widths[:provider] + 5}s", "-" * widths[:provider])
+          printf("%-#{widths[:id] + 5}s", "-" * widths[:id])
+          puts ""
+
+          # Print Content
+          content.each do |pc|
+            printf("%-#{widths[:provider] + 5}s", pc["provider"])
+            printf("%-#{widths[:id] + 5}s", pc["target_identifier"])
+            puts ""
+          end
+        end
+      end
+
+      def calculate_widths(content)
+        widths = {:provider => 8, :id => 2}
+
+        content.to_a.each do |pc|
+          if pc["provider"].length > widths[:provider]
+            widths[:provider] = pc["provider"].length
+          end
+          if pc["target_identifier"].length > widths[:id]
+            widths[:id] = pc["target_identifier"].length
+          end
+        end
+        widths
+      end
+
     end
   end
 end

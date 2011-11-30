@@ -83,6 +83,13 @@ module Aeolus
         config_parser.options[:build].should == '12345'
       end
 
+      it "should set options hash for valid status options" do
+        config_parser = ConfigParser.new(%w(status --targetimage 789))
+        config_parser.options[:targetimage].should == '789'
+        config_parser = ConfigParser.new(%w(status --providerimage 123))
+        config_parser.options[:providerimage].should == '123'
+      end
+
       it "should set options hash for valid import options" do
         config_parser = ConfigParser.new(%w(import --provider ec2-us-east-1a --description /path/to/file --id ami-123456 --target ec2))
         config_parser.options[:provider].should == ['ec2-us-east-1a']

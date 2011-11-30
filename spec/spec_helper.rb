@@ -32,6 +32,7 @@ require 'build_command'
 require 'push_command'
 require 'import_command'
 require 'delete_command'
+require 'status_command'
 
 require 'vcr_setup'
 

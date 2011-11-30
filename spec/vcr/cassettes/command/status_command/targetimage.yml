@@ -1,0 +1,38 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://admin:password@localhost:443/conductor/api/provider_images/1a0b179b-eb8a-4ce5-96e5-2b01ef2089cb.xml
+    body:
+    headers:
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge,chrome=1
+      etag:
+      - "\"a61cb9f4c82824a7fe5c8107f167cff1\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - thin 1.2.11 codename Bat-Shit Crazy
+      date:
+      - Tue, 22 Nov 2011 23:45:27 GMT
+      x-runtime:
+      - "0.049840"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlNjBhMDU4NTY2MWI2MGRjMWNlNjI2ZmY4YTFkYjQ2ODAiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--ecfe1e213920f3ba82c9b9c191118ee60d03f44c; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+      transfer-encoding:
+      - chunked
+    body: |+
+      <provider_image href='https://localhost/conductor/api/provider_images/1a0b179b-eb8a-4ce5-96e5-2b01ef2089cb' id='1a0b179b-eb8a-4ce5-96e5-2b01ef2089cb'>
+      <status>FAILED</status>
+      </provider_image>
+
+    http_version: "1.1"

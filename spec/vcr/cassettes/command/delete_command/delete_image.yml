@@ -2,50 +2,7 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: https://admin:password@localhost/conductor/api/images/3d0ee4e4-901f-415d-be3a-f8da80e74d03.xml
-    body:
-    headers:
-      accept:
-              - application/xml
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
-      code: 200
-      message: OK
-    headers:
-      x-ua-compatible:
-      - IE=Edge
-      etag:
-      - "\"cc43f6a95f5152f860ce275abf8053db\""
-      content-type:
-      - application/xml; charset=utf-8
-      server:
-      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
-      date:
-      - Wed, 19 Oct 2011 19:52:44 GMT
-      x-runtime:
-      - "0.659938"
-      content-length:
-      - "281"
-      set-cookie:
-      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlYWYwOTg2NzY1ZTJkMWZlNzMwMzg1MTRmMDAxNDk1YmEiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--3fb9e618235c265be515dcdad78d1eb45b6f228f; path=/; HttpOnly
-      cache-control:
-      - max-age=0, private, must-revalidate
-    body: |
-      <image href='http://localhost:3000/api/images/3d0ee4e4-901f-415d-be3a-f8da80e74d03' id='3d0ee4e4-901f-415d-be3a-f8da80e74d03'>
-        <name>tmpl1</name>
-        <description></description>
-        <os></os>
-        <os_version></os_version>
-        <arch></arch>
-        <builds type='xs:list'>
-        </builds>
-      </image>
-
-    http_version: "1.1"
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :delete
-    uri:  https://admin:password@localhost/conductor/api/images/3d0ee4e4-901f-415d-be3a-f8da80e74d03.xml
+    uri: https://admin:password@localhost/conductor/api/images/55bc53d9-7310-4cff-8c26-99823d79dfa6.xml
     body:
     headers:
       accept:
@@ -58,20 +15,74 @@
       x-ua-compatible:
       - IE=Edge
       etag:
-      - "\"5902e96950f4ffc9e380d555f8894f44\""
+      - "\"66a9f07339b90b9ea9c4ebc650419bad\""
       content-type:
       - application/xml; charset=utf-8
       server:
       - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
       date:
-      - Wed, 19 Oct 2011 19:52:44 GMT
+      - Tue, 29 Nov 2011 18:26:41 GMT
       x-runtime:
-      - "0.519205"
+      - "0.921110"
       content-length:
-      - "13"
+      - "437"
       set-cookie:
-      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlZThmZGUwNGJiZDhlY2E5ODJjN2E2YzMzNWU5Mzg3ODQiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--f9ed5f598c4bd2451a26aac38bb71db82e0d2264; path=/; HttpOnly
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlNzA0ZDY1MWU5ZWRkZmFhMDkyNWUzM2M5NjkzM2JmMjQiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--b21c884f98b9be3b03ced13752c251a14e96ca33; path=/; HttpOnly
       cache-control:
       - max-age=0, private, must-revalidate
-    body: Image Deleted
+    body: |
+      <image href='http://localhost:3000/api/images/55bc53d9-7310-4cff-8c26-99823d79dfa6' id='55bc53d9-7310-4cff-8c26-99823d79dfa6'>
+        <name>tmpl1</name>
+        <description>foo</description>
+        <os>Fedora</os>
+        <os_version>14</os_version>
+        <arch>x86_64</arch>
+        <builds type='xs:list'>
+          <build href='http://localhost:3000/api/builds/5847f6a3-1959-43fe-aee4-e3389287ab7a' id='5847f6a3-1959-43fe-aee4-e3389287ab7a'></build>
+        </builds>
+      </image>
+
+    http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :delete
+    uri: https://admin:password@localhost/conductor/api/images/55bc53d9-7310-4cff-8c26-99823d79dfa6.xml
+    body:
+    headers:
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge
+      etag:
+      - "\"9fc839a91166d43690c26885a2a38466\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
+      date:
+      - Tue, 29 Nov 2011 18:26:42 GMT
+      x-runtime:
+      - "0.935781"
+      content-length:
+      - "359"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlOWQxY2IxYzk2ZmM4ZDUzMDMwY2E2MWEzMDdiZTRlMzgiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--72d8f2fc779a53cb1950c490caad85412dd2f011; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+    body: |
+      <image href='http://localhost:3000/api/images/55bc53d9-7310-4cff-8c26-99823d79dfa6' id='55bc53d9-7310-4cff-8c26-99823d79dfa6'>
+        <status>DELETED</status>
+        <content>
+          <provider_content>
+            <provider>mock</provider>
+            <target_identifier>Mock_mock_4ad0c064-9b09-490b-9988-d17792705a4c</target_identifier>
+          </provider_content>
+        </content>
+      </image>
+
     http_version: "1.1"
