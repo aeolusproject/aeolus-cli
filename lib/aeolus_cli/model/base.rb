@@ -37,6 +37,14 @@ module Aeolus
             end
           end
         end
+
+        def headers
+          if !ENV['LANG'].nil? && ENV['LANG'].size >= 2
+            {'ACCEPT_LANGUAGE' => ENV['LANG'][0,2]}
+          else
+            {}
+          end
+        end
       end
 
       # Active Resrouce Uses dashes instead of underscores, this method overrides to use underscore
