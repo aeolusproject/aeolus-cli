@@ -1,0 +1,36 @@
+.TH aeolus-cli 1  "November 23, 2011" "version 0.1" "USER COMMANDS"
+.SH NAME
+aeolus-cli status \- command for querying build and push status
+.SH SYNOPSIS
+.B aeolus-cli status [\-h|--help] [\-u|--username] [\-w|--password] [\-t|--targetimage [target-image-id]] [\-P|--providerimage [provider-image-id]]
+.SH DESCRIPTION
+aeolus-cli status command allows users to query for the status of builds and pushes.
+.SH OPTIONS
+.TP
+\-u, --user <username>
+Conductor username
+.TP
+\-w, --password <password>
+Conductor password
+.TP
+\-t, --targetimage
+A target image id to query for build status
+.TP
+\-P, --providerimage
+A provider image id to query for push status
+.TP
+Get usage information for this command and associated commmands
+\-h, --help
+.SH EXAMPLES
+.TP
+Retrieve build status for target image A
+.B aeolus-cli status
+\--targetimage A
+.TP
+Retrieve push status for provider image B
+.B aeolus-cli status
+\--providerimage B
+.TP
+Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
+.SH SEE ALSO
+aeolus-cli-list(1), aeolus-cli-build(1), aeolus-cli-push(1), aeolus-cli-import(1)

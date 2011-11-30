@@ -1,0 +1,42 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: https://admin:password@localhost:443/conductor/api/provider_images/1ad1ca1d-d6d8-4892-a255-c4d49c03ed9b.xml
+    body:
+    headers:
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge,chrome=1
+      etag:
+      - "\"f06d14fc7ff951eef3ca560ad60f380d\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - thin 1.2.11 codename Bat-Shit Crazy
+      date:
+      - Tue, 22 Nov 2011 23:47:13 GMT
+      x-runtime:
+      - "0.273658"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlNDY1OWU3YzgxNGZkOWQ4ZmY1ZDE5MzVkY2VhYzA4ZmYiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--661d13e5a47633d15df8970235041aea2a860b31; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+      transfer-encoding:
+      - chunked
+    body: |+
+      <provider_image href='https://localhost/conductor/api/provider_images/1ad1ca1d-d6d8-4892-a255-c4d49c03ed9b' id='1ad1ca1d-d6d8-4892-a255-c4d49c03ed9b'>
+      <object_type>provider_image</object_type>
+      <target_identifier>Mock_mock_1ad1ca1d-d6d8-4892-a255-c4d49c03ed9b</target_identifier>
+      <status>COMPLETE</status>
+      <provider>mock</provider>
+      <target_image href='https://localhost/conductor/api/target_images/31a7fee4-37de-42ac-a573-2ab844145698' id='31a7fee4-37de-42ac-a573-2ab844145698'></target_image>
+      </provider_image>
+
+    http_version: "1.1"

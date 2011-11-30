@@ -18,7 +18,7 @@ require 'logger'
 module Aeolus
   module CLI
     class ConfigParser
-      COMMANDS = %w(list build push import delete)
+      COMMANDS = %w(list build push import delete status)
       attr_accessor :options, :command, :args
 
       def initialize(argv)
@@ -138,8 +138,20 @@ module Aeolus
           end
 
           opts.separator ""
+          opts.separator "Status options:"
+          opts.on('-t', '--targetimage ID', 'target image status') do |id|
+            @options[:subcommand] = :target_image
+            @options[:targetimage] = id
+          end
+          opts.on('-P', '--providerimage ID', 'provider image status') do |id|
+            @options[:subcommand] = :provider_image
+            @options[:providerimage] = id
+          end
+
+          opts.separator ""
           opts.separator "URL with credentials to Conductor are set in ~/.aeolus-cli"
           opts.separator "Conductor URL should point to https://<host_where_conductor_runs>/conductor/api"
+
 
           opts.separator ""
           opts.separator "List Examples:"
@@ -178,6 +190,11 @@ module Aeolus
           opts.separator "aeolus-cli delete --build $build_id               # deletes a build and all associated targetimages"
           opts.separator "aeolus-cli delete --targetimage $target_image     # deletes a target image and all associated provider images"
           opts.separator "aeolus-cli delete --providerimage $provider_image # deletes a provider image"
+
+          opts.separator ""
+          opts.separator "Status examples:"
+          opts.separator "aeolus-cli status --targetimage $target_image     # status of target image build"
+          opts.separator "aeolus-cli status --providerimage $provider_image # status of provider image push"
         end
 
         begin
@@ -234,6 +251,11 @@ module Aeolus
           delete_command = DeleteCommand.new(@options)
           delete_command.send(@options[:subcommand])
         end
+      end
+
+      def status
+        status_command = StatusCommand.new(@options)
+        status_command.run
       end
     end
   end
