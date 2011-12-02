@@ -6,8 +6,8 @@
 
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
-Version: 0.2.0
-Release: 1%{?extra_release}%{?dist}
+Version: 0.3.0
+Release: 0%{?extra_release}%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -76,6 +76,9 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Thu Dec  1 2011 Steve Linabery <slinaber@redhat.com> - 0.3.0-0
+- Bump version
+
 * Thu Dec  1 2011 Steve Linabery <slinaber@redhat.com> - 0.2.0-1
 - 785c8be Change and refactor tests for refactored option parser use
 - 911d47c refactored option parser to support multiple same options

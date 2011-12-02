@@ -26,7 +26,7 @@ RPM_SPEC = "rubygem-aeolus-cli.spec"
 
 spec = Gem::Specification.new do |s|
   s.name = 'aeolus-cli'
-  s.version = '0.2.0'
+  s.version = '0.3.0'
   s.summary= 'cli for aeolus cloud suite'
   s.description = 'Commandline interface for working with the aeolus cloud management suite'
   s.author = 'Jason Guiditta, Martyn Taylor'
