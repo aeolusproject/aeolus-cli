@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: 0.2.0
-Release: 0%{?extra_release}%{?dist}
+Release: 1%{?extra_release}%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -76,6 +76,19 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Thu Dec  1 2011 Steve Linabery <slinaber@redhat.com> - 0.2.0-1
+- 785c8be Change and refactor tests for refactored option parser use
+- 911d47c refactored option parser to support multiple same options
+- dd580f4 Set language in HTTP_ACCEPT_LANGUAGE header
+- 48bbaa0 RM 2803 - Add status checking on image builds and pushes - v2
+- 6907390 Added provider content cleanup output
+- d721dc0 added mention of .aeolus-cli into default help
+- 44aa00c added section explaining .aeolus-cli into manpage
+- 5db097e Added format since ARes changed default
+- f0df5bb added dependency on ActiveSupport and ActiveResource to specfile
+- 445347f bumped version in gem specification to reflect ver. in specfile
+- 97585c1 Utilize Conductor API Error Messaging
+
 * Mon Nov 21 2011 Maros Zatko <mzatko@redhat.com> 0.2.0-0
 - added dependency on ActiveSupport and ActiveResource
 
