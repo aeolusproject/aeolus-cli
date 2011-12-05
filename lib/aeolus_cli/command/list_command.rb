@@ -67,10 +67,22 @@ module Aeolus
           headers = ActiveSupport::OrderedHash.new
           headers[:id] = "ID"
           headers[:target_identifier] = "Target Identifier"
-          headers[:provider] = "Provider"
           headers[:status] = "Status"
           headers[:target_image] = "Target Image"
+          headers[:account_name] = "Account"
+          headers[:provider] = "Provider"
+          headers[:account_type] = "Provider Type"
           collection = @options[:id].nil? ? Aeolus::CLI::ProviderImage.all : Aeolus::CLI::ProviderImage.find(:all, :from => Aeolus::CLI::Base.site.path + "/target_images/" + @options[:id] + "/provider_images.xml")
+
+          paccs = Aeolus::CLI::ProviderAccount.all.group_by(&:provider)
+
+          collection.map! do |item|
+            prov = item.attributes[:provider]
+            item.attributes[:account_name] = paccs[prov].first.name
+            item.attributes[:account_type] = paccs[prov].first.provider_type
+            item
+          end
+
           print_collection(collection, headers)
           quit(0)
         rescue => e
