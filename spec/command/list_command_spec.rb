@@ -121,8 +121,11 @@ module Aeolus
           rescue SystemExit => e
             e.status.should == 0
           end
-          headers = ["ID", "Target Identifier", "Provider", "Status", "Target Image"]
-          content = ["9ac21235-81f4-4140-ac25-18a19ebcb2f8", "ami-test", "ec2-us-east-1", "COMPLETE", "d7cab2b2-eeb8-459e-b739-a1844a5d5a62"]
+          headers = ["ID", "Target Identifier", "Provider", "Status", "Target Image",
+                     "Account", "Provider", "Provider Type"]
+          content = ["9ac21235-81f4-4140-ac25-18a19ebcb2f8", "ami-test", "ec2-us-east-1",
+                     "COMPLETE", "d7cab2b2-eeb8-459e-b739-a1844a5d5a62", "ec2-acc",
+                     "ec2-us-east-1", "ec2"]
           (headers + content).each do |expected_text|
             $stdout.string.should include(expected_text)
           end
