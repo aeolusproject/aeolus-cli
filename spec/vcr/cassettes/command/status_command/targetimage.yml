@@ -2,9 +2,11 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :get
-    uri: https://admin:password@localhost:443/conductor/api/provider_images/1a0b179b-eb8a-4ce5-96e5-2b01ef2089cb.xml
+    uri: https://admin:password@localhost:443/conductor/api/target_images/3a105ed3-20e6-410a-815d-f0ac756f2473.xml
     body:
     headers:
+      accept-language:
+      - en
       accept:
       - application/xml
   response: !ruby/struct:VCR::Response
@@ -15,24 +17,30 @@
       x-ua-compatible:
       - IE=Edge,chrome=1
       etag:
-      - "\"a61cb9f4c82824a7fe5c8107f167cff1\""
+      - "\"8eabd74801c9981f6c3df69dc81c19fb\""
       content-type:
       - application/xml; charset=utf-8
       server:
       - thin 1.2.11 codename Bat-Shit Crazy
       date:
-      - Tue, 22 Nov 2011 23:45:27 GMT
+      - Tue, 06 Dec 2011 19:21:21 GMT
       x-runtime:
-      - "0.049840"
+      - "0.305330"
       set-cookie:
-      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlNjBhMDU4NTY2MWI2MGRjMWNlNjI2ZmY4YTFkYjQ2ODAiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--ecfe1e213920f3ba82c9b9c191118ee60d03f44c; path=/; HttpOnly
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlOWE0MzExMDUzY2MzZmU1N2ZiYmRkMDM0NTBjOTNkNGMiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--90ff8cc38ed80b72c16d94834a139008c6928e07; path=/; HttpOnly
       cache-control:
       - max-age=0, private, must-revalidate
       transfer-encoding:
       - chunked
     body: |+
-      <provider_image href='https://localhost/conductor/api/provider_images/1a0b179b-eb8a-4ce5-96e5-2b01ef2089cb' id='1a0b179b-eb8a-4ce5-96e5-2b01ef2089cb'>
-      <status>FAILED</status>
-      </provider_image>
+      <target_image href='https://localhost/conductor/api/target_images/3a105ed3-20e6-410a-815d-f0ac756f2473' id='3a105ed3-20e6-410a-815d-f0ac756f2473'>
+      <object_type>target_image</object_type>
+      <template>48bade4b-5b27-4b48-a9ed-a6d75ccfe02f</template>
+      <build href='https://localhost/conductor/api/builds/8b870f9a-ac32-4e21-98fb-76b4cc24e5f1' id='8b870f9a-ac32-4e21-98fb-76b4cc24e5f1'></build>
+      <status>COMPLETE</status>
+      <provider_images>
+      <provider_image href='https://localhost/conductor/api/provider_images/21ba2191-be4e-44b7-8d1d-61f7f50b89c8' id='21ba2191-be4e-44b7-8d1d-61f7f50b89c8'></provider_image>
+      </provider_images>
+      </target_image>
 
     http_version: "1.1"
