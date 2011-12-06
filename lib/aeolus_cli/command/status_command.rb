@@ -25,7 +25,7 @@ module Aeolus
       def run
         begin
           if @options[:targetimage]
-            ti = Aeolus::CLI::ProviderImage.find(@options[:targetimage])
+            ti = Aeolus::CLI::TargetImage.find(@options[:targetimage])
             puts "Build Status: " + ti.status
           elsif @options[:providerimage]
             pi = Aeolus::CLI::ProviderImage.find(@options[:providerimage])

@@ -19,7 +19,7 @@ module Aeolus
     describe StatusCommand do
       it "should return status for target image" do
         VCR.use_cassette('command/status_command/targetimage') do
-          @options[:targetimage] = ['1a0b179b-eb8a-4ce5-96e5-2b01ef2089cb']
+          @options[:targetimage] = ['3a105ed3-20e6-410a-815d-f0ac756f2473']
 
           s = StatusCommand.new(@options, @output)
           begin
@@ -27,7 +27,7 @@ module Aeolus
           rescue SystemExit => e
             e.status.should == 0
           end
-          $stdout.string.should include("Build Status: FAILED")
+          $stdout.string.should include("Build Status: COMPLETE")
         end
       end
 
