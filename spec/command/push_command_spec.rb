@@ -27,43 +27,67 @@ module Aeolus
       describe "#run" do
         it "should allow multple push for an image with 2 target images based on image id" do
           VCR.use_cassette('command/push_command/multiple_push_image_id') do
-            @options = ({ :image => "04b509a2-274b-468d-84b0-e4190e4457cb",
-                          :account => "ec2-acc,mock-acc" })
+            @options = ({ :image => "b4b340dc-0efc-4830-8c59-411c9a3e0aba",
+                          :account => "mock-acc,mock-acc" })
             p = PushCommand.new(@options, @output)
             begin
               p.run
             rescue SystemExit => e
               e.status.should == 0
             end
-            $stdout.string.should include("Image: 04b509a2-274b-468d-84b0-e4190e4457cb")
-            $stdout.string.should include("Provider Image: 139f9822-8228-4d25-a038-21a5d9e6888d")
-            $stdout.string.should include("Provider Image: b7460080-2156-4d38-9945-f4edd052d87b")
-            $stdout.string.should include("Status: New")
-            $stdout.string.should include("Status: COMPLETE")
+
+            # Headers
+            $stdout.string.should include("ID")
+            $stdout.string.should include("Provider")
+            $stdout.string.should include("Account")
+            $stdout.string.should include("Image")
+
+            # Provider Images
+            $stdout.string.should include("daf6f1b3-d4b9-4ab1-81d3-11adf84d3a6a")
+            $stdout.string.should include("07bf7f85-cf4f-4d26-862e-8795f0431f07")
+
+            # Image
+            $stdout.string.should include("b4b340dc-0efc-4830-8c59-411c9a3e0aba")
+
+            $stdout.string.should include("mock")
+            $stdout.string.should include("mock-acc")
+            $stdout.string.should include("COMPLETED")
           end
         end
 
         it "should allow multple push for an image with 2 target images based on build id" do
           VCR.use_cassette('command/push_command/multiple_push_build_id') do
-            @options = ({ :build => "5d81e1a4-911a-4934-bb50-b46881343f6d",
-                          :account => "ec2-acc,mock-acc" })
+            @options = ({ :build => "661ee541-6db3-4d36-9b3c-8972d6e63c94",
+                          :account => "mock-acc,mock-acc" })
             p = PushCommand.new(@options, @output)
             begin
               p.run
             rescue SystemExit => e
               e.status.should == 0
             end
-            $stdout.string.should include("Build: 5d81e1a4-911a-4934-bb50-b46881343f6d")
-            $stdout.string.should include("Provider Image: bd04dc3d-0e88-4175-987f-f448c009ea90")
-            $stdout.string.should include("Provider Image: 3597b77b-0a0e-4d0c-8916-a071a6e8ec30")
-            $stdout.string.should include("Status: New")
-            $stdout.string.should include("Status: COMPLETE")
+
+            # Headers
+            $stdout.string.should include("ID")
+            $stdout.string.should include("Provider")
+            $stdout.string.should include("Account")
+            $stdout.string.should include("Build")
+
+            # Provider Images
+            $stdout.string.should include("4f060b14-d627-4d20-a653-12307b6c0ea2")
+            $stdout.string.should include("421bf284-2f51-4156-b068-79d86d8b3d27")
+
+            # Build
+            $stdout.string.should include("661ee541-6db3-4d36-9b3c-8972d6e63c94")
+
+            $stdout.string.should include("mock")
+            $stdout.string.should include("mock-acc")
+            $stdout.string.should include("COMPLETED")
           end
         end
 
         it "should allow single push for an image on target image id" do
           VCR.use_cassette('command/push_command/multiple_push_target_image_id') do
-            @options = ({ :targetimage => "e650a5cc-61e1-466e-83e1-8f8cfe5ac9b8",
+            @options = ({ :targetimage => "e6176811-49e0-4dba-8b76-06b552a4b3a4",
                           :account => "mock-acc" })
             p = PushCommand.new(@options, @output)
             begin
@@ -71,9 +95,22 @@ module Aeolus
             rescue SystemExit => e
               e.status.should == 0
             end
-            $stdout.string.should include("Target Image: e650a5cc-61e1-466e-83e1-8f8cfe5ac9b8")
-            $stdout.string.should include("Provider Image: 2adccda4-d7eb-48eb-888e-54bd863f4130")
-            $stdout.string.should include("Status: COMPLETE")
+
+            # Headers
+            $stdout.string.should include("ID")
+            $stdout.string.should include("Provider")
+            $stdout.string.should include("Account")
+            $stdout.string.should include("Target Image")
+
+            # Provider Image
+            $stdout.string.should include("e4b94bf2-7bfc-4633-b6a1-2f888587417e")
+
+            # Build
+            $stdout.string.should include("e6176811-49e0-4dba-8b76-06b552a4b3a4")
+
+            $stdout.string.should include("mock")
+            $stdout.string.should include("mock-acc")
+            $stdout.string.should include("PENDING")
           end
         end
       end

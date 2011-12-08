@@ -127,47 +127,6 @@ module Aeolus
           handle_exception(e)
         end
       end
-
-      private
-      # Print Collection to STDOUT in a column layout
-      def print_collection(collection, headers)
-        widths = column_widths(collection, headers)
-
-        # Print Headers
-        widths.each_pair do |header, width|
-          printf("%-#{width + 5}s", headers[header])
-        end
-        puts ""
-
-        # Print Underlines
-        widths.each_pair do |header, width|
-          printf("%-#{width + 5}s", "-" * width)
-        end
-        puts ""
-
-        # Print collection information
-        collection.each do |resource|
-          widths.each_pair do |attr, width|
-            printf("%-#{width + 5}s", resource.attributes.include?(attr) ? resource.attributes[attr].to_s : "")
-          end
-          puts ""
-        end
-        puts ""
-      end
-
-      def column_widths(collection, headers)
-        widths = ActiveSupport::OrderedHash.new
-        headers.each_pair do |attr, header|
-          widths[attr] = header.length
-        end
-
-        collection.each do |resource|
-          headers.keys.each do |attr|
-            widths[attr] = widths[attr] > resource.attributes[attr].to_s.length ? widths[attr] : resource.attributes[attr].to_s.length
-          end
-        end
-        widths
-      end
     end
   end
 end

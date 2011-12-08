@@ -27,20 +27,23 @@ module Aeolus
           pi = Aeolus::CLI::ProviderImage.new(request_parameters)
           pi.save!
 
+          headers = ActiveSupport::OrderedHash.new
+          headers[:id] = "ID"
+          headers[:provider] = "Provider"
+          headers[:account] = "Account"
+          headers[:status] = "Status"
+          pi_array = Array(pi.provider_image)
+
           {:image_id => "Image", :build_id => "Build", :target_image_id => "Target Image"}.each_pair do |method, label|
             if pi.respond_to?(method)
-              puts label + ": " + pi.send(method)
+              headers[method] = label
+              pi_array.each do |provider_image|
+                provider_image.attributes[method] = pi.send(method)
+              end
             end
           end
 
-          if pi.respond_to?(:provider_image)
-            Array(pi.provider_image).each do |p|
-              puts "Provider Image: " + p.id + "\t Status: " + p.status
-            end
-          else
-            puts "Provider Image: " + pi.id
-          end
-
+          print_collection(pi_array, headers)
           quit(0)
         rescue => e
           handle_exception(e)
