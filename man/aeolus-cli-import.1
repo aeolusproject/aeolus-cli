@@ -2,7 +2,7 @@
 .SH NAME
 aeolus-cli import \- command for importing existing provider images into aeolus
 .SH SYNOPSIS
-.B aeolus-cli import [\-h|--help] [\-u|--username] [\-w|--password] [\-r|--provider [provider-name]] [\--id [provider-image-id]] [--description [path-to-file|xml string]] [\T|--target [target]] [\-d|--daemon]
+.B aeolus-cli import [\-h|--help] [\-u|--username] [\-w|--password] [\-a|--provider_account [account-name]] [\--id [provider-image-id]] [--description [path-to-file|xml string]] [\-d|--daemon]
 .SH DESCRIPTION
 aeolus-cli import allows users to import pre-existing images that exist in cloud provders for example AMI from EC2, into aeolus.
 .SH OPTIONS
@@ -13,14 +13,11 @@ Conductor username
 \-w, --password <password>
 Conductor password
 .TP
-\-r, --provider <provider-name>
-The provider name as it exists in conductor from where the importing image resides
+\-a, --provider_account <account-name>
+The provider account name as it exists in Conductor from where the importing image resides
 .TP
 \--id <provider-image-id>
 The providers ID given to the importing image
-.TP
-\-T, --target
-The target type for the given provider
 .TP
 \--description <path-to-xml-description|xml string>
 A user defined description to associate with the importing image
@@ -32,23 +29,20 @@ Get usage information for this command and associated commmands
 \-h, --help
 .SH EXAMPLES
 .TP
-Import the AMI ami-1234567 from the provider ec2-us-east-1 into aeolus
+Import the AMI ami-1234567 from the provider account my-ec2 into aeolus
 .B aeolus-cli import
-\--provider ec2-us-east-1
-\--target ec2
+\--provider_account my-ec2
 \--id ami-1234567
 .TP
-Import the AMI ami-1234567 from the provider ec2-us-west-1 into aeolus with a given xml description
+Import the AMI ami-1234567 from the provider account my-ec2 into aeolus with a given xml description
 .B aeolus-cli import
-\--provider ec2-us-west-1
-\--target ec2
+\--provider_account my-ec2
 \--id ami-1234567
 \--description '<image><name>myAMI</name></image>'
 .TP
-Import the AMI ami-1234567 from the provider ec2-us-west-1 into aeolus providing a path to the description XML file
+Import the AMI ami-1234567 from the provider account my-ec2 into aeolus providing a path to the description XML file
 .B aeolus-cli import
-\--provider ec2-us-west-1
-\--target ec23
+\--provider_account my-ec2
 \--id ami-1234567
 \--description /foo/bar/description.xml
 .SH AUTHOR

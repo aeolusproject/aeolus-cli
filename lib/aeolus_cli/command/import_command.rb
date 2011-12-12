@@ -19,11 +19,10 @@ module Aeolus
         super(opts, logger)
         default = {
           :image => '',
-          :build => '',
+          :build => '', # TODO - Is this used anywhere?
           :id => '',
           :description => '<image><name>' + @options[:id] + '</name></image>',
-          :target => '',
-          :provider => ''
+          :provider_account => ''
         }
         @options = default.merge(@options)
       end
@@ -36,9 +35,8 @@ module Aeolus
           end
           # TODO: Validate Description XML
           image = Aeolus::CLI::Image.new({:target_identifier => @options[:id],
-                                          :target_name => @options[:target].first,
                                           :image_descriptor => @options[:description],
-                                          :provider_name => @options[:provider].first})
+                                          :provider_account_name => @options[:provider_account].first})
           image.save!
           puts ""
           puts "Image: " + image.id

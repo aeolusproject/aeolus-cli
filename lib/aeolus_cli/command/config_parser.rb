@@ -61,6 +61,9 @@ module Aeolus
           opts.on('-r', '--provider NAME1,NAME2',  Array,'name of specific provider (ie ec2-us-east1)') do |name|
             @options[:provider] = name
           end
+          opts.on('-a', '--provider_account NAME1,NAME2', Array,'name of specific provider account (ie my-ec2') do |name|
+            @options[:provider_account] = name
+          end
           opts.on('-I', '--image ID', 'ID of the base image, can be used in build and push commands, see examples') do |id|
             @options[:image] = id
           end
@@ -196,9 +199,9 @@ module Aeolus
           if !subcommand || subcommand == :import
             opts.separator ""
             opts.separator "Import examples:"
-            opts.separator "aeolus-cli import --provider ec2-us-east-1 --target ec2 --id $ami_id # import an AMI from the specified provider"
-            opts.separator "aeolus-cli import --provider ec2-us-east-1 --target ec2 --id $ami_id --description '<image><name>My Image</name></image>' # import an AMI from the specified provider"
-            opts.separator "aeolus-cli import --provider ec2-us-east-1 --target ec2 --id $ami_id --description <path_to_xml_file> # import an AMI from the specified provider"
+            opts.separator "aeolus-cli import --provider_account my-ec2 --id $ami_id # import an AMI from the specified provider"
+            opts.separator "aeolus-cli import --provider_account my-ec2 --id $ami_id --description '<image><name>My Image</name></image>' # import an AMI from the specified provider"
+            opts.separator "aeolus-cli import --provider_account my-ec2 --id $ami_id --description <path_to_xml_file> # import an AMI from the specified provider"
           end
 
           if !subcommand || subcommand == :status
