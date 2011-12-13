@@ -29,6 +29,8 @@
       </image>
 
     headers:
+      accept-language:
+      - en
       content-type:
       - application/xml
   response: !ruby/struct:VCR::Response
@@ -39,36 +41,39 @@
       x-ua-compatible:
       - IE=Edge,chrome=1
       etag:
-      - "\"7c99627727857e6618d365853351a8d5\""
+      - "\"6f874fe42c203c470c4f7ac3038f5f09\""
       content-type:
       - application/xml; charset=utf-8
       server:
       - thin 1.2.11 codename Bat-Shit Crazy
       date:
-      - Wed, 02 Nov 2011 14:56:05 GMT
+      - Tue, 13 Dec 2011 15:25:27 GMT
       x-runtime:
-      - "0.335635"
+      - "0.340243"
       set-cookie:
-      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlZDljNTgyMzFkNzIwMDVmMTA3MmM0ZDYwZDBjYTg0ZTAiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--01b1228fe550752e0c9ec1a3ec0534083af93561; path=/; HttpOnly
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlNTdkMjFmZmIzMGE5MWJmMGQ4YzhlMzhkNmUxYzA3NjEiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--8d0f7e959e2acfe54e46c752ed3d75743aca3c82; path=/; HttpOnly
       cache-control:
       - max-age=0, private, must-revalidate
       transfer-encoding:
       - chunked
     body: |+
-      <image href='https://localhost/conductor/api/images/38d8b8e4-21f8-439b-9fc8-e6f8816682cb' id='38d8b8e4-21f8-439b-9fc8-e6f8816682cb'>
-      <build href='https://localhost/conductor/api/builds/af8016a8-2ee6-409c-8752-7c74c60a174e' id='af8016a8-2ee6-409c-8752-7c74c60a174e'>
+      <image href='https://localhost/conductor/api/images/48b91462-9715-4a06-be21-4090972a7f5f' id='48b91462-9715-4a06-be21-4090972a7f5f'>
+      <build href='https://localhost/conductor/api/builds/59643fd4-12d2-4e67-8394-2183341d9ec1' id='59643fd4-12d2-4e67-8394-2183341d9ec1'>
       <target_images>
-      <target_image href='https://localhost/conductor/api/target_images/c27db6d9-6f7c-413e-9103-70e8af0daf32' id='c27db6d9-6f7c-413e-9103-70e8af0daf32'>
+      <target_image href='https://localhost/conductor/api/target_images/e33e3358-663a-4e81-9259-cff0ce6aa3b1' id='e33e3358-663a-4e81-9259-cff0ce6aa3b1'>
       <status>New</status>
+      <target>ec2</target>
       <provider_images>
       </provider_images>
       </target_image>
-      <target_image href='https://localhost/conductor/api/target_images/30a11f4a-e568-4c2d-a9b6-7c2c80a7ed3f' id='30a11f4a-e568-4c2d-a9b6-7c2c80a7ed3f'>
+      <target_image href='https://localhost/conductor/api/target_images/c74124e7-8777-4ec1-beea-d896bec80b22' id='c74124e7-8777-4ec1-beea-d896bec80b22'>
       <status>COMPLETED</status>
+      <target>mock</target>
       <provider_images>
       </provider_images>
       </target_image>
       </target_images>
       </build>
       </image>
+
     http_version: "1.1"

@@ -2,7 +2,7 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :post
-    uri: https://admin:password@localhost/conductor/api/images.xml
+    uri: https://admin:password@localhost:443/conductor/api/images.xml
     body: |
       <?xml version="1.0" encoding="UTF-8"?>
       <image>
@@ -29,6 +29,8 @@
       </image>
 
     headers:
+      accept-language:
+      - en
       content-type:
       - application/xml
   response: !ruby/struct:VCR::Response
@@ -37,34 +39,35 @@
       message: OK
     headers:
       x-ua-compatible:
-      - IE=Edge
+      - IE=Edge,chrome=1
       etag:
-      - "\"c65786cb658ae9dcb74afacdfa17d01a\""
+      - "\"1cc9b56f5dd748a8cfa4632c4f5b54b3\""
       content-type:
       - application/xml; charset=utf-8
       server:
-      - WEBrick/1.3.1 (Ruby/1.8.7/2011-06-30)
+      - thin 1.2.11 codename Bat-Shit Crazy
       date:
-      - Thu, 20 Oct 2011 16:30:30 GMT
+      - Tue, 13 Dec 2011 15:25:24 GMT
       x-runtime:
-      - "0.805774"
-      content-length:
-      - "574"
+      - "2.639965"
       set-cookie:
-      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlMTA3ZjgzMWQ0ZmQ0NjRkNWEwZWJhM2MyN2ZlN2RkNGYiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--034e267cd5514827f2aaa2cd4cc99777ee5e02e9; path=/; HttpOnly
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlMWJjMzE4Zjc3MThiN2I4ZDc1OTg4MDE4ZmU3YmZmYzkiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--29e37a191161ffc7c3d145e46e63c9c72179b1e8; path=/; HttpOnly
       cache-control:
       - max-age=0, private, must-revalidate
-    body: |
-      <image href='http://localhost:3000/api/images/66941cc3-7bc7-4d67-abfb-f4473fdc1243' id='66941cc3-7bc7-4d67-abfb-f4473fdc1243'>
-        <build href='http://localhost:3000/api/builds/247fc85c-7eb9-4756-bb7a-c06d19f2da47' id='247fc85c-7eb9-4756-bb7a-c06d19f2da47'>
-          <target_images>
-            <target_image href='http://localhost:3000/api/target_images/7673bd21-3517-48c4-a282-9ea78f52573d' id='7673bd21-3517-48c4-a282-9ea78f52573d'>
-              <status>COMPLETED</status>
-              <provider_images>
-              </provider_images>
-            </target_image>
-          </target_images>
-        </build>
+      transfer-encoding:
+      - chunked
+    body: |+
+      <image href='https://localhost/conductor/api/images/6affc8f5-a560-4b7e-88da-2e993cf9ebce' id='6affc8f5-a560-4b7e-88da-2e993cf9ebce'>
+      <build href='https://localhost/conductor/api/builds/e0412885-28a6-4c3f-898a-886680ffadd0' id='e0412885-28a6-4c3f-898a-886680ffadd0'>
+      <target_images>
+      <target_image href='https://localhost/conductor/api/target_images/0079b860-e601-4705-8729-d7624f160786' id='0079b860-e601-4705-8729-d7624f160786'>
+      <status>COMPLETED</status>
+      <target>ec2</target>
+      <provider_images>
+      </provider_images>
+      </target_image>
+      </target_images>
+      </build>
       </image>
 
     http_version: "1.1"

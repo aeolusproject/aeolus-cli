@@ -31,9 +31,18 @@ module Aeolus
             rescue SystemExit => e
               e.status.should == 0
             end
-            $stdout.string.should include("Image:")
-            $stdout.string.should include("Target Image:")
-            $stdout.string.should include("Build:")
+            $stdout.string.should include("Image")
+            $stdout.string.should include("Target Image")
+            $stdout.string.should include("Build")
+            $stdout.string.should include("Target")
+            $stdout.string.should include("Status")
+
+            $stdout.string.should include("6affc8f5-a560-4b7e-88da-2e993cf9ebce")
+            $stdout.string.should include("e0412885-28a6-4c3f-898a-886680ffadd0")
+            $stdout.string.should include("0079b860-e601-4705-8729-d7624f160786")
+            $stdout.string.should include("COMPLETED")
+            $stdout.string.should include("ec2")
+
           end
         end
 
@@ -46,10 +55,21 @@ module Aeolus
             rescue SystemExit => e
               e.status.should == 0
             end
-            $stdout.string.should include("Image: 38d8b8e4-21f8-439b-9fc8-e6f8816682cb")
-            $stdout.string.should include("Build: af8016a8-2ee6-409c-8752-7c74c60a174e")
-            $stdout.string.should include("Target Image: 30a11f4a-e568-4c2d-a9b6-7c2c80a7ed3f")
-            $stdout.string.should include("Target Image: c27db6d9-6f7c-413e-9103-70e8af0daf32")
+            $stdout.string.should include("Image")
+            $stdout.string.should include("Build")
+            $stdout.string.should include("Target Image")
+            $stdout.string.should include("Target")
+            $stdout.string.should include("Status")
+
+            $stdout.string.should include("48b91462-9715-4a06-be21-4090972a7f5f")
+            $stdout.string.should include("59643fd4-12d2-4e67-8394-2183341d9ec1")
+            $stdout.string.should include("e33e3358-663a-4e81-9259-cff0ce6aa3b1")
+            $stdout.string.should include("ec2")
+            $stdout.string.should include("New")
+
+            $stdout.string.should include("c74124e7-8777-4ec1-beea-d896bec80b22")
+            $stdout.string.should include("mock")
+            $stdout.string.should include("COMPLETED")
           end
         end
 

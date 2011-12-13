@@ -34,14 +34,23 @@ module Aeolus
           begin
             template = read_template
             validate_xml_schema(template)
-
             image = Aeolus::CLI::Image.new({:targets => @options[:target] * ",", :tdl => template})
             image.save!
-            puts "Image: " + image.id
-            puts "Build: " + image.build.id
-            Array(image.build.target_images.target_image).each do |target_image|
-              puts "Target Image: " + target_image.id.to_s + "\t :Status " + target_image.status
+
+            headers = ActiveSupport::OrderedHash.new
+            headers[:id] = "Target Image"
+            headers[:target] = "Target"
+            headers[:status] = "Status"
+            headers[:image] = "Image"
+            headers[:build] = "Build"
+
+            ti_array = Array(image.build.target_images.target_image)
+            ti_array.each do |target_image|
+              target_image.image = image.id
+              target_image.build = image.build.id
             end
+
+            print_collection(ti_array, headers)
             quit(0)
           rescue => e
             handle_exception(e)
