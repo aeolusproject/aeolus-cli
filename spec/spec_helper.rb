@@ -64,12 +64,8 @@ RSpec.configure do |config|
         YAML::load(File.open(File.join(File.dirname(__FILE__), "/../examples/aeolus-cli")))
       end
     end
-    Aeolus::CLI::BaseCommand.class_eval do
-      def handle_exception(e)
-        raise e
-      end
-    end
   end
+
   config.before(:each) do
     @output = double('output')
     @stdout_orig = $stdout

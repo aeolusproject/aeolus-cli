@@ -78,6 +78,22 @@ module Aeolus
           errors.length.should == 0
         end
       end
+
+      describe "#handle_exception" do
+        it "should display a user message when an authorised response is returned from Conductor" do
+          VCR.use_cassette('command/base_command/invalid_credentials') do
+            lc = ListCommand.new
+            Aeolus::CLI::Base.password = "wrong_password"
+            begin
+              lc.accounts
+            rescue SystemExit => e
+              e.status.should == 1
+            end
+            $stdout.string.should include("Invalid Credentials, please check ~/.aeolus-cli")
+          end
+        end
+      end
+
     end
   end
 end

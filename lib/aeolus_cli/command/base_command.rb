@@ -90,7 +90,10 @@ module Aeolus
         code = doc.xpath("/error/code").text
         message = doc.xpath("/error/message").text
 
-        if message.to_s.empty?
+        if e.is_a?(ActiveResource::UnauthorizedAccess)
+          code = "Unauthorized"
+          message = "Invalid Credentials, please check ~/.aeolus-cli"
+        elsif message.to_s.empty?
           case code
             when "BuildDeleteFailure" : message = "An error occured when deleting the Build from the Image Warehouse"
             when "BuildNotFound" : message = "Could not find the specified Build"
