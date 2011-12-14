@@ -35,7 +35,7 @@ module Aeolus
         # File.expand_path("~")
         if COMMANDS.include?(@command)
           parse(@command)
-          self.send(@command.to_sym)
+          self.send(@command.to_sym) unless @args.include?('-h')
         else
           @args << "-h"
           puts "Valid command required: \n\n"
@@ -48,7 +48,7 @@ module Aeolus
         subcommand = subcommand.to_sym if subcommand
 
         @optparse ||= OptionParser.new do|opts|
-          opts.banner = "Usage: aeolus-cli [#{COMMANDS.join('|')}] [general options] [command options]"
+          opts.banner = "Usage: aeolus-cli image [#{COMMANDS.join('|')}] [general options] [command options]"
 
           opts.separator ""
           opts.separator "General options:"
@@ -221,7 +221,7 @@ module Aeolus
         end
 
         begin
-          @optparse.parse!(@args)
+          @optparse.parse(@args)
         rescue OptionParser::InvalidOption
           puts "Warning: Invalid option"
           exit(1)

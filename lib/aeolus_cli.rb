@@ -22,6 +22,7 @@ require File.join(File.dirname(__FILE__), 'aeolus_cli/command', 'import_command'
 require File.join(File.dirname(__FILE__), 'aeolus_cli/command', 'delete_command')
 require File.join(File.dirname(__FILE__), 'aeolus_cli/command', 'status_command')
 require File.join(File.dirname(__FILE__), 'aeolus_cli/command', 'config_parser')
+require File.join(File.dirname(__FILE__), 'aeolus_cli/command', 'cli_parser')
 
 require File.join(File.dirname(__FILE__), 'aeolus_cli/model', 'base')
 require File.join(File.dirname(__FILE__), 'aeolus_cli/model', 'image')

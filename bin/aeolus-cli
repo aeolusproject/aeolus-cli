@@ -16,5 +16,5 @@
 
 $: << File.expand_path(File.dirname(__FILE__) + '/../lib')
 require 'aeolus_cli'
-parser = Aeolus::CLI::ConfigParser.new(ARGV)
-puts parser.process
+parser = Aeolus::CLI::CLIParser.new(ARGV)
+parser.process

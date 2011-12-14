@@ -15,24 +15,8 @@
 $: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_cli/command/"))
 $: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_cli/model/"))
 
-require 'rubygems'
-require 'base'
-require 'image'
-require 'build'
-require 'target_image'
-require 'provider_image'
-require 'provider'
-require 'provider_type'
-require 'provider_account'
-require 'config_parser'
+require 'aeolus_cli'
 require 'stringio'
-require 'base_command'
-require 'list_command'
-require 'build_command'
-require 'push_command'
-require 'import_command'
-require 'delete_command'
-require 'status_command'
 
 require 'vcr_setup'
 
