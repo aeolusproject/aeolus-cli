@@ -1,0 +1,39 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :delete
+    uri: https://admin:password@localhost:443/conductor/api/images/1234.xml
+    body:
+    headers:
+      accept-language:
+      - en
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 500
+      message: Internal Server Error
+    headers:
+      x-ua-compatible:
+      - IE=Edge,chrome=1
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - thin 1.2.11 codename Bat-Shit Crazy
+      date:
+      - Fri, 16 Dec 2011 15:22:02 GMT
+      x-runtime:
+      - "0.094418"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlMDdmYzYxZjc0NDA5MDRiNTNjNzk0NWJjMzU5MTM5YTMiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--38649c32a563c52d870e6f2cbf32045b4c9c757f; path=/; HttpOnly
+      cache-control:
+      - no-cache
+      transfer-encoding:
+      - chunked
+    body: |
+      <error>
+      <code>ImageDeleteFailure</code>
+      <message>Could not find Image 1234</message>
+      </error>
+
+    http_version: "1.1"

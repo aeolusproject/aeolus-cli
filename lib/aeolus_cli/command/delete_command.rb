@@ -21,18 +21,12 @@ module Aeolus
 
       def provider_image
         begin
-          if pi = ProviderImage.find(@options[:providerimage])
-            if response = pi.destroy
-              puts "Provider Image: " + @options[:providerimage] + " Deleted Successfully"
-              puts ""
-              print_provider_content(response.body)
-              exit(0)
-            end
-            puts "ERROR: Unable to Delete Provider Image: " + @options[:providerimage]
-            exit(1)
-          else
-            puts "ERROR: Provider Image: " + @options[:providerimage] + " does not exist"
-            exit(1)
+          pi = ProviderImage.new({:id => @options[:providerimage]})
+          if response = pi.destroy
+            puts "Provider Image: " + @options[:providerimage] + " Deleted Successfully"
+            puts ""
+            print_provider_content(response.body)
+            exit(0)
           end
         rescue => e
           handle_exception(e)
@@ -41,18 +35,12 @@ module Aeolus
 
       def target_image
         begin
-          if ti = TargetImage.find(@options[:targetimage])
-            if response = ti.destroy
-              puts "Target Image: " + @options[:targetimage] + " Deleted Successfully"
-              puts ""
-              print_provider_content(response.body)
-              exit(0)
-            end
-            puts "ERROR: Unable to Delete Target Image: " + @options[:targetimage]
-            exit(1)
-          else
-            puts "ERROR: Target Image: " + @options[:targetimage] + " does not exist"
-            exit(1)
+          ti = TargetImage.new({:id => @options[:targetimage]})
+          if response = ti.destroy
+            puts "Target Image: " + @options[:targetimage] + " Deleted Successfully"
+            puts ""
+            print_provider_content(response.body)
+            exit(0)
           end
         rescue => e
           handle_exception(e)
@@ -61,18 +49,12 @@ module Aeolus
 
       def build
         begin
-          if b = Build.find(@options[:build])
-            if response = b.destroy
-              puts "Build: " + @options[:build] + " Deleted Successfully"
-              puts ""
-              print_provider_content(response.body)
-              exit(0)
-            end
-            puts "ERROR: Unable to Delete Build: " + @options[:build]
-            exit(1)
-          else
-            puts "ERROR: Build: " + @options[:build] + " does not exist"
-            exit(1)
+          b = Build.new({:id => @options[:build]})
+          if response = b.destroy
+            puts "Build: " + @options[:build] + " Deleted Successfully"
+            puts ""
+            print_provider_content(response.body)
+            exit(0)
           end
         rescue => e
           handle_exception(e)
@@ -81,19 +63,15 @@ module Aeolus
 
       def image
         begin
-          if i = Image.find(@options[:image])
-            if response = i.destroy
-              puts "Image: " + @options[:image] + " Deleted Successfully"
-              puts ""
-              print_provider_content(response.body)
-              exit(0)
-            end
-            puts "ERROR: Unable to Delete Image: " + @options[:image]
-          else
-            puts "ERROR: Image: " + @options[:image] + " does not exist"
+          i = Image.new({:id => @options[:image]})
+          if response = i.destroy
+            puts "Image: " + @options[:image] + " Deleted Successfully"
+            puts ""
+            print_provider_content(response.body)
+            exit(0)
           end
         rescue => e
-          exit(1)
+          handle_exception(e)
         end
       end
 

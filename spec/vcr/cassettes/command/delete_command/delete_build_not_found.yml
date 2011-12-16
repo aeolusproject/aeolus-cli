@@ -1,0 +1,39 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :delete
+    uri: https://admin:password@localhost:443/conductor/api/builds/1234.xml
+    body:
+    headers:
+      accept-language:
+      - en
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 404
+      message: Not Found
+    headers:
+      x-ua-compatible:
+      - IE=Edge,chrome=1
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - thin 1.2.11 codename Bat-Shit Crazy
+      date:
+      - Fri, 16 Dec 2011 15:22:02 GMT
+      x-runtime:
+      - "0.030815"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlOGQyZDQ1OGJlNzI5YTQ1YTIzNTlhYzM5NmE2YzlkNmUiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--246122de0cd2d386edb27a7e2eb14e4ac1818975; path=/; HttpOnly
+      cache-control:
+      - no-cache
+      transfer-encoding:
+      - chunked
+    body: |
+      <error>
+      <code>BuildNotFound</code>
+      <message>Could not find Build 1234</message>
+      </error>
+
+    http_version: "1.1"
