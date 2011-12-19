@@ -14,11 +14,9 @@ URL: http://aeolusproject.org
 
 # The source for this packages was pulled from the upstream's git repo.
 # Use the following commands to generate the gem
-# git clone  git://git.fedorahosted.org/aeolus/conductor.git
-# git checkout next
-# cd services/image_factory/aeolus-image
+# git clone  git://github.com/aeolusproject/aeolus-cli.git
+# cd aeolus-cli
 # rake gem
-# grab image_factory_console-0.0.1.gem from the pkg subdir
 Source0: %{gemname}-%{version}.gem
 
 Requires: ruby(abi) = %{rubyabi}
@@ -62,7 +60,8 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 
 %files
 %doc %{geminstdir}/COPYING
-%{_bindir}/aeolus-cli
+%{_bindir}/aeolus
+%{_bindir}/aeolus-image
 %dir %{geminstdir}
 %{geminstdir}/Rakefile
 %{geminstdir}/bin

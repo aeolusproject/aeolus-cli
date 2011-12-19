@@ -33,7 +33,8 @@ spec = Gem::Specification.new do |s|
   s.email = 'jguiditt@redhat.com, mtaylor@redhat.com'
   s.license = 'ASL 2.0'
   s.homepage = 'http://aeolusproject.org'
-  s.executables << 'aeolus-cli'
+  s.executables << 'aeolus' << 'aeolus-image'
+  s.default_executable = 'aeolus'
   s.files = %w(Rakefile) + Dir.glob("{bin,lib,spec,examples,man}/**/*") + %w(COPYING)
   s.require_path = "lib"
   s.bindir = "bin"

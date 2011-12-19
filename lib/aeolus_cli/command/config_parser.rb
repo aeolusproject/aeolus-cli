@@ -48,7 +48,7 @@ module Aeolus
         subcommand = subcommand.to_sym if subcommand
 
         @optparse ||= OptionParser.new do|opts|
-          opts.banner = "Usage: aeolus-cli image [#{COMMANDS.join('|')}] [general options] [command options]"
+          opts.banner = "Usage: aeolus-image [#{COMMANDS.join('|')}] [general options] [command options]"
 
           opts.separator ""
           opts.separator "General options:"
@@ -168,22 +168,22 @@ module Aeolus
           if !subcommand || subcommand == :list
             opts.separator ""
             opts.separator "List Examples:"
-            opts.separator "aeolus-cli list --images                    # list available images"
-            opts.separator "aeolus-cli list --builds $image_id          # list the builds of an image"
-            opts.separator "aeolus-cli list --targetimages $build_id    # list the target images from a build"
-            opts.separator "aeolus-cli list --providerimages $target_id # list the provider images from a target image"
-            opts.separator "aeolus-cli list --targets                   # list the values available for the --target parameter"
-            opts.separator "aeolus-cli list --providers                 # list the values available for the --provider parameter"
-            opts.separator "aeolus-cli list --accounts                  # list the values available for the --account parameter"
+            opts.separator "aeolus-image list --images                    # list available images"
+            opts.separator "aeolus-image list --builds $image_id          # list the builds of an image"
+            opts.separator "aeolus-image list --targetimages $build_id    # list the target images from a build"
+            opts.separator "aeolus-image list --providerimages $target_id # list the provider images from a target image"
+            opts.separator "aeolus-image list --targets                   # list the values available for the --target parameter"
+            opts.separator "aeolus-image list --providers                 # list the values available for the --provider parameter"
+            opts.separator "aeolus-image list --accounts                  # list the values available for the --account parameter"
           end
 
           if !subcommand || subcommand == :build
             opts.separator ""
             opts.separator "Build examples:"
-            opts.separator "aeolus-cli build --target ec2 --template my.tmpl        # build a new image for ec2 from based on the given template"
-            opts.separator "aeolus-cli build --target ec2,rhevm --template my.tmpl  # build a new image for ec2 and for rhevm based on the given template"
-            #opts.separator "aeolus-cli build --image $image_id                # (NOT IMPLEMENTED) rebuild the image template and targets from latest build"
-            #opts.separator %q{aeolus-cli build --target ec2,rackspace \         # rebuild the image with a new template and set of targets
+            opts.separator "aeolus-image build --target ec2 --template my.tmpl        # build a new image for ec2 from based on the given template"
+            opts.separator "aeolus-image build --target ec2,rhevm --template my.tmpl  # build a new image for ec2 and for rhevm based on the given template"
+            #opts.separator "aeolus-image build --image $image_id                # (NOT IMPLEMENTED) rebuild the image template and targets from latest build"
+            #opts.separator %q{aeolus-image build --target ec2,rackspace \         # rebuild the image with a new template and set of targets
             #         --image $image_i \
             #         --template my.tmpl}
           end
@@ -191,32 +191,32 @@ module Aeolus
           if !subcommand || subcommand == :push
             opts.separator ""
             opts.separator "Push examples:"
-            opts.separator "aeolus-cli push --account ec2-account,ec2-account2 --targetimage $target_image_id   # Push target images to each of the specified account"
-            opts.separator "aeolus-cli push --account ec2-account,rhevm-account --build $build_id               # Push target images attached to a particular build to each of the specified accounts"
-            opts.separator "aeolus-cli push --account ec2-account,rhevm-account --image $image_id               # Push target images attached to a particular image to each of the specified accounts"
+            opts.separator "aeolus-image push --account ec2-account,ec2-account2 --targetimage $target_image_id   # Push target images to each of the specified account"
+            opts.separator "aeolus-image push --account ec2-account,rhevm-account --build $build_id               # Push target images attached to a particular build to each of the specified accounts"
+            opts.separator "aeolus-image push --account ec2-account,rhevm-account --image $image_id               # Push target images attached to a particular image to each of the specified accounts"
           end
 
           if !subcommand || subcommand == :import
             opts.separator ""
             opts.separator "Import examples:"
-            opts.separator "aeolus-cli import --provider_account my-ec2 --id $ami_id # import an AMI from the specified provider"
-            opts.separator "aeolus-cli import --provider_account my-ec2 --id $ami_id --description '<image><name>My Image</name></image>' # import an AMI from the specified provider"
-            opts.separator "aeolus-cli import --provider_account my-ec2 --id $ami_id --description <path_to_xml_file> # import an AMI from the specified provider"
+            opts.separator "aeolus-image import --provider_account my-ec2 --id $ami_id # import an AMI from the specified provider"
+            opts.separator "aeolus-image import --provider_account my-ec2 --id $ami_id --description '<image><name>My Image</name></image>' # import an AMI from the specified provider"
+            opts.separator "aeolus-image import --provider_account my-ec2 --id $ami_id --description <path_to_xml_file> # import an AMI from the specified provider"
           end
 
           if !subcommand || subcommand == :status
             opts.separator "Status examples:"
-            opts.separator "aeolus-cli status --targetimage $target_image     # status of target image build"
-            opts.separator "aeolus-cli status --providerimage $provider_image # status of provider image push"
+            opts.separator "aeolus-image status --targetimage $target_image     # status of target image build"
+            opts.separator "aeolus-image status --providerimage $provider_image # status of provider image push"
           end
 
           if !subcommand || subcommand == :delete
             opts.separator ""
             opts.separator "Delete examples: (DELETE CURRENTLY NOT IMPLEMENTED) "
-            opts.separator "aeolus-cli delete --image $image_id               # deletes a image and all associated builds"
-            opts.separator "aeolus-cli delete --build $build_id               # deletes a build and all associated targetimages"
-            opts.separator "aeolus-cli delete --targetimage $target_image     # deletes a target image and all associated provider images"
-            opts.separator "aeolus-cli delete --providerimage $provider_image # deletes a provider image"
+            opts.separator "aeolus-image delete --image $image_id               # deletes a image and all associated builds"
+            opts.separator "aeolus-image delete --build $build_id               # deletes a build and all associated targetimages"
+            opts.separator "aeolus-image delete --targetimage $target_image     # deletes a target image and all associated provider images"
+            opts.separator "aeolus-image delete --providerimage $provider_image # deletes a provider image"
           end
         end
 
@@ -242,7 +242,7 @@ module Aeolus
         # self.send(@options[:subcommand])
         if @options[:subcommand].nil?
           # TODO: Pull out Print Usage into seporate method, and print
-          puts "Could not find subcommand for list, run `./aeolus-cli --help` for usage instructions"
+          puts "Could not find subcommand for list, run `./aeolus-image --help` for usage instructions"
           exit(1)
         else
           list_command = ListCommand.new(@options)
@@ -268,7 +268,7 @@ module Aeolus
       def delete
         if @options[:subcommand].nil?
           # TODO: Pull out Print Usage into seporate method, and print
-          puts "Could not find subcommand for delete, run `./aeolus-cli --help` for usage instructions"
+          puts "Could not find subcommand for delete, run `./aeolus-image --help` for usage instructions"
           exit(1)
         else
           delete_command = DeleteCommand.new(@options)

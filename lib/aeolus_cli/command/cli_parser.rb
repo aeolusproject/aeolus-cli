@@ -42,7 +42,7 @@ module Aeolus
       private
       def parse()
         @optparse ||= OptionParser.new do|opts|
-          opts.banner = "Usage: aeolus-cli [#{COMMANDS.join('|')}] [subcommand] [general options] [command options]"
+          opts.banner = "Usage: aeolus [#{COMMANDS.join('|')}] [subcommand] [general options] [command options]"
           opts.separator ""
           opts.on( '-h', '--help', 'Get usage information for this tool') do
             @out.puts opts
