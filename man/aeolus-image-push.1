@@ -1,10 +1,10 @@
-.TH aeolus-cli 1  "July 07, 2011" "version 0.4" "USER COMMANDS"
+.TH aeolus-image 1  "December 19, 2011" "version 0.4" "USER COMMANDS"
 .SH NAME
-aeolus-cli push \- command for pushing aeolus images to back end providers
+aeolus-image push \- command for pushing aeolus images to back end providers
 .SH SYNOPSIS
-.B aeolus-cli push [\-h|--help] [\-I|--image [image-id]] [\-B|--build [build-id]] [-m|--targetimage]] [-A|--account[account-name]]
+.B aeolus-image push [\-h|--help] [\-I|--image [image-id]] [\-B|--build [build-id]] [-m|--targetimage]] [-A|--account[account-name]]
 .SH DESCRIPTION
-aeolus-cli push allows users to push target images to particular backend providers.
+aeolus-image push allows users to push target images to particular backend providers.
 .SH OPTIONS
 .TP
 \-I|--image <id>
@@ -24,20 +24,20 @@ Get usage information for this command and associated commmands
 .SH EXAMPLES
 .TP
 Push target images associated with an image to each of specified accounts
-.B aeolus-cli push
+.B aeolus-image push
 \--image 12345678-bbbb-1234--1234567890ab
 \--account ec2-account,rhevm-account
 .TP
 Push target images associated with a build to each of the specified accounts
-.B aeolus-cli push
+.B aeolus-image push
 \--build 12345678-bbbb-1234--1234567890ab
 \--account ec2-account,rhevm-account
 .TP
 Push a target image to each of the specified accounts
-.B aeolus-cli push
+.B aeolus-image push
 \--targetimage 12345678-bbbb-1234--1234567890ab
 \--account ec2-account,ec2-account2
-.SH AUTHOR
+.SH AUTHORS
 Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
 .SH SEE ALSO
-aeolus-cli-list(1), aeolus-cli-build(1), aeolus-cli-import(1), aeolus-cli-status(1)
+aeolus-image-list(1), aeolus-image-build(1), aeolus-image-import(1), aeolus-image-status(1)
