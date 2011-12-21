@@ -6,7 +6,7 @@
 
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
-Version: 0.3.0
+Version: @VERSION@
 Release: 0%{?extra_release}%{?dist}
 Group: Development/Languages
 License: ASL 2.0

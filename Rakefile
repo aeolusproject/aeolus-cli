@@ -23,10 +23,11 @@ require 'rake/rpmtask'
 
 RPMBUILD_DIR = "#{File.expand_path('~')}/rpmbuild"
 RPM_SPEC = "rubygem-aeolus-cli.spec"
+PKG_VERSION = "0.3.0"
 
 spec = Gem::Specification.new do |s|
   s.name = 'aeolus-cli'
-  s.version = '0.3.0'
+  s.version = PKG_VERSION
   s.summary= 'cli for aeolus cloud suite'
   s.description = 'Commandline interface for working with the aeolus cloud management suite'
   s.author = 'Jason Guiditta, Martyn Taylor'
@@ -67,7 +68,7 @@ RSpec::Core::RakeTask.new do |t|
   t.pattern = FileList['spec/**/*.rb']
 end
 
-Rake::RpmTask.new(RPM_SPEC) do |rpm|
+Rake::RpmTask.new(RPM_SPEC, {:suffix => '.in', :pkg_version => PKG_VERSION}) do |rpm|
   rpm.need_tar = true
   rpm.package_files.include("lib/*")
   rpm.topdir = "#{RPMBUILD_DIR}"
