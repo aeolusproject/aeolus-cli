@@ -59,7 +59,7 @@ module Aeolus
           raise ArgumentError, "params should not contain nil"
         end
 
-        required_keys = [:id, :target, :description, :provider]
+        required_keys = [:id, :target, :description, :provider_account]
 
         isect = params.keys & required_keys
         diff  = params.keys - required_keys
