@@ -19,7 +19,6 @@ module Aeolus
     describe ImportCommand do
       let( :description ) { "<image><name>MyImage</name></image>" }
       let( :options ) { { :id => "ami-5592553c",
-        :target => ["ec2"],
         :provider_account => ["ec2-us-east-1"],
         :description => description } }
       let( :importc ) { ImportCommand.new( options ) }
@@ -27,7 +26,6 @@ module Aeolus
       describe "#import_image" do
         context "without description parameter" do
           let( :options ) { { :id => "ami-5592553c",
-            :target => ["ec2"],
             :provider_account => ["ec2-us-east-1"] } }
 
           it "should import an image with default description value" do
@@ -146,7 +144,6 @@ module Aeolus
         subject { lambda { importc.send( :import_params_valid!, params ) } }
         context "correct params" do
           let( :params ) { { :id => "ami-5592553c",
-            :target => ["ec2"],
             :provider_account => ["ec2-us-east-1"],
             :description => description } }
           it { subject.call.should be_true }
@@ -154,14 +151,12 @@ module Aeolus
 
         context "missing parameter" do
           let( :params ) { { :id => "ami-5592553c",
-            :provider_account => ["ec2-us-east-1"],
             :description => description } }
           it { should raise_error(ArgumentError, /missing/) }
         end
 
         context "unexpected parameter" do
           let( :params ) { { :id => "ami-5592553c",
-            :target => ["ec2"],
             :provider_account => ["ec2-us-east-1"],
             :other_parameter => "other_value",
             :description => description } }
@@ -170,9 +165,8 @@ module Aeolus
 
         context "any parameter is nil" do
           let( :params ) { { :id => "ami-5592553c",
-            :target => nil,
             :provider_account => ["ec2-us-east-1"],
-            :other_parameter => "other_value",
+            :other_parameter => nil,
             :description => description } }
           it { should raise_error(ArgumentError, /params should not contain nil/) }
         end
