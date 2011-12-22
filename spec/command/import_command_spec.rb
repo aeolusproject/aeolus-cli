@@ -20,7 +20,7 @@ module Aeolus
       before(:each) do
         @options = { :id => "ami-5592553c",
                      :target => ["ec2"],
-                     :provider => ["ec2-us-east-1"],
+                     :provider_account => ["ec2-us-east-1"],
                      :description => "<image><name>MyImage</name></image>"}
       end
 
