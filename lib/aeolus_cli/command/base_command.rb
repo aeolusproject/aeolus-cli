@@ -86,33 +86,67 @@ module Aeolus
 
       private
       def handle_exception(e)
-        doc = Nokogiri::XML e.response.body
-        code = doc.xpath("/error/code").text
-        message = doc.xpath("/error/message").text
 
         if e.is_a?(ActiveResource::UnauthorizedAccess)
           code = "Unauthorized"
           message = "Invalid Credentials, please check ~/.aeolus-cli"
-        elsif message.to_s.empty?
+
+        elsif e.is_a?(TypeError)
+          code = "Internal Error (TypeError)"
+          message = e.message
+
+        elsif e.is_a?(ArgumentError)
+          code = "Argument Error"
+          message = e.message
+
+        elsif e.is_a?(ActiveResource::ResourceNotFound)
+          code = "ResourceNotFound"
+          message = "Could not find resource"
+
+        elsif e.respond_to?(:response)
+          doc = Nokogiri::XML e.response.body
+          code = doc.xpath("/error/code").text
+          message = doc.xpath("/error/message").text
+
           case code
-            when "BuildDeleteFailure" : message = "An error occured when deleting the Build from the Image Warehouse"
-            when "BuildNotFound" : message = "Could not find the specified Build"
-            when "ImageDeleteFailure" : message = "An error occured when deleting the Image from the Image Warehouse"
-            when "ImageNotFound" : message = "Could not find the specified Image"
-            when "InsufficientParametersSupplied" : message = "There were insufficient parameters provided in the request"
-            when "ParameterDataIncorrect" : message = "The given parameters are incorrect"
-            when "PushError" : message = "An error occured the Image Factory when trying to push"
-            when "ProviderAccountNotFound" : message = "Could not find the specified account"
-            when "ProviderImageDeleteFailure" : message = "An error occurd when deleting the Provider Image from Image Warehouse"
-            when "ProviderImageNotFound" : message = "Could not find the specified Provider Image"
-            when "ProviderImageStatusNotFound" : message = "There was no status supplied in the Provider Image"
-            when "TargetImageDeleteFailure" : message = "An error occured when deleting the Target Image from the Image Warehouse"
-            when "TargetImageNotFound" : message = "Could not locate the specified Target Image"
-            when "TargetImageStatusNotFound" : message = "There was no status supplied in the Target Image"
-            when "TargetNotFound" : message = "Could not locate the specified Target"
-            else message = "Unknown Error"
+            when "BuildDeleteFailure"
+              message = "An error occured when deleting the Build from the Image Warehouse"
+            when "BuildNotFound"
+              message = "Could not find the specified Build"
+            when "ImageDeleteFailure"
+              message = "An error occured when deleting the Image from the Image Warehouse"
+            when "ImageNotFound"
+              message = "Could not find the specified Image"
+            when "InsufficientParametersSupplied"
+              message = "There were insufficient parameters provided in the request"
+            when "ParameterDataIncorrect"
+              message = "The given parameters are incorrect"
+            when "PushError"
+              message = "An error occured the Image Factory when trying to push"
+            when "ProviderAccountNotFound"
+              message = "Could not find the specified account"
+            when "ProviderImageDeleteFailure"
+              message = "An error occurd when deleting the Provider Image from Image Warehouse"
+            when "ProviderImageNotFound"
+              message = "Could not find the specified Provider Image"
+            when "ProviderImageStatusNotFound"
+              message = "There was no status supplied in the Provider Image"
+            when "TargetImageDeleteFailure"
+              message = "An error occured when deleting the Target Image from the Image Warehouse"
+            when "TargetImageNotFound"
+              message = "Could not locate the specified Target Image"
+            when "TargetImageStatusNotFound"
+              message = "There was no status supplied in the Target Image"
+            when "TargetNotFound"
+              message = "Could not locate the specified Target"
+            else
+              message = e.message
           end
+        else
+          message = e.message + "\n" + (e.backtrace * "\n")
+          code = 'Unknown Error'
         end
+
         puts ""
         puts "ERROR:  " + code + " => " + message
         quit(1)
