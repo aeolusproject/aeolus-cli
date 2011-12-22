@@ -80,7 +80,7 @@ module Aeolus
       def validate_description_xml!(xml)
         errors = validate_xml_document(File.dirname(__FILE__) + "/../../../examples/image_desc.rng", xml)
         if errors.length > 0
-          puts "ERROR: The given image descrition does not conform to the xml schema, see below for specific details:"
+          puts "ERROR: The given image description does not conform to the xml schema, see below for specific details:"
           errors.each do |error|
             puts "- " + error.message
           end

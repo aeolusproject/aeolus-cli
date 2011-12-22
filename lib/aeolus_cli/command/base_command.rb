@@ -99,10 +99,6 @@ module Aeolus
           code = "Argument Error"
           message = e.message
 
-#        elsif e.is_a?(ActiveResource::ResourceNotFound)
-#          code = "ResourceNotFound"
-#          message = "Could not find resource"
-
         elsif e.respond_to?(:response)
           doc = Nokogiri::XML e.response.body
           code = doc.xpath("/error/code").text
