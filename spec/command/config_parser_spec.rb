@@ -43,7 +43,7 @@ module Aeolus
 
       it "should notify the user of an invalid command" do
         config_parser = ConfigParser.new(%w(sparkle))
-        config_parser.should_receive(:exit).with(0)
+        config_parser.should_receive(:exit).with(1)
         silence_stream(STDOUT) do
           config_parser.process
         end
@@ -146,8 +146,8 @@ module Aeolus
 
         context "for import command" do
           context "without other options" do
-            let ( :parameters ) { %w(import --provider ec2-us-east-1a --description /path/to/file --id ami-123456 --target ec2) }
-            let ( :options_hash ) { { :provider => ['ec2-us-east-1a'], :target => ['ec2'], :description => '/path/to/file', :id =>  'ami-123456' } }
+            let ( :parameters ) { %w(import --account ec2-us-east-1a --description /path/to/file --id ami-123456) }
+            let ( :options_hash ) { { :provider_account => ['ec2-us-east-1a'], :description => '/path/to/file', :id =>  'ami-123456' } }
 
             its ( :options ) { should include( options_hash ) }
           end
@@ -155,14 +155,14 @@ module Aeolus
 
         context "for build command" do
           context "with --template FILE" do
-            let ( :parameters ) { %w(build --target ec2,rackspace --image 12345 --template my.tmpl) }
-            let ( :options_hash ) { { :target => ['ec2','rackspace'], :image => '12345', :template => 'my.tmpl' } }
+            let ( :parameters ) { %w(build --target ec2,rackspace --template my.tmpl) }
+            let ( :options_hash ) { { :target => ['ec2','rackspace'], :template => 'my.tmpl' } }
 
             its ( :options ) { should include( options_hash ) }
           end
           context "with --no-validation" do
-            let ( :parameters ) { %w(build --target ec2,rackspace --image 12345 --no-validation) }
-            let ( :options_hash ) { { :target => ['ec2','rackspace'], :image => '12345', :validation => false } }
+            let ( :parameters ) { %w(build --target ec2,rackspace --no-validation) }
+            let ( :options_hash ) { { :target => ['ec2','rackspace'], :validation => false } }
 
             its ( :options ) { should include( options_hash ) }
           end
@@ -170,26 +170,20 @@ module Aeolus
 
         context "for push command" do
           context "without other options" do
-            let ( :parameters ) { %w(push --provider ec2-us-east1 --id 12345) }
-            let ( :options_hash ) { { :provider => ['ec2-us-east1'], :id => '12345' } }
+            let ( :parameters ) { %w(push --account ec2-us-east1 --image 12345) }
+            let ( :options_hash ) { { :account => ['ec2-us-east1'], :image => '12345' } }
 
             its ( :options ) { should include( options_hash ) }
           end
           context "with --build ID" do
-            let ( :parameters ) { %w(push --provider ec2-us-east1 --build 12345) }
-            let ( :options_hash ) { { :provider => ['ec2-us-east1'], :build => '12345' } }
+            let ( :parameters ) { %w(push --account ec2-us-east1 --build 12345) }
+            let ( :options_hash ) { { :account => ['ec2-us-east1'], :build => '12345' } }
 
             its ( :options ) { should include( options_hash ) }
           end
           context "with --targetimage ID" do
-            let ( :parameters ) { %w(push --provider ec2-us-east1 --targetimage 12345) }
-            let ( :options_hash ) { { :provider => ['ec2-us-east1'], :targetimage => '12345' } }
-
-            its ( :options ) { should include( options_hash ) }
-          end
-          context "with --account NAME" do
-            let ( :parameters ) { %w(push --provider ec2-us-east1 --account 12345) }
-            let ( :options_hash ) { { :provider => ['ec2-us-east1'], :account => '12345' } }
+            let ( :parameters ) { %w(push --account ec2-us-east1 --targetimage 12345) }
+            let ( :options_hash ) { { :account => ['ec2-us-east1'], :targetimage => '12345' } }
 
             its ( :options ) { should include( options_hash ) }
           end
