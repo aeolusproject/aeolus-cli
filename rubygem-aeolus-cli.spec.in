@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 0%{?extra_release}%{?dist}
+Release: 1%{?extra_release}%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -75,6 +75,35 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Wed Jan 04 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-1
+- 3cd6277 Changes to build behavior in rpmtask.rb, Rakefile
+- ebd81ca Import command does not support :target, and :description is optional
+- 7e1bd27 Add tests for new methods in Aeolus::CLI::ImportCommand
+- e0173cd Correct typo and delete commented out code
+- 5b4740f Simple refactor of base_command_spec.rb
+- 78d61c6 change :provider to :provider_account
+- 21f8b1d change :provider to :provider_account
+- 4999f31 fix known error code condition
+- 604ea06 bz#747719: Relax NG schema for image description xml
+- 50c0885 bz#747719: error handling for import params validations
+- 87b325b bz#747719: validation of import parameters
+- 3745bc0 Man pages update for BZ# 768509
+- cb63a44 BZ# 768509: aeolus-cli rename to aeolus
+- 2e9afeb BZ# 768507: aeolus-cli needs syntax to be more flexible
+- 769a835 BZ#767068 Fixed Error handling on delete
+- f0a46c2 Require provider_account for image import
+- 4214286 Catch 401 Unauthorized response and display a more helpful error
+- b8a38fb BZ#753917 Added targets to output of build
+- 7ad615a BZ#753917 Updated Push command to list Provider/Account for ProviderImages
+- 6251c23 Fix build status reporting
+- 5d83b12 Added ProviderAccounts to provider images VCR cassette
+- c80adbb Modified test for listing provider images with acc.info
+- df91026 Added provider acc. info to provider images
+- 87f5da7 Merge branch 'apache_license'
+- bc2c9fd Bump version for ongoing development on master branch
+- 2a7c04a Bump release and add changelog for 0.2.0 RC
+- 6548977 Changed the license from GPL to ASL
+
 * Thu Dec  1 2011 Steve Linabery <slinaber@redhat.com> - 0.3.0-0
 - Bump version
 
