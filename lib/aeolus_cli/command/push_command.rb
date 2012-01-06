@@ -52,7 +52,7 @@ module Aeolus
 
       def request_parameters
         if @options[:account]
-          request_map = {:provider_account => @options[:account]}
+          request_map = {:provider_account => @options[:account].join(",")}
         else
           puts "Error: You must specifcy an account to push to"
           quit(1)
