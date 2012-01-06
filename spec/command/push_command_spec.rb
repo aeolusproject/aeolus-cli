@@ -28,7 +28,7 @@ module Aeolus
         it "should allow multple push for an image with 2 target images based on image id" do
           VCR.use_cassette('command/push_command/multiple_push_image_id') do
             @options = ({ :image => "b4b340dc-0efc-4830-8c59-411c9a3e0aba",
-                          :account => "mock-acc,mock-acc" })
+                          :account => ["mock-acc","mock-acc"] })
             p = PushCommand.new(@options, @output)
             begin
               p.run
@@ -58,7 +58,7 @@ module Aeolus
         it "should allow multple push for an image with 2 target images based on build id" do
           VCR.use_cassette('command/push_command/multiple_push_build_id') do
             @options = ({ :build => "661ee541-6db3-4d36-9b3c-8972d6e63c94",
-                          :account => "mock-acc,mock-acc" })
+                          :account => ["mock-acc","mock-acc"] })
             p = PushCommand.new(@options, @output)
             begin
               p.run
@@ -88,7 +88,7 @@ module Aeolus
         it "should allow single push for an image on target image id" do
           VCR.use_cassette('command/push_command/multiple_push_target_image_id') do
             @options = ({ :targetimage => "e6176811-49e0-4dba-8b76-06b552a4b3a4",
-                          :account => "mock-acc" })
+                          :account => ["mock-acc"] })
             p = PushCommand.new(@options, @output)
             begin
               p.run
@@ -128,7 +128,7 @@ module Aeolus
         end
 
         it "should give useful feedback if no image, build or targetimage is specified" do
-          @options[:account] = "mock_account"
+          @options[:account] = ["mock_account"]
           b = PushCommand.new(@options, @output)
           begin
             b.request_parameters
