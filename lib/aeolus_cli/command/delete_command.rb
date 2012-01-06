@@ -78,28 +78,29 @@ module Aeolus
       private
       def print_provider_content(content_xml)
         h = Hash.from_xml(content_xml)
-        provider_content = h[h.keys.first]["content"]["provider_content"]
+        if provider_content = h[h.keys.first]["content"]["provider_content"]
         content = provider_content.instance_of?(Array) ? provider_content : [provider_content]
-        if content.size > 0
-          widths = calculate_widths(content)
-          puts "N.B. The following provider content must be manually removed"
-          puts ""
-
-          # Print Headers
-          printf("%-#{widths[:provider] + 5}s", "Provider")
-          printf("%-#{widths[:id] + 5}s", "ID")
-          puts ""
-
-          # Print Column Lines
-          printf("%-#{widths[:provider] + 5}s", "-" * widths[:provider])
-          printf("%-#{widths[:id] + 5}s", "-" * widths[:id])
-          puts ""
-
-          # Print Content
-          content.each do |pc|
-            printf("%-#{widths[:provider] + 5}s", pc["provider"])
-            printf("%-#{widths[:id] + 5}s", pc["target_identifier"])
+          if content.size > 0
+            widths = calculate_widths(content)
+            puts "N.B. The following provider content must be manually removed"
             puts ""
+
+            # Print Headers
+            printf("%-#{widths[:provider] + 5}s", "Provider")
+            printf("%-#{widths[:id] + 5}s", "ID")
+            puts ""
+
+            # Print Column Lines
+            printf("%-#{widths[:provider] + 5}s", "-" * widths[:provider])
+            printf("%-#{widths[:id] + 5}s", "-" * widths[:id])
+            puts ""
+
+            # Print Content
+            content.each do |pc|
+              printf("%-#{widths[:provider] + 5}s", pc["provider"])
+              printf("%-#{widths[:id] + 5}s", pc["target_identifier"])
+              puts ""
+            end
           end
         end
       end
