@@ -2,7 +2,7 @@
 .SH NAME
 aeolus-image import \- command for importing existing provider images into aeolus
 .SH SYNOPSIS
-.B aeolus-image import [\-h|--help] [\-u|--username] [\-w|--password] [\-a|--provider_account [account-name]] [\--id [provider-image-id]] [--description [path-to-file|xml string]] [\-d|--daemon]
+.B aeolus-image import [\-h|--help] [\-u|--username] [\-w|--password] [\-A|--account [account-name]] [\--id [provider-image-id]] [--description [path-to-file|xml string]] [\-d|--daemon]
 .SH DESCRIPTION
 aeolus-image import allows users to import pre-existing images that exist in cloud provders for example AMI from EC2, into aeolus.
 .SH OPTIONS
@@ -13,7 +13,7 @@ Conductor username
 \-w, --password <password>
 Conductor password
 .TP
-\-a, --provider_account <account-name>
+\-A, --_account <account-name>
 The provider account name as it exists in Conductor from where the importing image resides
 .TP
 \--id <provider-image-id>
@@ -31,18 +31,18 @@ Get usage information for this command and associated commmands
 .TP
 Import the AMI ami-1234567 from the provider account my-ec2 into aeolus
 .B aeolus-image import
-\--provider_account my-ec2
+\--account my-ec2
 \--id ami-1234567
 .TP
 Import the AMI ami-1234567 from the provider account my-ec2 into aeolus with a given xml description
 .B aeolus-image import
-\--provider_account my-ec2
+\--account my-ec2
 \--id ami-1234567
 \--description '<image><name>myAMI</name></image>'
 .TP
 Import the AMI ami-1234567 from the provider account my-ec2 into aeolus providing a path to the description XML file
 .B aeolus-image import
-\--provider_account my-ec2
+\--account my-ec2
 \--id ami-1234567
 \--description /foo/bar/description.xml
 .SH AUTHOR
