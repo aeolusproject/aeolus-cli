@@ -75,7 +75,7 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
-* Mon Jan 09 2012 Steve Linabery <slinaber@redhat.com> - 0.4.0-1
+* Mon Jan 09 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-2
 - 7220d88 BZ#772006 Fixed Delete with no provider content
 - 4de3d85 BZ#771793 Updated Import Output to list format
 - 8be6e31 Updated man to reflect import changes
