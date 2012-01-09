@@ -35,10 +35,17 @@ module Aeolus
               rescue SystemExit => e
                 e.status.should == 0
               end
-              $stdout.string.should include("Image:")
-              $stdout.string.should include("Target Image:")
-              $stdout.string.should include("Build:")
-              $stdout.string.should include("Provider Image:")
+              $stdout.string.should include("Image")
+              $stdout.string.should include("Target Image")
+              $stdout.string.should include("Build")
+              $stdout.string.should include("Provider Image")
+              $stdout.string.should include("Status")
+
+              $stdout.string.should include("ddc15456-6fe3-4947-abdd-b198e0f3362d")
+              $stdout.string.should include("07553e18-ad7e-455e-aa18-b6d2c1c810b2")
+              $stdout.string.should include("c65d1b8a-5484-47ce-915e-fe57897eb1f1")
+              $stdout.string.should include("19c08854-9b3b-4abd-b19c-3d0f98a7d105")
+              $stdout.string.should include("COMPLETE")
             end
           end
         end
@@ -54,10 +61,17 @@ module Aeolus
                   rescue SystemExit => e
                     e.status.should == 0
                   end
-                  $stdout.string.should include("Image:")
-                  $stdout.string.should include("Target Image:")
-                  $stdout.string.should include("Build:")
-                  $stdout.string.should include("Provider Image:")
+                  $stdout.string.should include("Image")
+                  $stdout.string.should include("Target Image")
+                  $stdout.string.should include("Build")
+                  $stdout.string.should include("Provider Image")
+                  $stdout.string.should include("Status")
+
+                  $stdout.string.should include("ddc15456-6fe3-4947-abdd-b198e0f3362d")
+                  $stdout.string.should include("07553e18-ad7e-455e-aa18-b6d2c1c810b2")
+                  $stdout.string.should include("c65d1b8a-5484-47ce-915e-fe57897eb1f1")
+                  $stdout.string.should include("19c08854-9b3b-4abd-b19c-3d0f98a7d105")
+                  $stdout.string.should include("COMPLETE")
                 end
               end
             end
@@ -91,10 +105,17 @@ module Aeolus
                     rescue SystemExit => e
                       e.status.should == 0
                     end
-                    $stdout.string.should include("Image:")
-                    $stdout.string.should include("Target Image:")
-                    $stdout.string.should include("Build:")
-                    $stdout.string.should include("Provider Image:")
+                    $stdout.string.should include("Image")
+                    $stdout.string.should include("Target Image")
+                    $stdout.string.should include("Build")
+                    $stdout.string.should include("Provider Image")
+                    $stdout.string.should include("Status")
+
+                    $stdout.string.should include("510bec08-e6fa-4004-aa21-c726b420d97e")
+                    $stdout.string.should include("24c0f87e-86f6-4bd3-a3a6-a61d89b348f6")
+                    $stdout.string.should include("e6841cdc-c632-4dc8-be5e-8da8476b02cc")
+                    $stdout.string.should include("e21fe1a3-4c14-473a-8818-9aeeac09c8ad")
+                    $stdout.string.should include("COMPLETE")
                   end
                 end
 

@@ -125,6 +125,20 @@ module Aeolus
             $stdout.string.should include("Could not find ProviderImage 1234")
           end
         end
+
+        it "should not throw an error on delete when no provider content is found" do
+          VCR.use_cassette('command/delete_command/delete_image_no_provider_content') do
+            @options = {:image => "5f32b61f-1aad-495e-8ad7-45783ee802c5"}
+            dc = DeleteCommand.new(@options)
+            begin
+              dc.image
+            rescue SystemExit => e
+              e.status.should == 0
+            end
+            $stdout.string.should include("Image: 5f32b61f-1aad-495e-8ad7-45783ee802c5 Deleted Successfully")
+            $stdout.string.should_not include("ERROR")
+          end
+        end
       end
     end
   end

@@ -36,12 +36,21 @@ module Aeolus
                                           :image_descriptor => @options[:description],
                                           :provider_account_name => @options[:provider_account].first})
           image.save!
-          puts ""
-          puts "Image: " + image.id
-          puts "Build: " + image.build.id
-          puts "Target Image: " + image.build.target_images.target_image.id
-          puts "Provider Image: " + image.build.target_images.target_image.provider_images.provider_image.id
-          puts "Status: " + image.build.target_images.target_image.provider_images.provider_image.status
+
+          headers = ActiveSupport::OrderedHash.new
+          headers[:image] = "Image"
+          headers[:build] = "Build"
+          headers[:target_image] = "Target Image"
+          headers[:id] = "Provider Image"
+          headers[:status] = "Status"
+
+          pi  = image.build.target_images.target_image.provider_images.provider_image
+          pi.image = image.id
+          pi.build = image.build.id
+          pi.target_image = image.build.target_images.target_image.id
+          pi_array = Array(pi)
+
+          print_collection(pi_array, headers)
           quit(0)
         rescue => e
           handle_exception(e)

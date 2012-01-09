@@ -1,0 +1,42 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :delete
+    uri: https://admin:password@localhost:443/conductor/api/images/5f32b61f-1aad-495e-8ad7-45783ee802c5.xml
+    body:
+    headers:
+      accept-language:
+      - en
+      accept:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge,chrome=1
+      etag:
+      - "\"b7717357bc6e7bb39051de814ee273d4\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - thin 1.2.11 codename Bat-Shit Crazy
+      date:
+      - Fri, 06 Jan 2012 14:36:45 GMT
+      x-runtime:
+      - "0.329900"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlZmZhMmU0N2Y5Y2ZlMmI4YzFjN2VjZDhkN2NhMmI3ZjMiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--f3390c131bb0b6f28873e1ad8d8197f8414accee; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+      transfer-encoding:
+      - chunked
+    body: |
+      <image href='https://localhost/conductor/api/images/5f32b61f-1aad-495e-8ad7-45783ee802c5' id='5f32b61f-1aad-495e-8ad7-45783ee802c5'>
+      <status>DELETED</status>
+      <content>
+      </content>
+      </image>
+
+    http_version: "1.1"
