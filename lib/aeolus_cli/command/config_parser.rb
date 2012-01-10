@@ -36,7 +36,7 @@ module Aeolus
         # File.expand_path("~")
         if COMMANDS.include?(@command)
           opts = self.send((@command + "Options").to_sym)
-          if @args.include?('-h')
+          if @args.include?('-h') || @args.include?('--help')
             puts opts
           else
             parse(opts)
@@ -166,7 +166,7 @@ module Aeolus
           opts.on('-A', '--account NAME,NAME', Array, 'name of specific provider account to use for push') do |name|
             @options[:account] = name
           end
-          opts.on( '-h', '--help', 'Get usage information for this command')
+
 
           opts.separator ""
           opts.separator "Examples:"
@@ -301,7 +301,6 @@ module Aeolus
         status_command = StatusCommand.new(@options)
         status_command.run
       end
-
     end
   end
 end
