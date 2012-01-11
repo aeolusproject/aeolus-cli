@@ -51,11 +51,11 @@ module Aeolus
       def parse(opts)
         begin
           opts.parse(@args)
-        rescue OptionParser::InvalidOption => io
-          puts "Warning, " + io.message + "\n\tSee `aeolus-image " + @command + " -h` for usage information."
+        rescue OptionParser::ParseError => e
+          puts "Warning, " + e.message + "\n\tSee `aeolus-image " + @command + " -h` for usage information."
           exit(1)
-        rescue OptionParser::MissingArgument => e
-          puts "Warning, #{e.message}" + "\n\tSee `aeolus-image " + @command + " -h` for usage information."
+        rescue
+          puts "An error occurred: See `aeolus-image " + @command + " -h` for usage information."
           exit(1)
         end
       end
