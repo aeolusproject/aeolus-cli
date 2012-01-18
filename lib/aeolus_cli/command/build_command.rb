@@ -38,11 +38,11 @@ module Aeolus
             image.save!
 
             headers = ActiveSupport::OrderedHash.new
+            headers[:image] = "Image"
+            headers[:build] = "Build"
             headers[:id] = "Target Image"
             headers[:target] = "Target"
             headers[:status] = "Status"
-            headers[:image] = "Image"
-            headers[:build] = "Build"
 
             ti_array = Array(image.build.target_images.target_image)
             ti_array.each do |target_image|
