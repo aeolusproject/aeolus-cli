@@ -119,6 +119,8 @@ module Aeolus
           opts.separator "aeolus-image list --targets                    # list the values available for the --target parameter"
           opts.separator "aeolus-image list --providers                  # list the values available for the --provider parameter"
           opts.separator "aeolus-image list --accounts                   # list the values available for the --account parameter"
+          opts.separator ""
+          opts.separator "N.B. Aeolus Credentials should be defined in the configuration file ~/.aeolus-cli"
         end
       end
 
@@ -173,6 +175,8 @@ module Aeolus
           opts.separator "aeolus-image push --account ec2-account,ec2-account2 --targetimage $target_image_id   # Push target images to each of the specified account"
           opts.separator "aeolus-image push --account ec2-account,rhevm-account --build $build_id               # Push target images attached to a particular build to each of the specified accounts"
           opts.separator "aeolus-image push --account ec2-account,rhevm-account --image $image_id               # Push target images attached to a particular image to each of the specified accounts"
+          opts.separator ""
+          opts.separator "N.B. Aeolus Credentials should be defined in the configuration file ~/.aeolus-cli"
         end
       end
 
@@ -194,6 +198,8 @@ module Aeolus
           opts.separator "Examples:"
           opts.separator "aeolus-image status --targetimage $target_image     # status of target image build"
           opts.separator "aeolus-image status --providerimage $provider_image # status of provider image push"
+          opts.separator ""
+          opts.separator "N.B. Aeolus Credentials should be defined in the configuration file ~/.aeolus-cli"
         end
       end
 
@@ -218,6 +224,8 @@ module Aeolus
           opts.separator "aeolus-image import --account my-ec2 --id $ami_id # import an AMI from the specified provider"
           opts.separator "aeolus-image import --account my-ec2 --id $ami_id --description '<image><name>My Image</name></image>' # import an AMI from the specified provider"
           opts.separator "aeolus-image import --account my-ec2 --id $ami_id --description <path_to_xml_file> # import an AMI from the specified provider"
+          opts.separator ""
+          opts.separator "N.B. Aeolus Credentials should be defined in the configuration file ~/.aeolus-cli"
         end
       end
 
@@ -251,6 +259,8 @@ module Aeolus
           opts.separator "aeolus-image delete --build $build_id               # deletes a build and all associated targetimages"
           opts.separator "aeolus-image delete --targetimage $target_image     # deletes a target image and all associated provider images"
           opts.separator "aeolus-image delete --providerimage $provider_image # deletes a provider image"
+          opts.separator ""
+          opts.separator "N.B. Aeolus Credentials should be defined in the configuration file ~/.aeolus-cli"
         end
       end
 
