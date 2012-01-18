@@ -38,7 +38,7 @@ module Aeolus
               end
             end
           end
-          headers[:id] = "ID"
+          headers[:id] = "Provider Image"
           headers[:provider] = "Provider"
           headers[:account] = "Account"
           headers[:status] = "Status"
