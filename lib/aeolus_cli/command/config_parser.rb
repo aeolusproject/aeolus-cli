@@ -166,7 +166,7 @@ module Aeolus
           opts.on('-A', '--account NAME,NAME', Array, 'name of specific provider account to use for push') do |name|
             @options[:account] = name
           end
-
+          opts.on( '-h', '--help', 'Get usage information for this command')
 
           opts.separator ""
           opts.separator "Examples:"
