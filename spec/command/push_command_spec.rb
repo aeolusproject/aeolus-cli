@@ -37,7 +37,7 @@ module Aeolus
             end
 
             # Headers
-            $stdout.string.should include("ID")
+            $stdout.string.should include("Provider Image")
             $stdout.string.should include("Provider")
             $stdout.string.should include("Account")
             $stdout.string.should include("Image")
@@ -67,7 +67,7 @@ module Aeolus
             end
 
             # Headers
-            $stdout.string.should include("ID")
+            $stdout.string.should include("Provider Image")
             $stdout.string.should include("Provider")
             $stdout.string.should include("Account")
             $stdout.string.should include("Build")
@@ -97,7 +97,7 @@ module Aeolus
             end
 
             # Headers
-            $stdout.string.should include("ID")
+            $stdout.string.should include("Provider Image")
             $stdout.string.should include("Provider")
             $stdout.string.should include("Account")
             $stdout.string.should include("Target Image")

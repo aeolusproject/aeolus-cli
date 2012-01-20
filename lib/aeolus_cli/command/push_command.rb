@@ -28,12 +28,8 @@ module Aeolus
           pi.save!
 
           headers = ActiveSupport::OrderedHash.new
-          headers[:id] = "ID"
-          headers[:provider] = "Provider"
-          headers[:account] = "Account"
-          headers[:status] = "Status"
+          # Add Image/Build or TargetImage to output (Depending on what is defined on command line)
           pi_array = Array(pi.provider_image)
-
           {:image_id => "Image", :build_id => "Build", :target_image_id => "Target Image"}.each_pair do |method, label|
             if pi.respond_to?(method)
               headers[method] = label
@@ -42,6 +38,10 @@ module Aeolus
               end
             end
           end
+          headers[:id] = "Provider Image"
+          headers[:provider] = "Provider"
+          headers[:account] = "Account"
+          headers[:status] = "Status"
 
           print_collection(pi_array, headers)
           quit(0)
