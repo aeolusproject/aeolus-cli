@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 4%{?dist}
+Release: 5%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -75,6 +75,13 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Fri Jan 20 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-5
+- 39f8c24 BZ#782417 Output of Push Include 'Provider Image' not 'ID'
+- 072dcd8 BZ#782417 Rearrange output of build/push/import for consistency
+- 35c46db BZ#751212 Added reference to ~/.aeolus-cli in help output
+- 9c7e7ab Added --help option to push help output
+- 4600e2d Bump release, add changelog 0.3.0-4
+
 * Wed Jan 18 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-4
 - 72f368b BZ#768317 Handle Ambiguous Option Exception
 
