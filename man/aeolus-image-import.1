@@ -45,6 +45,11 @@ Import the AMI ami-1234567 from the provider account my-ec2 into aeolus providin
 \--account my-ec2
 \--id ami-1234567
 \--description /foo/bar/description.xml
+.SH RHEV
+.TP
+Enter the template id for the provider image id. The template id can be found through the RHEV REST API.
+For example:
+  curl https://rhevm.redhat.com:8443/api/templates --user user@rhevm_domain:password
 .SH AUTHOR
 Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
 .SH SEE ALSO

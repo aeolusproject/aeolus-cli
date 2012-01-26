@@ -225,6 +225,10 @@ module Aeolus
           opts.separator "aeolus-image import --account my-ec2 --id $ami_id --description '<image><name>My Image</name></image>' # import an AMI from the specified provider"
           opts.separator "aeolus-image import --account my-ec2 --id $ami_id --description <path_to_xml_file> # import an AMI from the specified provider"
           opts.separator ""
+          opts.separator "RHEV:"
+          opts.separator "Enter the template id for the provider image id. The template id can be found through the RHEV REST API."
+          opts.separator "For example: curl https://rhevm.redhat.com:8443/api/templates --user user@rhevm_domain:password"
+          opts.separator ""
           opts.separator "N.B. Aeolus Credentials should be defined in the configuration file ~/.aeolus-cli"
         end
       end
