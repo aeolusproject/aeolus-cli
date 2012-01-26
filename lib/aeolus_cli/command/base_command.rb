@@ -95,6 +95,18 @@ module Aeolus
           code = "Unauthorized"
           message = "Invalid Credentials, please check ~/.aeolus-cli"
 
+        elsif e.is_a?(ActiveResource::Redirection)
+          code = "Found"
+          message = "Server tried to redirect to #{e.response.header['location']}, please check ~/.aeolus-cli"
+
+        elsif e.is_a?(ActiveResource::ServerError)
+          code = "Service Temporarily Unavailable"
+          message = "Please check that Conductor is running."
+
+        elsif e.is_a?(SocketError)
+          code = "Name Or Service Not Found"
+          message = "Please check your ~/.aeolus-cli"
+
         elsif e.is_a?(TypeError)
           code = "Internal Error (TypeError)"
           message = e.message
