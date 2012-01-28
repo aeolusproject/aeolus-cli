@@ -86,6 +86,29 @@ module Aeolus
             $stdout.string.should include("Invalid Credentials, please check ~/.aeolus-cli")
           end
         end
+
+        it "should display message when Found response is returned from Conductor" do
+          resp = mock(:header => {'Location' => 'site'})
+          e = ActiveResource::Redirection.new(resp)
+          lambda {base_command.send(:handle_exception, e)}.should raise_error(SystemExit)
+
+          $stdout.string.should include("Server tried to redirect to #{e.response.header['location']}, please check ~/.aeolus-cli")
+        end
+
+        it "should display message when Conductor is not running" do
+          resp = mock(:header => {'Location' => 'site'})
+          e = ActiveResource::ServerError.new(resp)
+          lambda {base_command.send(:handle_exception, e)}.should raise_error(SystemExit)
+
+          $stdout.string.should include("Please check that Conductor is running.")
+        end
+
+        it "should display message when there is incorrect hostname in .aeolus-cli" do
+          e = SocketError.new
+          lambda {base_command.send(:handle_exception, e)}.should raise_error(SystemExit)
+
+          $stdout.string.should include("Please check your ~/.aeolus-cli")
+        end
       end
 
     end

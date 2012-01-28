@@ -87,9 +87,25 @@ module Aeolus
       private
       def handle_exception(e)
 
-        if e.is_a?(ActiveResource::UnauthorizedAccess)
+        if e.is_a?(Errno::ECONNREFUSED)
+          code = "Connection Refused"
+          message = "Could not connect to aeolus-conductor please make sure it is running and that ~/.aeolus-cli points to the conductor API URL"
+
+        elsif e.is_a?(ActiveResource::UnauthorizedAccess)
           code = "Unauthorized"
           message = "Invalid Credentials, please check ~/.aeolus-cli"
+
+        elsif e.is_a?(ActiveResource::Redirection)
+          code = "Found"
+          message = "Server tried to redirect to #{e.response.header['location']}, please check ~/.aeolus-cli"
+
+        elsif e.is_a?(ActiveResource::ServerError)
+          code = "Service Temporarily Unavailable"
+          message = "Please check that Conductor is running."
+
+        elsif e.is_a?(SocketError)
+          code = "Name Or Service Not Found"
+          message = "Please check your ~/.aeolus-cli"
 
         elsif e.is_a?(TypeError)
           code = "Internal Error (TypeError)"
