@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 6%{?dist}
+Release: 7%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -75,6 +75,11 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Fri Jan 27 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-7
+- 76c98a9 BZ 749376: tests for aeolus-image handling of Conductor being down
+- a46435e BZ 749376: aeolus-image should gracefully handle Conductor being down
+- 77d9434 BZ#783886 Catch Connection Refused Exception
+
 * Thu Jan 26 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-6
 - 79ddbf9 BZ 773347 - rename redhat.com to example.org
 - 34f1157 BZ 773347 - update import help and man page to include RHEV notes
