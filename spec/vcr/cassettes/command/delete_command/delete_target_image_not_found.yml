@@ -11,8 +11,8 @@
       - application/xml
   response: !ruby/struct:VCR::Response
     status: !ruby/struct:VCR::ResponseStatus
-      code: 500
-      message: Internal Server Error
+      code: 404
+      message: Not Found
     headers:
       x-ua-compatible:
       - IE=Edge,chrome=1
@@ -32,7 +32,7 @@
       - chunked
     body: |
       <error>
-      <code>TargetImageDeleteFailure</code>
+      <code>TargetImageNotFound</code>
       <message>Could not find TargetImage 1234</message>
       </error>
 
