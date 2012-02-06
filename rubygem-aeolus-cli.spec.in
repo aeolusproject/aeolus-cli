@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 7%{?dist}
+Release: 8%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -75,6 +75,9 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Mon Feb  6 2012 John Eckersberg <jeckersb@redhat.com> - 0.3.0-8
+- 2a34282 BZ786800 Correct VCR cassetes for delete command
+
 * Fri Jan 27 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-7
 - 76c98a9 BZ 749376: tests for aeolus-image handling of Conductor being down
 - a46435e BZ 749376: aeolus-image should gracefully handle Conductor being down
