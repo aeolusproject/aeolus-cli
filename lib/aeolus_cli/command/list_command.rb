@@ -24,11 +24,13 @@ module Aeolus
           headers = ActiveSupport::OrderedHash.new
           headers[:id] = "ID"
           headers[:name] = "Name"
+          headers[:environment] = "Environment"
           headers[:os] = "OS"
           headers[:os_version] = "OS Version"
           headers[:arch] = "Arch"
           headers[:description] = "Description"
-          print_collection(Aeolus::CLI::Image.all, headers)
+          collection = @options[:environment].nil? ? Aeolus::CLI::Image.all : Aeolus::CLI::Image.find(:all, :from => Aeolus::CLI::Base.site.path + "/environments/" + @options[:environment] + "/images.xml")
+          print_collection(collection, headers)
           quit(0)
         rescue => e
           handle_exception(e)
@@ -127,6 +129,18 @@ module Aeolus
           handle_exception(e)
         end
       end
+
+      def environments
+        begin
+          headers = ActiveSupport::OrderedHash.new
+          headers[:name] = "Name"
+          print_collection(Aeolus::CLI::Environment.all, headers)
+          quit(0)
+        rescue => e
+          handle_exception(e)
+        end
+      end
+
     end
   end
 end

@@ -20,6 +20,7 @@ module Aeolus
       before(:each) do
         @options[:target] = ['ec2']
         @options[:template] = "#{File.dirname(__FILE__)}" + "../../fixtures/valid_template.tdl"
+        @options[:environment] = ['default']
       end
 
       describe "#run" do

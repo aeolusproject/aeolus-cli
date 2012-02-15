@@ -34,7 +34,7 @@ module Aeolus
           begin
             template = read_template
             validate_xml_schema(template)
-            image = Aeolus::CLI::Image.new({:targets => @options[:target] * ",", :tdl => template})
+            image = Aeolus::CLI::Image.new({:targets => @options[:target] * ",", :tdl => template, :environment => @options[:environment]})
             image.save!
 
             headers = ActiveSupport::OrderedHash.new
@@ -81,7 +81,7 @@ module Aeolus
       end
 
       def combo_implemented?
-        if @options[:template].empty? || @options[:target].empty?
+        if @options[:template].empty? || @options[:target].empty? || @options[:environment].nil?
           puts "Error: This combination of parameters is not currently supported"
           quit(1)
         end
