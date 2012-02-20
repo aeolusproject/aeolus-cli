@@ -87,6 +87,9 @@ module Aeolus
           opts.on('-i', '--images', 'Retrieve a list of images') do
             @options[:subcommand] = :images
           end
+          opts.on('-E', '--environment ENVIRONMENT', 'Limit image list to environment') do |environment|
+            @options[:environment] =  environment
+          end
           opts.on('-b', '--builds ID', 'Retrieve the builds of an image') do |id|
             @options[:subcommand] = :builds
             @options[:id] = id
@@ -108,11 +111,15 @@ module Aeolus
           opts.on('-a', '--accounts', 'Retrieve the values available for the --account parameter') do
             @options[:subcommand] = :accounts
           end
+          opts.on('-c', '--environments', 'Retrieve the values available for the --environment parameter') do
+            @options[:subcommand] = :environments
+          end
           opts.on( '-h', '--help', 'Get usage information for this command')
 
           opts.separator ""
           opts.separator "Examples:"
           opts.separator "aeolus-image list --images                     # list available images"
+          opts.separator "aeolus-image list --images --environment $env   # list available images for an environment"
           opts.separator "aeolus-image list --builds $image_id           # list the builds of an image"
           opts.separator "aeolus-image list --targetimages $build_id     # list the target images from a build"
           opts.separator "aeolus-image list --providerimages $target_id  # list the provider images from a target image"
@@ -137,6 +144,9 @@ module Aeolus
           end
           opts.on('-T', '--target TARGET1,TARGET2', Array, 'provider type (ec2, rackspace, rhevm, etc)') do |name|
             @options[:target] = name
+          end
+          opts.on('-E', '--environment ENVIRONMENT', 'Limit image list to environment') do |environment|
+            @options[:environment] =  environment
           end
           opts.on( '-h', '--help', 'Get usage information for this command')
 
