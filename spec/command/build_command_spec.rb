@@ -74,17 +74,12 @@ module Aeolus
           end
         end
 
-        it "should exit with a message if only image id is provided" do
+        it "should raise an ArgumentError if only image id is provided" do
           @options.delete(:template)
           @options.delete(:target)
           @options[:image] = '825c94d1-1353-48ca-87b9-36f02e069a8d'
           b = BuildCommand.new(@options, @output)
-          begin
-            b.run
-          rescue SystemExit => e
-            e.status.should == 1
-          end
-          $stdout.string.should include("This combination of parameters is not currently supported")
+          lambda {b.run}.should raise_error(ArgumentError)
         end
 
         it "should exit with appropriate message when a non compliant template is given" do
@@ -101,16 +96,11 @@ module Aeolus
       end
 
       describe "#combo_implemented?" do
-        it "should give useful feedback if no template or target is specified" do
+        it "should raise an ArgumentError if required options are not specified" do
           @options[:template] = ''
           @options[:target] = []
           b = BuildCommand.new(@options, @output)
-          begin
-            b.combo_implemented?
-          rescue SystemExit => e
-            e.status.should == 1
-          end
-          $stdout.string.should include("This combination of parameters is not currently supported")
+	  lambda {b.combo_implemented?}.should raise_error(ArgumentError)
         end
       end
     end
