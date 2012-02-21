@@ -82,8 +82,7 @@ module Aeolus
 
       def combo_implemented?
         if @options[:template].empty? || @options[:target].empty? || @options[:environment].nil?
-          puts "Error: This combination of parameters is not currently supported"
-          quit(1)
+          raise ArgumentError, "Error: This combination of parameters is not currently supported"
         end
         true
       end

@@ -40,7 +40,13 @@ module Aeolus
             puts opts
           else
             parse(opts)
-            self.send(@command.to_sym)
+	    begin
+              self.send(@command.to_sym)
+	    rescue ArgumentError => e
+	      puts "Warning, #{e.message}"
+	      puts opts
+	      exit(1)
+	    end
           end
         else
           puts generalOptions
@@ -152,8 +158,8 @@ module Aeolus
 
           opts.separator ""
           opts.separator "Examples:"
-          opts.separator "aeolus-image build --target ec2 --template my.tmpl        # build a new image for ec2 from based on the given template"
-          opts.separator "aeolus-image build --target ec2,rhevm --template my.tmpl  # build a new image for ec2 and for rhevm based on the given template"
+          opts.separator "aeolus-image build --target ec2 --template my.tmpl --environment default        # build a new image for ec2 from based on the given template for the default environment"
+          opts.separator "aeolus-image build --target ec2,rhevm --template my.tmpl --environment default  # build a new image for ec2 and for rhevm based on the given template for the default environment"
           #opts.separator "aeolus-image build --image $image_id                # (NOT IMPLEMENTED) rebuild the image template and targets from latest build"
           #opts.separator %q{aeolus-image build --target ec2,rackspace \         # rebuild the image with a new template and set of targets
           #         --image $image_i \
