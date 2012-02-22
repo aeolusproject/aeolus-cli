@@ -2,7 +2,7 @@
 .SH NAME
 aeolus-image \- command for listing aeolus image associated objects.
 .SH SYNOPSIS
-.B aeolus-image list [\-h|--help] [\-u|--username] [\-w|--password] [\-i|--images] [\-b|--builds [image id]] [\-t|--targetimages [build id]] [\-P|--providerimages [target image id]] [\-g|--targets] [\-a|--accounts] [\-p|--providers]
+.B aeolus-image list [\-h|--help] [\-u|--username] [\-w|--password] [\-i|--images] [\-E|--environment] [\-b|--builds [image id]] [\-t|--targetimages [build id]] [\-P|--providerimages [target image id]] [\-g|--targets] [\-a|--accounts] [\-p|--providers] [\-c|--environments]
 .SH DESCRIPTION
 aeolus-image list commands allows users to list information on the contents of particular objects in image warehouse including:
 .P
@@ -27,6 +27,9 @@ Get usage information for this command and associated commmands
 \-i, --images
 Retrieve a list of images
 .TP
+\-E, --environment
+Limit image list to environment
+.TP
 \-b, --builds <image id>
 Retrieve a list of builds of for a particular image
 .TP
@@ -45,6 +48,9 @@ Retrieve a list of available providers
 \-a, --accounts
 Retrieve a list of available accounts
 .TP
+\-c, --environments
+Retrieve the values available for the --environment parameter
+.TP
 \-d, --daemon
 Run as a background process
 .TP
@@ -54,6 +60,10 @@ Run as a background process
 List all images
 .B aeolus-image list
 \--images
+.TP
+List available images for an environment
+.B aeolus-image list
+\--images --environment default
 .TP
 List all builds for an image with id: 12345678-aaaa-1234--1234567890ab
 .B aeolus-image list
@@ -82,6 +92,10 @@ List all available providers
 List all available accounts
 .B aeolus-image list
 \--account
+.TP
+List all available environments
+.B aeolus-image list
+\--environments
 .SH AUTHORS
 Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
 .SH SEE ALSO
