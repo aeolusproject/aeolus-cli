@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 9%{?dist}
+Release: 10%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -75,6 +75,10 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Wed Feb 22 2012 John Eckersberg <jeckersb@redhat.com> - 0.3.0-10
+- dafc407 BZ #795650: Fix related man page
+- 5ef319d BZ #795650: "This combination of parameters is not currently supported"
+
 * Mon Feb 20 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-9
 - 81aa96b bug 786220 - Scope images to Pool Family
 
