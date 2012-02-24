@@ -151,7 +151,7 @@ module Aeolus
           opts.on('-T', '--target TARGET1,TARGET2', Array, 'provider type (ec2, rackspace, rhevm, etc)') do |name|
             @options[:target] = name
           end
-          opts.on('-E', '--environment ENVIRONMENT', 'Limit image list to environment') do |environment|
+          opts.on('-E', '--environment ENVIRONMENT', 'environment to build for') do |environment|
             @options[:environment] =  environment
           end
           opts.on( '-h', '--help', 'Get usage information for this command')
@@ -233,13 +233,16 @@ module Aeolus
           opts.on('-A', '--account NAME,NAME', Array, 'name of specific account to import to') do |name|
             @options[:provider_account] = name
           end
+          opts.on('-E', '--environment ENVIRONMENT', 'environment to import into') do |environment|
+            @options[:environment] =  environment
+          end
           opts.on( '-h', '--help', 'Get usage information for this command')
 
           opts.separator ""
           opts.separator "Examples:"
-          opts.separator "aeolus-image import --account my-ec2 --id $ami_id # import an AMI from the specified provider"
-          opts.separator "aeolus-image import --account my-ec2 --id $ami_id --description '<image><name>My Image</name></image>' # import an AMI from the specified provider"
-          opts.separator "aeolus-image import --account my-ec2 --id $ami_id --description <path_to_xml_file> # import an AMI from the specified provider"
+          opts.separator "aeolus-image import --account my-ec2 --id $ami_id --environment default # import an AMI from the specified provider"
+          opts.separator "aeolus-image import --account my-ec2 --id $ami_id --environment default --description '<image><name>My Image</name></image>' # import an AMI from the specified provider"
+          opts.separator "aeolus-image import --account my-ec2 --id $ami_id --environment default --description <path_to_xml_file> # import an AMI from the specified provider"
           opts.separator ""
           opts.separator "RHEV:"
           opts.separator "Enter the template id for the provider image id. The template id can be found through the RHEV REST API."
