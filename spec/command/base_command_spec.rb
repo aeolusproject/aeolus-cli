@@ -26,6 +26,26 @@ module Aeolus
           Aeolus::CLI::Base.user.to_s.should == "admin"
           Aeolus::CLI::Base.password.to_s.should == "password"
         end
+
+        it "should raise error on invalid config when conductor is not specified" do
+          base_command.instance_eval { @config = {} }
+          lambda { base_command.send(:configure_active_resource) }.should raise_error(Aeolus::CLI::ConfigError, "Error in configuration file")
+        end
+
+        it "should raise error on invalid config when no URL is specified" do
+          base_command.instance_eval { @config = {:conductor => {:username => "username", :password => "password"}} }
+          lambda { base_command.send(:configure_active_resource) }.should raise_error(Aeolus::CLI::ConfigError, "Error in configuration file: url is missing")
+        end
+
+        it "should raise error on invalid config when no password is specified" do
+          base_command.instance_eval { @config = {:conductor => {:username => "username", :url => "https://localhost/conductor/api"}} }
+          lambda { base_command.send(:configure_active_resource) }.should raise_error(Aeolus::CLI::ConfigError, "Error in configuration file: password is missing")
+        end
+
+        it "should raise error on invalid config when no username is specified" do
+          base_command.instance_eval { @config = {:conductor => {:url => "https://localhost/conductor/api", :password => "password"}} }
+          lambda { base_command.send(:configure_active_resource) }.should raise_error(Aeolus::CLI::ConfigError, "Error in configuration file: username is missing")
+        end
       end
 
       describe "#read_file" do

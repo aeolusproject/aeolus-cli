@@ -33,3 +33,5 @@ require File.join(File.dirname(__FILE__), 'aeolus_cli/model', 'provider')
 require File.join(File.dirname(__FILE__), 'aeolus_cli/model', 'provider_account')
 require File.join(File.dirname(__FILE__), 'aeolus_cli/model', 'provider_type')
 require File.join(File.dirname(__FILE__), 'aeolus_cli/model', 'environment')
+
+require File.join(File.dirname(__FILE__), 'aeolus_cli/', 'exceptions')
