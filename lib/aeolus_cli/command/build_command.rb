@@ -64,7 +64,7 @@ module Aeolus
           if errors.length > 0
             puts "ERROR: The given Template does not conform to the TDL Schema, see below for specific details:"
             errors.each do |error|
-              puts "- " + error.message
+              puts "- Line: " + error.line.to_s + " => " + error.message
             end
             quit(1)
           end
