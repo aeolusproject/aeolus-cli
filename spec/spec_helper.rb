@@ -14,6 +14,7 @@
 
 $: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_cli/command/"))
 $: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_cli/model/"))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_cli/"))
 
 require 'aeolus_cli'
 require 'stringio'
