@@ -20,13 +20,15 @@ module Aeolus
       let( :description ) { "<image><name>MyImage</name></image>" }
       let( :options ) { { :id => "ami-5592553c",
         :provider_account => ["ec2-us-east-1"],
+        :environment => "default",
         :description => description } }
       let( :importc ) { ImportCommand.new( options ) }
 
       describe "#import_image" do
         context "without description parameter" do
           let( :options ) { { :id => "ami-5592553c",
-            :provider_account => ["ec2-us-east-1"] } }
+            :provider_account => ["ec2-us-east-1"],
+            :environment => "default" } }
 
           it "should import an image with default description value" do
             VCR.use_cassette('command/import_command/import_image_default') do
@@ -166,7 +168,8 @@ module Aeolus
         context "correct params" do
           let( :params ) { { :id => "ami-5592553c",
             :provider_account => ["ec2-us-east-1"],
-            :description => description } }
+            :description => description,
+            :environment => "default" } }
           it { subject.call.should be_true }
         end
 
@@ -176,10 +179,18 @@ module Aeolus
           it { should raise_error(ArgumentError, /missing/) }
         end
 
+        context "missing environment" do
+          let( :params ) { { :id => "ami-5592553c",
+            :description => description,
+            :provider_account => ["ec2-us-east-1"]} }
+          it { should raise_error(ArgumentError, /missing environment/) }
+        end
+
         context "unexpected parameter" do
           let( :params ) { { :id => "ami-5592553c",
             :provider_account => ["ec2-us-east-1"],
             :other_parameter => "other_value",
+            :environment => "default",
             :description => description } }
           it { should raise_error(ArgumentError, /unexpected/) }
         end

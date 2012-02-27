@@ -34,7 +34,8 @@ module Aeolus
 
           image = Aeolus::CLI::Image.new({:target_identifier => @options[:id],
                                           :image_descriptor => @options[:description],
-                                          :provider_account_name => @options[:provider_account].first})
+                                          :provider_account_name => @options[:provider_account].first,
+                                          :environment => @options[:environment]})
           image.save!
 
           headers = ActiveSupport::OrderedHash.new
@@ -68,7 +69,7 @@ module Aeolus
           raise ArgumentError, "params should not contain nil"
         end
 
-        required_keys = [:id, :provider_account]
+        required_keys = [:id, :provider_account, :environment]
         optional_keys = [:description]
 
         isect = params.keys & required_keys
