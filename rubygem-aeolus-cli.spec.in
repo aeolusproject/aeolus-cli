@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 10%{?dist}
+Release: 11%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -75,6 +75,9 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Mon Feb 27 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-11
+- 2d2bc81 Bug 796781: Handle environment param in cli call for import (revised)
+
 * Wed Feb 22 2012 John Eckersberg <jeckersb@redhat.com> - 0.3.0-10
 - dafc407 BZ #795650: Fix related man page
 - 5ef319d BZ #795650: "This combination of parameters is not currently supported"
