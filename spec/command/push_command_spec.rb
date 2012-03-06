@@ -124,7 +124,7 @@ module Aeolus
           rescue SystemExit => e
             e.status.should == 1
           end
-          $stdout.string.should  include("Error: You must specifcy an account to push to")
+          $stdout.string.should  include("Error: You must specify an account to push to")
         end
 
         it "should give useful feedback if no image, build or targetimage is specified" do

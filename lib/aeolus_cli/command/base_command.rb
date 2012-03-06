@@ -24,11 +24,15 @@ module Aeolus
       attr_accessor :options
 
       def initialize(opts={}, logger=nil)
-        logger(logger)
-        @options = opts
-        @config_location = "~/.aeolus-cli"
-        @config = load_config
-        configure_active_resource
+        begin
+          logger(logger)
+          @options = opts
+          @config_location = "~/.aeolus-cli"
+          @config = load_config
+          configure_active_resource
+        rescue => e
+          handle_exception(e)
+        end
       end
 
       protected
@@ -115,6 +119,10 @@ module Aeolus
           code = "Argument Error"
           message = e.message
 
+        elsif e.is_a?(Aeolus::CLI::ConfigError)
+          code = "Config Error"
+          message = e.message + "; please check ~/.aeolus-cli"
+
         elsif e.respond_to?(:response)
           doc = Nokogiri::XML e.response.body
           code = doc.xpath("/error/code").text
@@ -167,9 +175,16 @@ module Aeolus
       end
 
       def configure_active_resource
-        Aeolus::CLI::Base.site = @config[:conductor][:url]
-        Aeolus::CLI::Base.user = @config[:conductor][:username]
-        Aeolus::CLI::Base.password = @config[:conductor][:password]
+        if @config.has_key?(:conductor)
+          [:url, :password, :username].each do |key|
+            raise Aeolus::CLI::ConfigError.new("Error in configuration file: #{key} is missing") unless @config[:conductor].has_key?(key)
+          end
+          Aeolus::CLI::Base.site = @config[:conductor][:url]
+          Aeolus::CLI::Base.user = @config[:conductor][:username]
+          Aeolus::CLI::Base.password = @config[:conductor][:password]
+        else
+          raise Aeolus::CLI::ConfigError.new("Error in configuration file")
+        end
       end
 
       # Print Collection to STDOUT in a column layout
