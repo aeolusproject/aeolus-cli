@@ -26,6 +26,7 @@ module Aeolus
         @args = argv
         # Default options
         @options = {}
+        @value = /^(?!-).*$/
       end
 
       def process
@@ -90,21 +91,21 @@ module Aeolus
       def listOptions
         OptionParser.new do |opts|
           opts.banner = "Usage: aeolus-image list [command options]"
-          opts.on('-i', '--images', 'Retrieve a list of images') do
+          opts.on('-i', '--images', @value, 'Retrieve a list of images') do
             @options[:subcommand] = :images
           end
-          opts.on('-E', '--environment ENVIRONMENT', 'Limit image list to environment') do |environment|
+          opts.on('-E', '--environment ENVIRONMENT', @value, 'Limit image list to environment') do |environment|
             @options[:environment] =  environment
           end
-          opts.on('-b', '--builds ID', 'Retrieve the builds of an image') do |id|
+          opts.on('-b', '--builds ID', @value, 'Retrieve the builds of an image') do |id|
             @options[:subcommand] = :builds
             @options[:id] = id
           end
-          opts.on('-t', '--targetimages ID', 'Retrieve the target images from a build') do |id|
+          opts.on('-t', '--targetimages ID', @value, 'Retrieve the target images from a build') do |id|
             @options[:subcommand] = :targetimages
             @options[:id] = id
           end
-          opts.on('-P', '--providerimages ID', 'Retrieve the provider images from a target image') do |id|
+          opts.on('-P', '--providerimages ID', @value, 'Retrieve the provider images from a target image') do |id|
             @options[:subcommand] = :providerimages
             @options[:id] = id
           end
@@ -142,7 +143,7 @@ module Aeolus
           opts.banner = "Usage: aeolus-image build [command options]"
           opts.separator ""
           opts.separator "Options:"
-          opts.on('-e', '--template FILE', 'path to file that contains template xml') do |file|
+          opts.on('-e', '--template FILE', @value, 'path to file that contains template xml') do |file|
             @options[:template] = file
           end
           opts.on('-z', '--no-validation', 'Do not validation the template against the TDL XML Schema') do |description|
@@ -151,7 +152,7 @@ module Aeolus
           opts.on('-T', '--target TARGET1,TARGET2', Array, 'provider type (ec2, rackspace, rhevm, etc)') do |name|
             @options[:target] = name
           end
-          opts.on('-E', '--environment ENVIRONMENT', 'environment to build for') do |environment|
+          opts.on('-E', '--environment ENVIRONMENT', @value, 'environment to build for') do |environment|
             @options[:environment] =  environment
           end
           opts.on( '-h', '--help', 'Get usage information for this command')
@@ -172,13 +173,13 @@ module Aeolus
           opts.banner = "Usage: aeolus-image push [command options]"
           opts.separator ""
           opts.separator "Options:"
-          opts.on('-I', '--image ID', 'ID of the base image, can be used in build and push commands, see examples') do |id|
+          opts.on('-I', '--image ID', @value, 'ID of the base image, can be used in build and push commands, see examples') do |id|
             @options[:image] = id
           end
-          opts.on('-B', '--build ID', 'push all target images for a build, to same providers as previously') do |id|
+          opts.on('-B', '--build ID', @value, 'push all target images for a build, to same providers as previously') do |id|
             @options[:build] = id
           end
-          opts.on('-t', '--targetimages ID', 'Retrieve the target images from a build') do |id|
+          opts.on('-t', '--targetimages ID', @value, 'Retrieve the target images from a build') do |id|
             @options[:targetimage] = id
           end
           opts.on('-A', '--account NAME,NAME', Array, 'name of specific provider account to use for push') do |name|
@@ -201,11 +202,11 @@ module Aeolus
           opts.banner = "Usage: aeolus-image status [command options]"
           opts.separator ""
           opts.separator "Options:"
-          opts.on('-t', '--targetimage ID', 'target image status') do |id|
+          opts.on('-t', '--targetimage ID', @value, 'target image status') do |id|
             @options[:subcommand] = :target_image
             @options[:targetimage] = id
           end
-          opts.on('-P', '--providerimage ID', 'provider image status') do |id|
+          opts.on('-P', '--providerimage ID', @value, 'provider image status') do |id|
             @options[:subcommand] = :provider_image
             @options[:providerimage] = id
           end
@@ -227,13 +228,13 @@ module Aeolus
           opts.on('-d', '--id ID', 'id for a given object') do |id|
             @options[:id] = id
           end
-          opts.on('-r', '--description NAME', 'description (e.g. "<image><name>MyImage</name></image>" or "/home/user/myImage.xml")') do |description|
+          opts.on('-r', '--description NAME', @value, 'description (e.g. "<image><name>MyImage</name></image>" or "/home/user/myImage.xml")') do |description|
             @options[:description] = description
           end
           opts.on('-A', '--account NAME,NAME', Array, 'name of specific account to import to') do |name|
             @options[:provider_account] = name
           end
-          opts.on('-E', '--environment ENVIRONMENT', 'environment to import into') do |environment|
+          opts.on('-E', '--environment ENVIRONMENT', @value, 'environment to import into') do |environment|
             @options[:environment] =  environment
           end
           opts.on( '-h', '--help', 'Get usage information for this command')
@@ -258,19 +259,19 @@ module Aeolus
           opts.separator ""
 
           opts.separator "Delete options:"
-          opts.on('-I', '--image ID', 'delete build image and associated objects') do |id|
+          opts.on('-I', '--image ID', @value, 'delete build image and associated objects') do |id|
             @options[:subcommand] = :image
             @options[:image] = id
           end
-          opts.on('-B', '--build ID', 'delete build and associated objects') do |id|
+          opts.on('-B', '--build ID', @value, 'delete build and associated objects') do |id|
             @options[:subcommand] = :build
             @options[:build] = id
           end
-          opts.on('-m', '--targetimage ID', 'delete target image and its provider images') do |id|
+          opts.on('-m', '--targetimage ID', @value, 'delete target image and its provider images') do |id|
             @options[:subcommand] = :target_image
             @options[:targetimage] = id
           end
-          opts.on('-D', '--providerimage ID', 'delete provider image') do |id|
+          opts.on('-D', '--providerimage ID', @value, 'delete provider image') do |id|
             @options[:subcommand] = :provider_image
             @options[:providerimage] = id
           end
