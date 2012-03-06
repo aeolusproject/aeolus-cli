@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 12%{?dist}
+Release: 13%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -75,6 +75,10 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Tue Mar 06 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-13
+- 60d7c59 BZ#799107 Fixed Typo in Push Command
+- 10c55a5 BZ#797157 Validate aeolus config
+
 * Tue Feb 27 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-12
 - 783e1c0 Added Line Number to validation errors
 - fc71f7c BZ#795523 Updated tdl.rng to validate OS name
