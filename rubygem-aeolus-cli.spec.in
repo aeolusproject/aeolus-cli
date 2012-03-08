@@ -23,7 +23,6 @@ Requires: ruby(abi) = %{rubyabi}
 Requires: rubygems
 Requires: rubygem(nokogiri) >= 1.4.0
 Requires: rubygem(rest-client)
-Requires: rubygem(imagefactory-console) >= 0.4.0
 Requires: rubygem(activesupport)
 Requires: rubygem(activeresource)
 
