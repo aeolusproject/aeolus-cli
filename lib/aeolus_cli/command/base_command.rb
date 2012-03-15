@@ -90,7 +90,6 @@ module Aeolus
 
       private
       def handle_exception(e)
-
         if e.is_a?(Errno::ECONNREFUSED)
           code = "Connection Refused"
           message = "Could not connect to aeolus-conductor please make sure it is running and that ~/.aeolus-cli points to the conductor API URL"
@@ -105,7 +104,11 @@ module Aeolus
 
         elsif e.is_a?(ActiveResource::ServerError)
           code = "Service Temporarily Unavailable"
-          message = "Please check that Conductor is running."
+          if e.response.code == "503" && /Imagefactory/.match(e.response.body)
+            message = "Please check that Imagefactory is running."
+          else
+            message = "Please check that Conductor is running."
+          end
 
         elsif e.is_a?(SocketError)
           code = "Name Or Service Not Found"
