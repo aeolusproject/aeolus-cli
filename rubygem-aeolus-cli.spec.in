@@ -7,7 +7,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 14%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -74,6 +74,9 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Thu Mar 15 2012 Steve Linabery <slinaber@redhat.com> - 0.3.1-1
+- Bump PKG_VERSION in Rakefile to force creation of rubygem-aeolus-cli-0.3.1.gem
+
 * Thu Mar 08 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-14
 - 74558aa BZ801456 rubygem-aeolus-cli depends on rubygem-imagefactory-console
 
