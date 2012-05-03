@@ -34,7 +34,10 @@ module Aeolus
           begin
             template = read_template
             validate_xml_schema(template)
-            image = Aeolus::CLI::Image.new({:targets => @options[:target] * ",", :tdl => template, :environment => @options[:environment]})
+            image = Aeolus::CLI::Image.new({
+                :targets => @options[:target] * ",",
+                :tdl => "<![CDATA[#{template}]]>",
+                :environment => @options[:environment]})
             image.save!
 
             headers = ActiveSupport::OrderedHash.new
