@@ -19,7 +19,7 @@ require 'rubygems/package_task'
 require 'rdoc/task'
 require 'rake/testtask'
 require 'rspec/core/rake_task'
-require 'rake/rpmtask'
+require './rake/rpmtask'
 
 RPMBUILD_DIR = "#{File.expand_path('~')}/rpmbuild"
 RPM_SPEC = "rubygem-aeolus-cli.spec"
