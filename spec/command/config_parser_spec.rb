@@ -160,12 +160,6 @@ module Aeolus
 
             its ( :options ) { should include( options_hash ) }
           end
-          context "with --no-validation" do
-            let ( :parameters ) { %w(build --target ec2,rackspace --no-validation) }
-            let ( :options_hash ) { { :target => ['ec2','rackspace'], :validation => false } }
-
-            its ( :options ) { should include( options_hash ) }
-          end
         end
 
         context "for push command" do
