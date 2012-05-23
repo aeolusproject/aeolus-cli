@@ -1,8 +1,17 @@
+%if 0%{?fedora} > 16
+%global rubyabi 1.9.1
+%global gem_name aeolus-cli
+%global gemname %{gem_name}
+%global geminstdir %{gem_instdir}
+%global gemdir %{gem_dir}
+%else
 %global gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %global gemname aeolus-cli
 %global geminstdir %{gemdir}/gems/%{gemname}-%{version}
-%global mandir %{_mandir}/man1
 %global rubyabi 1.8
+%endif
+
+%global mandir %{_mandir}/man1
 
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
@@ -23,13 +32,18 @@ Requires: ruby(abi) = %{rubyabi}
 Requires: rubygems
 Requires: rubygem(nokogiri) >= 1.4.0
 Requires: rubygem(rest-client)
-Requires: rubygem(imagefactory-console) >= 0.4.0
 Requires: rubygem(activesupport)
 Requires: rubygem(activeresource)
 
 BuildRequires: ruby
 BuildRequires: rubygems
 BuildRequires: rubygem(rspec-core)
+
+%if 0%{?fedora} > 16
+BuildRequires: rubygems-devel
+BuildRequires: rubygem(vcr)
+BuildRequires: rubygem(webmock)
+%endif
 
 BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
@@ -75,6 +89,10 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Tue May 08 2012 Mo Morsi <mmorsi@redhat.com> - 0.4.0-1
+- new upstream release
+- update to ruby 1.9
+
 * Mon Jan 09 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-2
 - 7220d88 BZ#772006 Fixed Delete with no provider content
 - 4de3d85 BZ#771793 Updated Import Output to list format
