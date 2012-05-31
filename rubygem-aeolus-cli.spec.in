@@ -74,6 +74,9 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Thu May 31 2012 Steve Linabery <slinaber@redhat.com> - 0.3.2-1
+- 7a7400c BZ797298: man: fix minor typo in aeolus(1) man page
+
 * Thu Mar 15 2012 Steve Linabery <slinaber@redhat.com> - 0.3.1-1
 - Bump PKG_VERSION in Rakefile to force creation of rubygem-aeolus-cli-0.3.1.gem
 
