@@ -23,7 +23,7 @@ require 'rake/rpmtask'
 
 RPMBUILD_DIR = "#{File.expand_path('~')}/rpmbuild"
 RPM_SPEC = "rubygem-aeolus-cli.spec"
-PKG_VERSION = "0.3.2"
+PKG_VERSION = "0.3.3"
 
 spec = Gem::Specification.new do |s|
   s.name = 'aeolus-cli'

@@ -74,6 +74,10 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Thu May 31 2012 Steve Linabery <slinaber@redhat.com> - 0.3.3-1
+- f494ad3 BZ804543 Removed Optional Element for rootpw in tdl
+- 46ad975 Revert "BZ797298: man: fix minor typo in aeolus(1) man page"
+
 * Thu May 31 2012 Steve Linabery <slinaber@redhat.com> - 0.3.2-1
 - 7a7400c BZ797298: man: fix minor typo in aeolus(1) man page
 
