@@ -16,7 +16,7 @@
 Summary: Command-line interface for working with the Aeolus cloud suite
 Name: rubygem-aeolus-cli
 Version: @VERSION@
-Release: 0%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -89,6 +89,13 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Wed Jun 06 2012 Steve Linabery <slinaber@redhat.com> - 0.5.0-1
+- 4e160d9 BZ815357: spec: removed testcase for --no-validation
+- 535676a BZ815357: removed --no-validation option
+- 03981c1 BZ815357: buildcmd: surround template xml with CDATA
+- 396a329 BZ804543 Removed Optional Element for rootpw in tdl
+- 09d5380 BZ797298: man: fix minor typo in aeolus(1) man page
+
 * Tue May 08 2012 Mo Morsi <mmorsi@redhat.com> - 0.4.0-1
 - new upstream release
 - update to ruby 1.9
