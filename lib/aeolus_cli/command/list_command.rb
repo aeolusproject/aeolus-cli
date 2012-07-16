@@ -29,7 +29,7 @@ module Aeolus
           headers[:os_version] = "OS Version"
           headers[:arch] = "Arch"
           headers[:description] = "Description"
-          collection = @options[:environment].nil? ? Aeolus::CLI::Image.all : Aeolus::CLI::Image.find(:all, :from => Aeolus::CLI::Base.site.path + "/environments/" + @options[:environment] + "/images.xml")
+          collection = @options[:environment].nil? ? Aeolus::CLI::Image.all : Aeolus::CLI::Image.find(:all, :from => URI::encode(Aeolus::CLI::Base.site.path + "/environments/" + @options[:environment] + "/images.xml"))
           print_collection(collection, headers)
           quit(0)
         rescue => e
