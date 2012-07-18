@@ -1,0 +1,115 @@
+---
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://localhost:8000/valid_template.tdl
+    body: 
+    headers: 
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      server: 
+      - SimpleHTTP/0.6 Python/2.7.3
+      content-type: 
+      - application/octet-stream
+      content-length: 
+      - "519"
+      date: 
+      - Wed, 18 Jul 2012 16:18:16 GMT
+      last-modified: 
+      - Wed, 18 Jul 2012 16:18:11 GMT
+    body: |-
+      <template>
+        <name>tmpl1</name>
+        <description>foo</description>
+        <os>
+          <rootpw>password</rootpw>
+          <name>Fedora</name>
+          <arch>x86_64</arch>
+          <version>14</version>
+          <install type="url">
+            <url>http://download.fedoraproject.org/pub/fedora/linux/releases/14/Fedora/x86_64/os/</url>
+          </install>
+        </os>
+        <repositories>
+          <repository name="custom">
+            <url>http://repos.fedorapeople.org/repos/aeolus/demo/webapp/</url>
+            <signed>false</signed>
+          </repository>
+        </repositories>
+      </template>
+    http_version: "1.1"
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: https://admin:password@localhost:443/conductor/api/images.xml
+    body: |
+      <?xml version="1.0" encoding="UTF-8"?>
+      <image>
+        <targets>ec2</targets>
+        <tdl>&lt;template&gt;
+        &lt;name&gt;tmpl1&lt;/name&gt;
+        &lt;description&gt;foo&lt;/description&gt;
+        &lt;os&gt;
+          &lt;rootpw&gt;password&lt;/rootpw&gt;
+          &lt;name&gt;Fedora&lt;/name&gt;
+          &lt;arch&gt;x86_64&lt;/arch&gt;
+          &lt;version&gt;14&lt;/version&gt;
+          &lt;install type="url"&gt;
+            &lt;url&gt;http://download.fedoraproject.org/pub/fedora/linux/releases/14/Fedora/x86_64/os/&lt;/url&gt;
+          &lt;/install&gt;
+        &lt;/os&gt;
+        &lt;repositories&gt;
+          &lt;repository name="custom"&gt;
+            &lt;url&gt;http://repos.fedorapeople.org/repos/aeolus/demo/webapp/&lt;/url&gt;
+            &lt;signed&gt;false&lt;/signed&gt;
+          &lt;/repository&gt;
+        &lt;/repositories&gt;
+      &lt;/template&gt;</tdl>
+      </image>
+
+    headers:
+      accept-language:
+      - en
+      content-type:
+      - application/xml
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      x-ua-compatible:
+      - IE=Edge,chrome=1
+      etag:
+      - "\"1cc9b56f5dd748a8cfa4632c4f5b54b3\""
+      content-type:
+      - application/xml; charset=utf-8
+      server:
+      - thin 1.2.11 codename Bat-Shit Crazy
+      date:
+      - Tue, 13 Dec 2011 15:25:24 GMT
+      x-runtime:
+      - "2.639965"
+      set-cookie:
+      - _session_id=BAh7CCIPc2Vzc2lvbl9pZCIlMWJjMzE4Zjc3MThiN2I4ZDc1OTg4MDE4ZmU3YmZmYzkiGXdhcmRlbi51c2VyLnVzZXIua2V5aQYiEGJyZWFkY3J1bWJzWwA%3D--29e37a191161ffc7c3d145e46e63c9c72179b1e8; path=/; HttpOnly
+      cache-control:
+      - max-age=0, private, must-revalidate
+      transfer-encoding:
+      - chunked
+    body: |+
+      <image href='https://localhost/conductor/api/images/6affc8f5-a560-4b7e-88da-2e993cf9ebce' id='6affc8f5-a560-4b7e-88da-2e993cf9ebce'>
+      <build href='https://localhost/conductor/api/builds/e0412885-28a6-4c3f-898a-886680ffadd0' id='e0412885-28a6-4c3f-898a-886680ffadd0'>
+      <target_images>
+      <target_image href='https://localhost/conductor/api/target_images/0079b860-e601-4705-8729-d7624f160786' id='0079b860-e601-4705-8729-d7624f160786'>
+      <status>COMPLETED</status>
+      <target>ec2</target>
+      <provider_images>
+      </provider_images>
+      </target_image>
+      </target_images>
+      </build>
+      </image>
+
+    http_version: "1.1"
