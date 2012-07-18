@@ -131,6 +131,51 @@ module Aeolus
           end
         end
       end
+
+      context "list" do
+        context "with environment" do
+          context "empty" do
+            it('is correct URL') do
+              VCR.use_cassette('command/list_command/empty_environment') do
+                lc = ListCommand.new({:environment => nil})
+                begin
+                  lc.images()
+                rescue SystemExit => e
+                  e.status.should == 0
+                end
+              end
+            end
+          end
+
+          context "'default'" do
+            it('is correct URL') do
+              VCR.use_cassette('command/list_command/default_environment') do
+                lc = ListCommand.new({:environment => 'default'})
+                begin
+                  lc.images()
+                rescue SystemExit => e
+                  e.status.should == 0
+                end
+              end
+            end
+          end
+
+          context "'Test cloud'" do
+            it('is correct URL') do
+              VCR.use_cassette('command/list_command/test_cloud_environment') do
+                lc = ListCommand.new({:environment => 'Test cloud'})
+                begin
+                  lc.images()
+                rescue SystemExit => e
+                  e.status.should == 0
+                end
+              end
+            end
+          end
+
+        end
+      end
+
     end
   end
 end
