@@ -19,13 +19,37 @@ module Aeolus
     describe BuildCommand do
       before(:each) do
         @options[:target] = ['ec2']
-        @options[:template] = "#{File.dirname(__FILE__)}" + "../../fixtures/valid_template.tdl"
+        @options[:template] = File.join("#{File.dirname(__FILE__)}", "../fixtures/valid_template.tdl")
         @options[:environment] = ['default']
       end
 
       describe "#run" do
         it "should kick off a build with valid options" do
           VCR.use_cassette('command/build_command/build') do
+            b = BuildCommand.new(@options, @output)
+            begin
+              b.run
+            rescue SystemExit => e
+              e.status.should == 0
+            end
+            $stdout.string.should include("Image")
+            $stdout.string.should include("Target Image")
+            $stdout.string.should include("Build")
+            $stdout.string.should include("Target")
+            $stdout.string.should include("Status")
+
+            $stdout.string.should include("6affc8f5-a560-4b7e-88da-2e993cf9ebce")
+            $stdout.string.should include("e0412885-28a6-4c3f-898a-886680ffadd0")
+            $stdout.string.should include("0079b860-e601-4705-8729-d7624f160786")
+            $stdout.string.should include("COMPLETED")
+            $stdout.string.should include("ec2")
+
+          end
+        end
+
+        it "should kick off a build with template in URL" do
+          @options[:template] = 'http://localhost:8000/valid_template.tdl'
+          VCR.use_cassette('command/build_command/build_url') do
             b = BuildCommand.new(@options, @output)
             begin
               b.run
@@ -83,7 +107,7 @@ module Aeolus
         end
 
         it "should exit with appropriate message when a non compliant template is given" do
-          @options[:template] = "#{File.dirname(__FILE__)}" + "../../fixtures/invalid_template.tdl"
+          @options[:template] = File.join("#{File.dirname(__FILE__)}", "../fixtures/invalid_template.tdl")
           @options[:image] = '825c94d1-1353-48ca-87b9-36f02e069a8d'
           b = BuildCommand.new(@options, @output)
           begin
