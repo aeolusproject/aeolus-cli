@@ -12,6 +12,8 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+require 'open-uri'
+
 module Aeolus
   module CLI
     class BuildCommand < BaseCommand
@@ -73,13 +75,14 @@ module Aeolus
       end
 
       def read_template
-        template = read_file(@options[:template])
-        if template.nil?
-          puts "Error: Cannot find specified file"
-          quit(1)
+        begin
+          f = open(@options[:template])
+          return f.read
+        rescue Errno::ENOENT => e
+          puts "Error: Cannot open '#{e}'"
+          exit(1)
         end
-        template
-      end
+     end
 
       def combo_implemented?
         if @options[:template].empty? || @options[:target].empty? || @options[:environment].nil?
