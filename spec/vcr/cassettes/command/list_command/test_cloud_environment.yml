@@ -1,0 +1,39 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://admin:password@localhost:443/conductor/api/environments/Test%20cloud/images.xml
+    body: 
+    headers: 
+      accept-language: 
+      - en
+      accept: 
+      - application/xml
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      x-runtime: 
+      - "0.050452"
+      content-type: 
+      - application/xml; charset=utf-8
+      x-ua-compatible: 
+      - IE=Edge,chrome=1
+      set-cookie: 
+      - _session_id=2fd49f92701ecd124afe951098d9cebe; path=/; HttpOnly
+      server: 
+      - thin 1.2.11 codename Bat-Shit Crazy
+      transfer-encoding: 
+      - chunked
+      etag: 
+      - "\"f0d3ad5d1a5e3230d20342ef89c63988\""
+      date: 
+      - Wed, 18 Jul 2012 13:52:26 GMT
+      cache-control: 
+      - max-age=0, private, must-revalidate
+    body: |
+      <images>
+      </images>
+
+    http_version: "1.1"

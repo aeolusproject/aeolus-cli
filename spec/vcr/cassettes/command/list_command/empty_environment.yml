@@ -1,0 +1,225 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://admin:password@localhost:443/conductor/api/images.xml
+    body: 
+    headers: 
+      accept-language: 
+      - en
+      accept: 
+      - application/xml
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      server: 
+      - thin 1.2.11 codename Bat-Shit Crazy
+      etag: 
+      - "\"b43aaba1687570812638c78b997b2b1a\""
+      date: 
+      - Wed, 18 Jul 2012 13:33:56 GMT
+      transfer-encoding: 
+      - chunked
+      set-cookie: 
+      - _session_id=9b7557ab2f5a3488ffb285231aa6aa39; path=/; HttpOnly
+      x-ua-compatible: 
+      - IE=Edge,chrome=1
+      cache-control: 
+      - max-age=0, private, must-revalidate
+      content-type: 
+      - application/xml; charset=utf-8
+      x-runtime: 
+      - "12.179137"
+    body: |
+      <images>
+      <image href='https://localhost/conductor/api/images/520595d8-9f8a-11e1-a52b-525400157706' id='520595d8-9f8a-11e1-a52b-525400157706'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/16a95484-f76e-4c0a-a6f3-5aa173c36879' id='16a95484-f76e-4c0a-a6f3-5aa173c36879'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/c9678aa0-9f8a-11e1-a52b-525400157706' id='c9678aa0-9f8a-11e1-a52b-525400157706'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/dd7d4069-4d5e-483e-bcf4-f15b9cd7ade8' id='dd7d4069-4d5e-483e-bcf4-f15b9cd7ade8'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/9a75157a-a316-11e1-bee5-5254001a6d84' id='9a75157a-a316-11e1-bee5-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/7828bafc-a321-11e1-b426-5254001a6d84' id='7828bafc-a321-11e1-b426-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/32fa5bbe-a323-11e1-8f06-5254001a6d84' id='32fa5bbe-a323-11e1-8f06-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/202426f0-a32d-11e1-8f06-5254001a6d84' id='202426f0-a32d-11e1-8f06-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/73763b06-a367-11e1-8f06-5254001a6d84' id='73763b06-a367-11e1-8f06-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/5683214e-a434-11e1-9fad-5254001a6d84' id='5683214e-a434-11e1-9fad-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/e808b674-a434-11e1-a85d-5254001a6d84' id='e808b674-a434-11e1-a85d-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/7bb31588-4c1c-4469-9cd9-761ffa7f9db4' id='7bb31588-4c1c-4469-9cd9-761ffa7f9db4'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/762621a8-a435-11e1-9aae-5254001a6d84' id='762621a8-a435-11e1-9aae-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/463ff7cb-b933-4304-b99c-d0eb99ca81c1' id='463ff7cb-b933-4304-b99c-d0eb99ca81c1'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/d55b0da0-a435-11e1-bd11-5254001a6d84' id='d55b0da0-a435-11e1-bd11-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/ae1bab84-1f3a-40af-a88b-27c63018d53a' id='ae1bab84-1f3a-40af-a88b-27c63018d53a'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/03c603ac-a436-11e1-a125-5254001a6d84' id='03c603ac-a436-11e1-a125-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/e0427565-88e3-4eb3-80ba-aa2058d099d5' id='e0427565-88e3-4eb3-80ba-aa2058d099d5'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/16f1e7ce-a437-11e1-8029-5254001a6d84' id='16f1e7ce-a437-11e1-8029-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/3d4da7f7-3b95-4bad-a41f-fd0b7278a6a9' id='3d4da7f7-3b95-4bad-a41f-fd0b7278a6a9'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/62543fbe-a437-11e1-b438-5254001a6d84' id='62543fbe-a437-11e1-b438-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/c9f65d79-d103-4a98-9ebb-4a2abf87dbc4' id='c9f65d79-d103-4a98-9ebb-4a2abf87dbc4'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/925705c0-a437-11e1-8c7b-5254001a6d84' id='925705c0-a437-11e1-8c7b-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/4142c3f6-b738-4af7-a5f4-c915446efbd5' id='4142c3f6-b738-4af7-a5f4-c915446efbd5'></build>
+      </builds>
+      </image>
+      
+      <image href='https://localhost/conductor/api/images/c919c5f2-a437-11e1-86d7-5254001a6d84' id='c919c5f2-a437-11e1-86d7-5254001a6d84'>
+      <name>tmpl1</name>
+      <environment>default</environment>
+      <description>foo</description>
+      <os>Fedora</os>
+      <os_version>14</os_version>
+      <arch>x86_64</arch>
+      <builds type='xs:list'>
+      <build href='https://localhost/conductor/api/builds/4addd4c5-ec6a-4d51-9169-34cf9130a27f' id='4addd4c5-ec6a-4d51-9169-34cf9130a27f'></build>
+      </builds>
+      </image>
+      
+      </images>
+
+    http_version: "1.1"
