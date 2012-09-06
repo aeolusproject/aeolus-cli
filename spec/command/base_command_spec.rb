@@ -116,7 +116,15 @@ module Aeolus
         end
 
         it "should display message when Conductor is not running" do
-          resp = mock(:header => {'Location' => 'site'})
+          resp = mock(:header => {'Location' => 'site'}, :body => "Imagefactory", :code => 500)
+          e = ActiveResource::ServerError.new(resp)
+          lambda {base_command.send(:handle_exception, e)}.should raise_error(SystemExit)
+
+          $stdout.string.should include("Please check that Conductor is running.")
+        end
+
+        it "should display message when Imagefactory is not running" do
+          resp = mock(:header => {'Location' => 'site'}, :code => 503)
           e = ActiveResource::ServerError.new(resp)
           lambda {base_command.send(:handle_exception, e)}.should raise_error(SystemExit)
 
