@@ -1,0 +1,46 @@
+.TH aeolus-image 1  "December 20, 2011" "version 0.4" "USER COMMANDS"
+.SH NAME
+aeolus-image \- command line tool for managing images and related resources on the aeolus suite of tools
+.SH SYNOPSIS
+.B aeolus image
+[list|build|push|import|status] [\-h]
+
+.SH DESCRIPTION
+
+.B aeolus-image
+is a tool that allows users to manage images and related resources in their aeolus installation.  Such resources consist of:
+
+.B aeolus-image
+consists of 5 subcommands: list, build, push, import and status.
+
+Each command can also be called directly via
+.B 'aeolus-image'
+or via
+.B 'aeolus-image-{subcommand}'
+.
+
+For more information on each subcommand, you may run any of the following:
+    man aeolus-{command}-{subcommand}
+    aeolus-image {subcommand} --help
+    aeolus-image-{subcommand} --help
+    aeolus --help
+
+.SH OPTIONS
+.TP
+\-h, --help
+Get usage information for this tool and subcommands
+.SH FILES
+.P
+aeolus reads its configuration from ~/.aeolus-cli
+.P
+.I ~/.aeolus-cli
+.RS
+This contains the URL and credentials for your admin user in
+.B aeolus-conductor.
+If setup differs from default one, those should be changed accordingly. Conductor URL should be as follows
+.I https://<host_where_conductor_runs>/conductor/api
+.RE
+.SH AUTHORS
+Martyn Taylor (mtaylor@redhat.com), Jason Guiditta (jguiditta@redhat.com)
+.SH SEE ALSO
+aeolus-image-build(1), aeolus-image-push(1), aeolus-image-list(1), aeolus-image-import(1), aeolus-image-status(1)
