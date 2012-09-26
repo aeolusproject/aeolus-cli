@@ -66,7 +66,6 @@ module Aeolus
       def validate_xml_schema(xml)
         errors = validate_xml_document(File.dirname(__FILE__) + "/../../../examples/tdl.rng", xml)
         if errors.length > 0
-          puts "ERROR: The given Template does not conform to the TDL Schema, see below for specific details:"
           errors.each do |error|
             puts "- Line: " + error.line.to_s + " => " + error.message
           end
