@@ -79,7 +79,11 @@ module Aeolus
 
       def validate_xml_document(schema_path, xml_string)
         schema = Nokogiri::XML::RelaxNG(File.read(schema_path))
-        doc = Nokogiri::XML xml_string
+	begin
+          doc = Nokogiri::XML(xml_string) { |config| config.strict }
+	rescue Nokogiri::XML::SyntaxError => e
+	  return [e]
+	end
         schema.validate(doc)
       end
 
