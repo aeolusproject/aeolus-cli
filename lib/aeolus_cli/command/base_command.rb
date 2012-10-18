@@ -256,7 +256,7 @@ module Aeolus
 
       def write_file
         example = File.read(File.expand_path(File.dirname(__FILE__) + "/../../../examples/aeolus-cli"))
-        File.open(File.expand_path(@config_location), 'a+') do |f|
+        File.open(File.expand_path(@config_location), 'a+', 0600) do |f|
           f.write(example)
         end
       end
