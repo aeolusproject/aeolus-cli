@@ -89,6 +89,9 @@ mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 %{mandir}/*
 
 %changelog
+* Wed Oct 24 2012 Steve Linabery <slinaber@redhat.com> - 0.7.7-1
+- build upstream tag v0.7.7-1
+
 * Mon Oct 22 2012 Steve Linabery <slinaber@redhat.com> - 0.7.6-1
 - build upstream tag v0.7.6-1
 
