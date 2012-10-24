@@ -38,7 +38,7 @@ module Aeolus
             validate_xml_schema(template)
             image = Aeolus::CLI::Image.new({
                 :targets => @options[:target] * ",",
-                :tdl => "<![CDATA[#{template}]]>",
+                :tdl => "#{template}",
                 :environment => @options[:environment]})
             image.save!
 
